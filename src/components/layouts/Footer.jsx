@@ -1,6 +1,7 @@
 import React from "react";
 import { SiConstruct3 } from "react-icons/si";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -8,11 +9,7 @@ const Footer = () => {
       <div className="mx-auto flex max-w-[1150px] flex-col justify-between gap-8 md:flex-row">
         {/* left */}
         <div className="mr-10 flex items-center space-x-3">
-          <SiConstruct3 className="text-7xl text-blue-500" />
-          <div className="flex flex-col items-start -space-y-1">
-            <h2 className="text-2xl text-blue-400 xl:text-4xl">NFTizeMarket</h2>
-            <p className="text-[1.1rem] text-gray-300">Safest Place to buy</p>
-          </div>
+          <img src={logo} alt="NFtizeMarket" className="w-[240px]" />
         </div>
         {/* center */}
         <div className="grid grid-cols-2 gap-4">

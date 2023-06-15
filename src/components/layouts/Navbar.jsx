@@ -7,21 +7,16 @@ import { HiShoppingCart } from "react-icons/hi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
 
   return (
-    <nav className="bg-gray-600 px-4 py-6 text-gray-100 lg:px-7">
+    <nav className="bg-[#444444] px-4 py-6 text-gray-100 lg:px-7">
       <div className="flex items-center justify-between">
         {/* left */}
-        <div className="flex items-center space-x-3">
-          <SiConstruct3 className="text-4xl text-blue-500" />
-          <div className="flex flex-col items-start -space-y-1">
-            <h2 className="text-2xl text-blue-400">NFTizeMarket</h2>
-            <p className="text-[0.8rem] text-gray-300">Safest Place to buy</p>
-          </div>
-        </div>
+        <img src={logo} alt="NFtizeMarket" className="w-[210px]" />
         {/* right */}
         <div className="hidden w-full md:flex xl:w-[60%]">
           {/* navlinks */}
@@ -49,7 +44,7 @@ const Navbar = () => {
           <div className="flex space-x-3">
             <button
               className="flex items-center rounded-md 
-          bg-blue-400 p-2 px-3 transition-all hover:-translate-y-0.5 hover:shadow-md"
+          bg-primary p-2 px-3 transition-all hover:-translate-y-0.5 hover:shadow-md"
             >
               <span>
                 <FaWallet className="mr-2 text-xl text-white" />

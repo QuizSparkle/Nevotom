@@ -1,5 +1,5 @@
 import React from "react";
-import hero from "../assets/hero.png";
+import hero from "../../assets/hero.png";
 
 const Hero = () => {
   return (
@@ -9,16 +9,16 @@ const Hero = () => {
     sm:flex-row sm:space-x-16"
     >
       <div className="flex flex-col items-center space-y-4">
-        <h1 className="text-5xl text-blue-400">NFTizeMarket</h1>
-        <p className="text-xl text-gray-200">The safest Place to Buy</p>
+        <h1 className="text-5xl text-primary">NFTizeMarket</h1>
+        <p className="text-xl text-gray-300">The safest Place to Buy</p>
         <button
-          className="rounded-md bg-blue-500 p-2 
+          className="rounded-md bg-primary p-2 
       px-5 text-gray-100 transition-all hover:scale-105"
         >
           Shop Now
         </button>
       </div>
-      <div>
+      <div className="rounded-full border border-white bg-primary p-2">
         <img
           src={hero}
           alt="cartLogo"
