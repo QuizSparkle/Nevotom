@@ -13,6 +13,7 @@ class User(models.Model):
     username = models.CharField(max_length=USERNAME_MAX_LENGTH, unique=True)
     country = models.CharField(max_length=COUNTRY_MAX_LENGTH)
     address = models.CharField(max_length=ADDRESS_MAX_LENGTH)
+
     wallet_address = models.CharField(max_length=100)  # Assuming wallet address is a string
 
     def __str__(self):
