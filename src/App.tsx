@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Layout } from 'antd';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { BrowserRouter, Navigate, Route, Routes, } from 'react-router-dom';
@@ -11,23 +12,25 @@ import ShopDetail from './components/ShopDetail';
 
 const App: FC = () => {
   const AppLayout = () => (
-    <div>
+    <>
       <Header />
       <Navbar />
       <Basket />
       <Pick/>
       <Footer />
-    </div>
+    </>
   );
 
   return (
     <div className="App">
       <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<Navigate to="/" />} />
-            <Route path='/' element={<AppLayout />} />
-            <Route path='/detail' element={<ShopDetail />} />
-          </Routes>
+        <Layout>
+        <Routes>
+          <Route path="*" element={<Navigate to="/" />} />
+          <Route path='/' element={<AppLayout />} />
+          <Route path='/detail' element={<ShopDetail />} />
+        </Routes>
+        </Layout>
       </BrowserRouter>
     </div>
   )
