@@ -1,5 +1,4 @@
 import React from "react";
-import { SiConstruct3 } from "react-icons/si";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 

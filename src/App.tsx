@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./components/home/Home";
 import Navbar from "./components/layouts/Navbar";
-import Home from "./pages/Home";
 
 function App() {
   useEffect(() => {

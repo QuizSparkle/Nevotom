@@ -1,7 +1,7 @@
 import React from "react";
-import Hero from "../components/layouts/Hero";
-import Footer from "../components/layouts/Footer";
-import Picks from "../components/layouts/Picks";
+import Hero from "./Hero";
+import Footer from "../layouts/Footer";
+import Picks from "./Picks";
 
 const Home = () => {
   return (
