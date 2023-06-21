@@ -1,0 +1,78 @@
+/* menu */
+.pick {
+    .pick-container {
+        display: flex;
+        height: 777px;
+        padding-left: 137px;
+        padding-right: 137px;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        gap: 66px;
+
+        .pick-row {
+            .pick-title {
+                padding-top: 50px;
+                font-family: Poppins;
+                font-size: 36px;
+                font-weight: 500;
+                line-height: 54px;
+
+                .pick-title-description {
+                    font-family: Poppins;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 24px;
+                    letter-spacing: 0em;
+                    color: #9F9F9F;
+                }
+            }
+
+            .pick-content {
+                display: flex;
+                justify-content: space-between;
+                gap: 80px;
+
+                .pick-item {
+                    justify-content: space-between;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3px;
+
+                    img {
+
+                    }
+
+                    .pick-item-description {
+                        font-family: Poppins;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                    }
+
+                    .pick-item-price {
+                        font-family: Poppins;
+                        font-size: 24px;
+                        font-weight: 500;
+                        line-height: 36px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                    }
+                }
+            }
+
+            .pick-more {
+                font-family: Poppins;
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 30px;
+                letter-spacing: 0em;
+                text-align: left;
+                padding-bottom: 19px;
+                border-bottom: solid black 2px;
+            }
+        }
+    }
+}

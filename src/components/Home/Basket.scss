@@ -1,0 +1,64 @@
+.basket {
+    display: flex;
+    align-items: center;
+    height: 800px;
+    padding-left: 112px;
+    padding-right: 94;
+    background-color: #131313;
+
+    .bascket-column-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        width: 50%;
+        ;
+
+        .label-large {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 64px;
+            line-height: 96px;
+            text-align: center;
+            color: #8789FE;
+        }
+
+        .label-medium {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 32px;
+            line-height: 48px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .label-shop {
+            .shop-button {
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                background-color: #868686;
+                font-weight: 500;
+            }
+        }
+
+        .basket-img {
+            background: #8789FE;
+            border: 5px solid #FFFFFF;
+            border-radius: 50%;
+            box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        img {
+            padding: 35px 51px 59px 51px;
+        }
+    }
+}

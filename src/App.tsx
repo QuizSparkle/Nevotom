@@ -1,33 +1,36 @@
-import React, { useEffect } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/layouts/Navbar";
-import Home from "./pages/Home";
+import React, { FC } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import { BrowserRouter, Navigate, Route, Routes, } from 'react-router-dom';
 
-function App() {
-  useEffect(() => {
-    fetch("/api/endpoint") // Replace `endpoint` with the actual API endpoint in your Django app
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the received data
-        console.log("data : ", data);
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error(error);
-      });
-  });
+import './App.css';
+import Basket from './components/Home/Basket';
+import Pick from './components/Home/Pick';
+import Navbar from './components/NavBar';
+import ShopDetail from './components/ShopDetail';
 
-  return (
-    <div className="App h-[100vh]">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </Router>
+const App: FC = () => {
+  const AppLayout = () => (
+    <div>
+      <Header />
+      <Navbar />
+      <Basket />
+      <Pick/>
+      <Footer />
     </div>
   );
+
+  return (
+    <div className="App">
+      <BrowserRouter>
+          <Routes>
+            <Route path="*" element={<Navigate to="/" />} />
+            <Route path='/' element={<AppLayout />} />
+            <Route path='/detail' element={<ShopDetail />} />
+          </Routes>
+      </BrowserRouter>
+    </div>
+  )
 }
 
 export default App;
