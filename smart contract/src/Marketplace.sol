@@ -1,79 +1,319 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.17;
 
-contract Marketplace {
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "./Tom.sol";
+import {IERC20} from "@openzeppelin/contracts/interfaces/IERC20.sol";
 
-struct User {
-string fullName;
-string email;
-string username;
-string country;
-string address_;
-uint256 reward;
-}
+/**
+ * @title The Marketplace contract
+ * @notice the Marketplace is where the logic for reward/fee transfers are implemented
+ * @dev main functionalities are implemented.
+ */
 
-struct Product {
-string name;
-string image;
-string description;
-uint256 price;
-uint256 quantity;
-uint256 postingFee;
-}
+contract Marketplace is Ownable, ReentrancyGuard {
+    using Counters for Counters.Counter;
 
-// mapping(address => User) public users;
-mapping(uint256 => Product) public products;
+    struct User {
+        uint256 spentAmount;
+    }
 
-event UserRegistered(address indexed user, string fullName, string email, string username, string country, string useraddress, bool isSeller);
-event ProductCreated(uint256 indexed productId, string name, string image, string description, uint256 price, uint256 quantity, uint256 postingFee);
-event ProductSold(uint256 indexed productId, address indexed buyer, address indexed seller);
-event RewardDistributed(address indexed user, uint256 amount);
+    struct Item {
+        string name;
+        string image;
+        string description;
+        uint256 price;
+        uint256 quantity;
+        uint256 postingFee;
+        address seller;
+    }
 
-function registerUser(string memory fullName, string memory email, string memory username, string memory country, string memory useraddress, bool isSeller) public {
-User memory user = User(fullName, email, username, country, isSeller, msg.sender);
-// users[msg.sender] = user;
-emit UserRegistered(msg.sender, fullName, email, username, country, isSeller);
-}
+    TOM private token;
+    IERC20 private usdt;
+    Counters.Counter private _itemIdCounter;
+    mapping(address => User) users;
+    address[] usersList;
+    mapping(uint256 => Item) private items;
+    uint256 private constant FEE_RATE = 10;
+    uint256 private constant REWARD_RATE = 10;
+    uint256 private constant TOM_USD_PRICE = 10;
+    uint8 private immutable decimals;
 
-function createProduct(string memory name, string memory image, string memory description, uint256 price, uint256 quantity) public {
-Product memory product = Product(name, image, description, price, quantity, calculatePostingFee(quantity));
-products[product.id] = product;
-emit ProductCreated(product.id, name, image, description, price, quantity, product.postingFee);
-}
+    event TokenBought(address indexed buyer, uint256 amount);
+    event userRegistered(address indexed user);
+    event ItemListed(
+        address indexed seller,
+        uint256 indexed itemId,
+        uint256 price,
+        uint256 quantity,
+        uint256 postingFee
+    );
+    event ItemCanceled(address indexed seller, uint256 indexed itemId);
+    event ItemBought(
+        address indexed seller,
+        address indexed buyer,
+        uint256 indexed itemId,
+        uint256 price,
+        uint256 quantity,
+        uint256 rewards
+    );
+    event RewardsClaimed(address indexed user, uint256 rewards);
 
-function buyProduct(uint256 productId) public payable {
-Product memory product = products[productId];
-require(product.quantity > 0, "Product is out of stock");
-require(msg.value >= product.price, "Not enough funds");
+    // error AlreadyListed(uint256 itemId);
+    error PriceMustBeAboveZero();
+    error InsufficientTomBalance();
+    error InsufficientUsdtBalance();
+    error ItemSoldOut();
+    error NotListed(uint256 itemId);
+    error UserAlreadyExists(address user);
+    error UserDoesNotExist(address user);
 
-product.quantity--;
-emit ProductSold(productId, msg.sender, product.seller);
+    modifier isListed(uint256 itemId) {
+        Item memory item = items[itemId];
+        if (item.price <= 0) {
+            revert NotListed(itemId);
+        }
+        _;
+    }
 
-uint256 rewardAmount = product.postingFee * 70 / 100;
-distributeReward(rewardAmount);
-}
+    modifier isNotUser(address user) {
+        uint256 length = usersList.length;
+        for (uint256 i = 0; i < length; ++i) {
+            if (usersList[i] == user) {
+                revert UserAlreadyExists(user);
+            }
+        }
+        _;
+    }
 
-function calculatePostingFee(uint256 quantity) public view returns (uint256) {
-return 10 * quantity;
-}
+    modifier isUser(address user) {
+        uint256 length = usersList.length;
+        bool exists = false;
+        for (uint256 i = 0; i < length; ++i) {
+            if (usersList[i] == user) {
+                exists = true;
+                break;
+            }
+        }
+        if (exists == false) {
+            revert UserDoesNotExist(user);
+        }
+        _;
+    }
 
-function distributeReward(uint256 amount) public {
-uint256 communityReward = amount * 30 / 100;
-uint256 userReward = amount * 70 / 100;
+    constructor(address _usdtAddress, uint8 _decimals) {
+        usdt = IERC20(_usdtAddress);
+        decimals = _decimals;
+    }
 
-// Send community reward to the community contract
-// ...
+    function activate(address _tomAddress) public onlyOwner {
+        token = TOM(_tomAddress);
+    }
 
-// Send user reward to all users
-for (address user : users.keys()) {
-  users[user].reward += userReward / users.length;
-}
+    /**
+     * @notice Get registered o
+     * @dev Approve function needs to run first
+     */
 
-emit RewardDistributed(msg.sender, amount);
-Use code with caution. Learn more
-}
+    function registerUser(address user) public isNotUser(user) {
+        users[user] = User(0);
+        usersList.push(user);
+        emit userRegistered(user);
+    }
 
-function getReward(address user) public view returns (uint256) {
-return users[user].reward;
-}
+    /**
+     * @notice Function to purchase TOM token.
+     * @dev Approve function needs to run first
+     * For now 1 USDT = 10 TOM
+     */
+
+    function buyTOM(uint256 usdtAmount) public isUser(msg.sender) {
+        uint256 tomAmount = calculateTOMAmount(usdtAmount);
+        usdt.transferFrom(msg.sender, address(this), usdtAmount);
+        token.transfer(msg.sender, tomAmount);
+
+        emit TokenBought(msg.sender, tomAmount);
+    }
+
+    /**
+     * @notice List an item in the marketplace
+     * @dev Approve function needs to run first
+     * The Posting FEE = 10% of sell price
+     */
+
+    function listItem(
+        string memory name,
+        string memory image,
+        string memory description,
+        uint256 price,
+        uint256 quantity
+    ) external isUser(msg.sender) {
+        uint256 postingFee = calculateTOMAmount(
+            (FEE_RATE * price * quantity) / 100
+        );
+        if (token.balanceOf(msg.sender) < postingFee) {
+            revert InsufficientTomBalance();
+        }
+
+        if (price <= 0) {
+            revert PriceMustBeAboveZero();
+        }
+
+        if (postingFee < 10) {
+            postingFee = 10;
+        }
+
+        token.transferFrom(msg.sender, address(this), postingFee);
+
+        Item memory newItem = Item(
+            name,
+            image,
+            description,
+            price,
+            quantity,
+            postingFee,
+            msg.sender
+        );
+
+        uint256 itemId = _itemIdCounter.current();
+
+        items[itemId] = newItem;
+
+        _itemIdCounter.increment();
+
+        emit ItemListed(msg.sender, itemId, price, quantity, postingFee);
+    }
+
+    /**
+     * @notice Cancel a listing
+     * @dev Can only be run by seller or contract Owner.
+     * We also need to automate the canceling of sold out items using chainlink keepers maybe.
+     */
+
+    function cancelListing(uint256 itemId) external isListed(itemId) {
+        require(
+            msg.sender == items[itemId].seller || msg.sender == owner(),
+            "Caller must be Seller or Owner"
+        );
+        delete (items[itemId]);
+        emit ItemCanceled(msg.sender, itemId);
+    }
+
+    /**
+     * @notice Buy an item, get the reward and increase spent amount.
+     * @dev Approve function needs to run first
+     * For later versions, the amount paid will be locked in a third party contract until buyer confirms
+     * that product has been received or times run out (chainlink keepers ?)
+     * This part needs further thinking as how to further secure this process
+     */
+
+    function buyItem(
+        uint256 itemId,
+        uint256 quantity
+    ) public isListed(itemId) isUser(msg.sender) nonReentrant {
+        Item storage item = items[itemId];
+        if (item.quantity - quantity < 0) {
+            revert ItemSoldOut();
+        }
+        if (usdt.balanceOf(msg.sender) < item.price * quantity) {
+            revert InsufficientUsdtBalance();
+        }
+
+        uint256 rewards = (((item.postingFee * quantity) / item.quantity) *
+            70) / 100;
+
+        usdt.transferFrom(msg.sender, item.seller, item.price * quantity);
+        for (uint256 i = 0; i < quantity; i++) {
+            item.quantity--;
+        }
+
+        token.transfer(msg.sender, rewards);
+
+        users[msg.sender].spentAmount += item.price * quantity;
+
+        emit ItemBought(
+            item.seller,
+            msg.sender,
+            itemId,
+            item.price * quantity,
+            quantity,
+            rewards
+        );
+    }
+
+    /**
+     * @notice Claims rewards if amount spent > 500 dollars
+     * @dev after claiming, the spent amount is fixed to 0 again.
+     */
+
+    function claimRewards() public {
+        User storage user = users[msg.sender];
+        require(
+            user.spentAmount >= 500 * 10 ** decimals,
+            "Not eligible for rewards yet"
+        );
+        uint256 rewards = calculateTOMAmount(
+            (REWARD_RATE * user.spentAmount) / 100
+        );
+        token.transfer(msg.sender, rewards);
+        user.spentAmount = 0;
+
+        emit RewardsClaimed(msg.sender, rewards);
+    }
+
+    /**
+     * @notice Register using a referal
+     * @dev both parties get 50 TOM
+     */
+
+    function UseReferalLink(
+        address referedBy
+    ) public isUser(referedBy) nonReentrant {
+        registerUser(msg.sender);
+        token.transfer(msg.sender, 50);
+        token.transfer(referedBy, 50);
+    }
+
+    function calculateTOMAmount(
+        uint256 usdtAmount
+    ) public pure returns (uint256) {
+        return usdtAmount * TOM_USD_PRICE;
+    }
+
+    function getUser(uint256 key) public view returns (address) {
+        return usersList[key];
+    }
+
+    function getSpentAmount(address user) public view returns (uint256) {
+        return users[user].spentAmount;
+    }
+
+    function getItem(
+        uint256 itemId
+    )
+        public
+        view
+        returns (
+            string memory,
+            string memory,
+            string memory,
+            uint256,
+            uint256,
+            uint256,
+            address
+        )
+    {
+        return (
+            items[itemId].name,
+            items[itemId].image,
+            items[itemId].description,
+            items[itemId].price,
+            items[itemId].quantity,
+            items[itemId].postingFee,
+            items[itemId].seller
+        );
+    }
 }
