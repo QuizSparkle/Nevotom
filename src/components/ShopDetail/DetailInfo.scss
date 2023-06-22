@@ -1,13 +1,14 @@
 .detail-info {
     display: flex;
     flex-direction: column;
-    margin-left: 95px;
     gap: 28px;
     border-bottom: 1px solid #D9D9D9;
     margin-top: 35px;
 
     .detail-content-box {
         display: flex;
+        margin-left: 95px;
+
         .detail-img-box {
             display: flex;
             width: 100%;
@@ -71,6 +72,7 @@
                     line-height: 36px;
                     letter-spacing: 0em;
                     text-align: left;
+                    color: #9F9F9F;
                 }
 
                 .detail-info-shop {
@@ -84,6 +86,7 @@
                 }
 
                 .detail-info-description {
+                    padding-right: 200px;
                     text-align: left;
                     width: 100%;
                     font-family: Poppins;
@@ -94,6 +97,17 @@
                     text-align: justified;
                 }
 
+                label {
+                    font-family: Poppins;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 21px;
+                    text-align: left;
+                    color: #9F9F9F;
+                    margin-top: 6px;
+                    margin-bottom: 6px;
+
+                }
 
                 .detail-info-size-box {
                     display: flex;
@@ -111,91 +125,152 @@
                         border-radius: 5px;
 
                         label {
-
                             font-family: Poppins;
                             font-weight: 400;
-
+                            color: black;
                         }
-
                     }
                 }
 
-                .detail-info-color {}
+                .detail-info-color {
+                    border-radius: 50px;
+                    background: #000;
+                    width: 30px;
+                    height: 30px;
+                    flex-shrink: 0;
+                }
 
-                .detail-info-count-box {
-                    font-family: Poppins;
-                    font-size: 16px;
-                    font-weight: 500;
-                    line-height: 24px;
-                    letter-spacing: 0em;
-                    text-align: left;
-                    border: 1px solid #9F9F9F;
-                    border-radius: 10px;
+                .count-container {
+                    display: flex;
+                    margin-top: 32px;
+                    margin-bottom: 60px;
 
-                    .detail-info-count {}
+                    .count-box {
+                        width: 123px;
+                        height: 64px;
+                        flex-shrink: 0;
+                        font-family: Poppins;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 24px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                        border: 1px solid #9F9F9F;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
 
-                    .detail-info-add-card {
+                        .count-minus {
+                            margin-left: 15px;
+                        }
+
+                        .count-plus {
+                            margin-right: 15px;
+                        }
+
+                        .detail-info-count {}
+
+                    }
+
+                    .add-card {
+                        margin-left: 66px;
+                        display: flex;
+                        align-items: center;
                         font-family: Poppins;
                         font-size: 20px;
                         font-weight: 400;
                         line-height: 30px;
                         letter-spacing: 0em;
                         text-align: left;
-
                     }
                 }
             }
 
             .detail-info-footer {
+                display: flex;
+                gap: 16px;
 
-                .detail-info-footer-row {
+                .footer-column {
                     border-top: 1px solid #D9D9D9;
+                    display: flex;
+                    flex-direction: column;
+                    padding-top: 41px;
+                    padding-bottom: 38px;
+                    gap: 12px;
 
                     .detail-info-footer-cell {
-                        font-family: Poppins;
-                        font-size: 16px;
-                        font-weight: 400;
-                        line-height: 24px;
-                        letter-spacing: 0em;
                         text-align: left;
+                        color: #9F9F9F;
+                        font-size: 16px;
+                        font-family: Poppins;
+                        display: flex;
+                        gap: 25px;
 
                         img {}
                     }
                 }
             }
         }
-
     }
 
     .detail-description-box {
+        padding-top: 50px;
+        border-top: 1px solid #D9D9D9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
 
-        .detail-description-title {
-            font-family: Poppins;
-            font-size: 24px;
-            font-weight: 400;
-            line-height: 36px;
-            letter-spacing: 0em;
-            text-align: left;
+        .title-box {
+            display: flex;
+            gap: 53px;
+
+            .title {
+                font-family: Poppins;
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 36px;
+                letter-spacing: 0em;
+                text-align: left;
+            }
         }
 
         .detail-description {
-            font-family: Poppins;
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 24px;
-            letter-spacing: 0em;
-            text-align: justified;
+            .description {
+                font-family: Poppins;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: #9F9F9F;
+                padding-left: 226px;
+                padding-right: 226px;
+            }
+        }
 
-            .detail-description-thumb-box {
-                margin-left: 100px;
-                margin-right: 100px;
+        .thumb-box {
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 45px;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 66px;
+            justify-content: center;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
 
-                .detail-description-thumb {
-                    width: 50%;
-                    background: #9F9F9F;
-                    border-radius: 10px;
+            .thumb {
+                // width: 612px;
+                width: max-content;
+                height: 360px;
+                background: #9F9F9F;
+                border-radius: 10px;
 
-                    img {}
+                img {
+                    height: 100%;
                 }
             }
         }
