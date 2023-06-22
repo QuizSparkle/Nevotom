@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { SiConstruct3 } from "react-icons/si";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { FaWallet } from "react-icons/fa";
@@ -13,21 +12,27 @@ const Navbar = () => {
   const [menu, setMenu] = useState(false);
 
   return (
-    <nav className="bg-[#444444] px-4 py-6 text-gray-100 lg:px-7">
+    <nav className="bg-[#444444] px-4 py-6 text-white lg:px-7">
       <div className="flex items-center justify-between">
         {/* left */}
         <img src={logo} alt="NFtizeMarket" className="w-[210px]" />
         {/* right */}
         <div className="hidden w-full md:flex xl:w-[60%]">
           {/* navlinks */}
-          <div className="ml-4 flex items-center space-x-4 text-lg text-white xl:text-xl">
-            <ScrollLink className="cursor-pointer hover:text-gray-200">
+          <div
+            className="ml-4 flex items-center space-x-4 text-lg
+           text-white xl:text-xl"
+          >
+            <ScrollLink
+              to="/home"
+              className="cursor-pointer hover:text-gray-200"
+            >
               Home
             </ScrollLink>
-            <ScrollLink className="cursor-pointer hover:text-gray-200">
+            <ScrollLink to="/" className="cursor-pointer hover:text-gray-200">
               Buy
             </ScrollLink>
-            <ScrollLink className="cursor-pointer hover:text-gray-200">
+            <ScrollLink to="/" className="cursor-pointer hover:text-gray-200">
               About
             </ScrollLink>
           </div>
@@ -37,7 +42,7 @@ const Navbar = () => {
               type="search"
               placeholder="searchNFT"
               className="w-full rounded-sm bg-black/10 p-2 px-4
-               text-white outline-none placeholder:text-blue-200"
+               text-white outline-none placeholder:text-primary"
             />
           </div>
           {/* right-right */}
@@ -51,10 +56,10 @@ const Navbar = () => {
               </span>{" "}
               Connect Wallet
             </button>
-            <Link>
+            <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>
-            <Link>
+            <Link to="/account">
               <RiAccountCircleFill className="text-3xl text-white hover:text-gray-200" />
             </Link>
           </div>

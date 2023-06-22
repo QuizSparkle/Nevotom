@@ -6,7 +6,7 @@ const Hero = () => {
     <div
       className="flex  h-[550px] w-[100vw] flex-col-reverse items-center justify-center 
       gap-10 bg-[#131313] sm:h-[620px] 
-    sm:flex-row sm:space-x-16"
+    sm:flex-row sm:space-x-36"
     >
       <div className="flex flex-col items-center space-y-4">
         <h1 className="text-5xl text-primary">NFTizeMarket</h1>
