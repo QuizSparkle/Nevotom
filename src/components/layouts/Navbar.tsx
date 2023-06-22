@@ -1,12 +1,42 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
-import { FaWallet } from "react-icons/fa";
 import { HiShoppingCart } from "react-icons/hi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import logo from "../../assets/logo.png";
+
+// For Web3Modal
+import {
+  EthereumClient,
+  w3mConnectors,
+  w3mProvider,
+} from "@web3modal/ethereum";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { arbitrum, fantomTestnet, mainnet, polygon } from "wagmi/chains";
+import ConnectBtn from "./ConnectBtn";
+import { Web3Modal } from "@web3modal/react";
+
+import { useAccount } from 'wagmi';
+
+console.log("account : " , useAccount.name);
+
+const chains = [arbitrum, mainnet, polygon, fantomTestnet];
+
+const { publicClient } = configureChains(chains, [
+  w3mProvider({ projectId: "edb6828b8024fe4e9f28bfb372f4c88f" }),
+]);
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: w3mConnectors({
+    projectId: "edb6828b8024fe4e9f28bfb372f4c88f",
+    version: 2,
+    chains,
+  }),
+  publicClient,
+});
+const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
@@ -24,7 +54,7 @@ const Navbar = () => {
            text-white xl:text-xl"
           >
             <ScrollLink
-              to="/home"
+              to="/"
               className="cursor-pointer hover:text-gray-200"
             >
               Home
@@ -41,21 +71,16 @@ const Navbar = () => {
             <input
               type="search"
               placeholder="searchNFT"
-              className="w-full rounded-sm bg-black/10 p-2 px-4
-               text-white outline-none placeholder:text-primary"
+              className="w-full rounded-sm bg-white/10 p-2 px-4
+               text-white outline-none placeholder:text-gray-200"
             />
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-            <button
-              className="flex items-center rounded-md 
-          bg-primary p-2 px-3 transition-all hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <span>
-                <FaWallet className="mr-2 text-xl text-white" />
-              </span>{" "}
-              Connect Wallet
-            </button>
+            <WagmiConfig config={wagmiConfig}>
+              <ConnectBtn />
+            </WagmiConfig>
+
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>
@@ -72,6 +97,10 @@ const Navbar = () => {
         </button>
       </div>
       {/* navbar for smaller screens */}
+      <Web3Modal
+        projectId="edb6828b8024fe4e9f28bfb372f4c88f"
+        ethereumClient={ethereumClient}
+      />
     </nav>
   );
 };
