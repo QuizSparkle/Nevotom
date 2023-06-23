@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.17;
+pragma solidity 0.8.17;
 
 import "forge-std/Script.sol";
 import "forge-std/Test.sol";
@@ -22,10 +22,10 @@ contract DeployMarketplace is Script {
         marketplace = new Marketplace(address(link), 18);
         token = new TOM(address(marketplace));
 
-        // marketplace.activate(address(token));
+        marketplace.activate(address(token));
 
-        // link.approve(address(marketplace), 10 * 10 ** 18);
-        // token.approve(address(marketplace), 10 * 10 ** 18);
+        link.approve(address(marketplace), 10 * 10 ** 18);
+        token.approve(address(marketplace), 10 * 10 ** 18);
 
         vm.stopBroadcast();
     }

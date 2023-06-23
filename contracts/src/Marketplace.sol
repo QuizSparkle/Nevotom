@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -114,8 +113,8 @@ contract Marketplace is Ownable, ReentrancyGuard {
     }
 
     /**
-     * @notice Get registered o
-     * @dev Approve function needs to run first
+     * @notice Get registered
+     * @dev emits an event
      */
 
     function registerUser(address user) public isNotUser(user) {
@@ -249,7 +248,7 @@ contract Marketplace is Ownable, ReentrancyGuard {
      * @dev after claiming, the spent amount is fixed to 0 again.
      */
 
-    function claimRewards() public {
+    function claimRewards() public isUser(msg.sender) nonReentrant {
         User storage user = users[msg.sender];
         require(
             user.spentAmount >= 500 * 10 ** decimals,
