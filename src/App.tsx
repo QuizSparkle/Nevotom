@@ -30,7 +30,7 @@ const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
 const App: FC = () => {
   useEffect(() => {
-    fetch("/api/endpoint") // Replace `endpoint` with the actual API endpoint in your Django app
+    fetch("http://localhost:8000/api/endpoint") // Replace `endpoint` with the actual API endpoint in your Django app
       .then((response) => response.json())
       .then((data) => {
         // Handle the received data
