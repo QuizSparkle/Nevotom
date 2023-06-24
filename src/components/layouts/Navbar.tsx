@@ -18,9 +18,9 @@ import { arbitrum, fantomTestnet, mainnet, polygon } from "wagmi/chains";
 import ConnectBtn from "./ConnectBtn";
 import { Web3Modal } from "@web3modal/react";
 
-import { useAccount } from 'wagmi';
+import { useAccount } from "wagmi";
 
-console.log("account : " , useAccount.name);
+console.log("account : ", useAccount.name);
 
 const chains = [arbitrum, mainnet, polygon, fantomTestnet];
 
@@ -53,13 +53,15 @@ const Navbar = () => {
             className="ml-4 flex items-center space-x-4 text-lg
            text-white xl:text-xl"
           >
+            <Link to="/" className="cursor-pointer hover:text-gray-200">
+              Home
+            </Link>
             <ScrollLink
-              to="/"
+              to="/toppicks"
+              duration={500}
+              smooth
               className="cursor-pointer hover:text-gray-200"
             >
-              Home
-            </ScrollLink>
-            <ScrollLink to="/" className="cursor-pointer hover:text-gray-200">
               Buy
             </ScrollLink>
             <ScrollLink to="/" className="cursor-pointer hover:text-gray-200">

@@ -1,6 +1,6 @@
 import React from "react";
-import {PiShieldStarLight} from "react-icons/pi";
-import {BiDollar} from "react-icons/bi";
+import { RiShieldStarFill } from "react-icons/ri";
+import { BiDollar } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 type props = {
@@ -15,20 +15,24 @@ const HomeProduct = (props: props) => {
   return (
     <div
       className="relative flex h-[260px] min-w-[270px] cursor-default flex-col items-center
-     justify-between p-2 transition-all ease-linear hover:shadow-md border-gray-100 border-l"
+     justify-between border-l border-gray-100 p-2 transition-all ease-linear hover:shadow-md"
     >
       <Link to="/rewards">
-      <PiShieldStarLight 
-       className={`text-yellow-700 hover:text-yellow-500 cursor-pointer
-       font-bold text-3xl ${props.reward ? 'visible' : 'invisible' } absolute top-1 left-2`} />
+        <RiShieldStarFill
+          className={`cursor-pointer text-3xl font-bold
+       text-yellow-700 hover:text-yellow-500 ${
+         props.reward ? "visible" : "invisible"
+       } absolute left-2 top-1`}
+        />
       </Link>
-      <img src={props.img} className="w-[140px] h-[140px]" alt={props.name} />
+      <img src={props.img} className="h-[140px] w-[140px]" alt={props.name} />
       <div className="flex flex-col items-start gap-1">
         <strong className="text-xl text-gray-900">{props.name}</strong>
         <p className="text-left text-sm text-gray-600">{props.description}</p>
-        <h2 className="text-lg text-black flex items-center">
+        <h2 className="flex items-center text-lg text-black">
           <BiDollar />
-           {props.price}</h2>
+          {props.price}
+        </h2>
       </div>
     </div>
   );
