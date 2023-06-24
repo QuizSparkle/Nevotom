@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, FC } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/home/Home";
@@ -13,6 +13,9 @@ import {
 } from "@web3modal/ethereum";
 import { configureChains, createConfig } from "wagmi";
 import { fantomTestnet } from "wagmi/chains";
+import Checkout from "./components/checkout/Checkout";
+import ProductDetails from "./components/productDetails/ProductDetails";
+import ShoppingCartModal from "./components/cart/ShoppingCartModal";
 
 const chains = [fantomTestnet];
 const projectId = "edb6828b8024fe4e9f28bfb372f4c88f";
@@ -25,7 +28,7 @@ const wagmiConfig = createConfig({
 });
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
-function App() {
+const App: FC = () => {
   useEffect(() => {
     fetch("/api/endpoint") // Replace `endpoint` with the actual API endpoint in your Django app
       .then((response) => response.json())
@@ -45,11 +48,34 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                productName="product1"
+                productPrice={40}
+                subtotal={20}
+                total={60}
+              />
+            }
+          />
+          <Route path="/product-detail" element={<ProductDetails />} />
+          <Route
+            path="/cartmodal"
+            element={
+              <ShoppingCartModal
+                handleClose={() => false}
+                // handleClose="sdfsdf"
+                isShow={true}
+                // goodsCount={12}
+              />
+            }
+          />
         </Routes>
         <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
       </Router>
     </div>
   );
-}
+};
 
 export default App;
