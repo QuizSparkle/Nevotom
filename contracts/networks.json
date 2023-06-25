@@ -1,0 +1,12 @@
+{
+    "networks": [
+        {
+            "nameOfNetwork": "Fantom Opera Mainnet",
+            "chainId": 250
+        },
+        {
+            "nameOfNetwork": "Fantom testnet",
+            "chainId": 4002
+        }
+    ]
+}

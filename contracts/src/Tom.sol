@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
+
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 /**
@@ -11,13 +12,11 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 contract TOM is ERC20Votes {
     uint256 public s_maxSupply = 1000000000000000000000000000;
 
-    constructor(
-        address marketplace
-    ) ERC20("TokenMarket", "TOM") ERC20Permit("TokenMarket") {
+    constructor(address marketplace) ERC20("TokenMarket", "TOM") ERC20Permit("TokenMarket") {
         _mint(marketplace, s_maxSupply);
     }
 
-    function decimals() public view override returns (uint8) {
+    function decimals() public pure override returns (uint8) {
         return 18;
     }
 
@@ -25,11 +24,7 @@ contract TOM is ERC20Votes {
      * @dev Mints for authenticated position contracts.
      */
 
-    function mint(
-        address _positionAddress,
-        address _receiver,
-        uint256 _moreDebt
-    ) external {
+    function mint(address _receiver, uint256 _moreDebt) external {
         _mint(_receiver, _moreDebt);
     }
 
@@ -40,11 +35,7 @@ contract TOM is ERC20Votes {
     }
 
     // The functions below are overrides required by Solidity.
-    function _afterTokenTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal override(ERC20Votes) {
+    function _afterTokenTransfer(address from, address to, uint256 amount) internal override(ERC20Votes) {
         super._afterTokenTransfer(from, to, amount);
     }
 
@@ -52,10 +43,7 @@ contract TOM is ERC20Votes {
         super._mint(to, amount);
     }
 
-    function _burn(
-        address account,
-        uint256 amount
-    ) internal override(ERC20Votes) {
+    function _burn(address account, uint256 amount) internal override(ERC20Votes) {
         super._burn(account, amount);
     }
 }
