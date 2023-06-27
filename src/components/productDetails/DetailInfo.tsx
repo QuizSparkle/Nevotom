@@ -5,6 +5,7 @@ import linkedInIcon from "../../assets/logos/linked-in.svg";
 import twitterIcon from "../../assets/logos/twitter.svg";
 import faceBookIcon from "../../assets/logos/face-book.svg";
 import ShoppingCartModal from "./ProductDetails";
+import "./DetailInfo.css";
 
 // type DetailProps = {};
 

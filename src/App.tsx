@@ -16,6 +16,7 @@ import { fantomTestnet } from "wagmi/chains";
 import Checkout from "./components/checkout/Checkout";
 import ProductDetails from "./components/productDetails/ProductDetails";
 import ShoppingCartModal from "./components/cart/ShoppingCartModal";
+import Footer from "./components/layouts/Footer";
 
 const chains = [fantomTestnet];
 const projectId = "edb6828b8024fe4e9f28bfb372f4c88f";
@@ -45,7 +46,7 @@ const App: FC = () => {
   return (
     <div className="App h-[100vh]">
       <Router>
-        <Navbar />
+        <Navbar connected={true} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -72,6 +73,7 @@ const App: FC = () => {
             }
           />
         </Routes>
+        <Footer />
         <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
       </Router>
     </div>

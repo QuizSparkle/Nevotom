@@ -3,7 +3,7 @@ import verticalBarImg from "../../assets/logos/verticalBar.svg";
 
 function Breadcrumbs() {
   return (
-    <div className="ml-100 flex h-16 items-center gap-3">
+    <div className="ml-36 flex h-16 items-center gap-3">
       <div className="flex items-center">
         Home
         <img

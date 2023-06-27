@@ -6,6 +6,7 @@ import { RiAccountCircleFill } from "react-icons/ri";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import logo from "../../assets/logo.png";
+import coin from "../../assets/Coin-No-BG.png";
 
 // For Web3Modal
 import {
@@ -38,36 +39,78 @@ const wagmiConfig = createConfig({
 });
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
-const Navbar = () => {
+type props = {
+  connected: boolean;
+};
+
+const Navbar = (props: props) => {
   const [menu, setMenu] = useState(false);
 
   return (
     <nav className="bg-[#444444] px-4 py-6 text-white lg:px-7">
       <div className="flex items-center justify-between">
         {/* left */}
-        <img src={logo} alt="NFtizeMarket" className="w-[210px]" />
-        {/* right */}
-        <div className="hidden w-full md:flex xl:w-[60%]">
+        <div className="flex space-x-16">
+          <img src={logo} alt="NFtizeMarket" className="w-[210px]" />
+
           {/* navlinks */}
           <div
-            className="ml-4 flex items-center space-x-4 text-lg
-           text-white xl:text-xl"
+            className="ml-4 flex items-center space-x-6 text-lg
+          text-white xl:text-xl"
           >
             <Link to="/" className="cursor-pointer hover:text-gray-200">
               Home
             </Link>
-            <ScrollLink
-              to="/toppicks"
-              duration={500}
-              smooth
-              className="cursor-pointer hover:text-gray-200"
-            >
-              Buy
-            </ScrollLink>
-            <ScrollLink to="/" className="cursor-pointer hover:text-gray-200">
-              About
-            </ScrollLink>
+            {!props.connected ? (
+              <div>
+                <ScrollLink
+                  to="/about"
+                  duration={500}
+                  smooth
+                  className="cursor-pointer hover:text-gray-200"
+                >
+                  About
+                </ScrollLink>
+                <ScrollLink
+                  to="/contact"
+                  className="cursor-pointer hover:text-gray-200"
+                >
+                  Contact
+                </ScrollLink>
+              </div>
+            ) : (
+              <>
+                <ScrollLink
+                  to="/buy"
+                  duration={500}
+                  smooth
+                  className="cursor-pointer hover:text-gray-200"
+                >
+                  Buy
+                </ScrollLink>
+                <ScrollLink
+                  to="/sell"
+                  className="cursor-pointer hover:text-gray-200"
+                >
+                  Sell
+                </ScrollLink>
+              </>
+            )}
           </div>
+        </div>
+
+        {/* center */}
+        {props.connected && (
+          <div
+            className="flex h-14 items-center space-x-2 rounded-md 
+            bg-gray-200 px-1 text-4xl font-bold text-black"
+          >
+            <img src={coin} alt="nft" className="w-[80px]" />
+            <p>9476</p>
+          </div>
+        )}
+        {/* right */}
+        <div className="hidden w-full md:flex xl:w-[60%]">
           {/* search bar */}
           <div className="mx-6 flex-1">
             <input
