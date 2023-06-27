@@ -1,23 +1,31 @@
-import closeAngleBracketImg from "../assets/imgs/bracket.svg";
-import verticalBarImg from "../assets/imgs/verticalBar.svg";
-import './Breadcrumbs.scss';
+import closeAngleBracketImg from "../../assets/logos/bracket.svg";
+import verticalBarImg from "../../assets/logos/verticalBar.svg";
+
 function Breadcrumbs() {
-    return (
-        <div className="breadcrumbs">
-            <div className="breadcrumbs-url">
-                Home
-                <img src={closeAngleBracketImg} alt="close-angle-bracket" />
-            </div>
-            <div className="breadcrumbs-url">
-                Shop
-                <img src={closeAngleBracketImg} alt="close-angle-bracket" />
-            </div>
-            <div className="breadcrumbs-last-url">
-                <img src={verticalBarImg} alt="vertical-bar" />
-                Tire
-            </div>
-        </div>
-    )
+  return (
+    <div className="ml-100 flex h-16 items-center gap-3">
+      <div className="flex items-center">
+        Home
+        <img
+          src={closeAngleBracketImg}
+          alt="close-angle-bracket"
+          className="pl-5"
+        />
+      </div>
+      <div className="flex items-center">
+        Shop
+        <img
+          src={closeAngleBracketImg}
+          alt="close-angle-bracket"
+          className="pl-5"
+        />
+      </div>
+      <div className="flex items-center">
+        <img src={verticalBarImg} alt="vertical-bar" className="mr-3" />
+        Tire
+      </div>
+    </div>
+  );
 }
 
 export default Breadcrumbs;

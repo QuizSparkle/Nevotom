@@ -1,10 +1,9 @@
 import React, { FC } from "react";
-import bigThumbImg from "../../assets/imgs/big-thumb.png";
-import miniThumbImg from "../../assets/imgs/mini-thumb.png";
-import linkedInIcon from "../../assets/imgs/linked-in.svg";
-import twitterIcon from "../../assets/imgs/twitter.svg";
-import faceBookIcon from "../../assets/imgs/face-book.svg";
-import "./DetailInfo.scss";
+import bigThumbImg from "../../assets/logos/big-thumb.png";
+import miniThumbImg from "../../assets/logos/mini-thumb.png";
+import linkedInIcon from "../../assets/logos/linked-in.svg";
+import twitterIcon from "../../assets/logos/twitter.svg";
+import faceBookIcon from "../../assets/logos/face-book.svg";
 import ShoppingCartModal from "./ProductDetails";
 
 // type DetailProps = {};
@@ -30,7 +29,7 @@ function DetailInfo() {
       <div className="detail-content-box">
         <div className="detail-img-box">
           {/* Mini Thumbs */}
-          <div className="detail-mini-thumb">
+          <div className="flex flex-col gap-8">
             <div className="detail-img-thumb">
               <img src={miniThumbImg} alt="mini-thumb" />
             </div>
@@ -49,21 +48,25 @@ function DetailInfo() {
 
         <div className="dettail-info-box">
           <div className="detail-info-content">
-            <div className="detail-info-title">MIRAGE MR-AT172 285/65</div>
-            <div className="detail-info-price">Rs. 50,000.00</div>
+            <div className="detail-info-title text-2xl font-medium">
+              MIRAGE MR-AT172 285/65
+            </div>
+            <div className="detail-info-price text-lg font-semibold text-gray-600">
+              Rs. 50,000.00
+            </div>
 
-            <div className="detail-info-shop">Shope: Tire House</div>
+            <div className="detail-info-shop">Shop: Tire House</div>
 
             <div className="detail-info-description">
               The MIRAGE MR-AT172 285/65 R17 is a tyre developed with an
-              advanced tread pattern and compound which offer a long tread
-              life.It employs a variable pitch tread design. This variable pitch
+              advanced tread pattern and compound which offer a long tread life.
+              It employs a variable pitch tread design. This variable pitch
               design significantly reduces noise and provides a quiet ride. Its
               optimized profile provides even wear and classic style.
             </div>
             <label>Size</label>
-            {/* Siezes */}
-            <div className="detail-info-size-box">
+            {/* Sizes */}
+            <div className="detail-info-size-box flex gap-4">
               <div className="detail-info-size">
                 <label>17</label>
               </div>
@@ -75,21 +78,23 @@ function DetailInfo() {
               </div>
             </div>
             <label>Color</label>
-            <div className="detail-info-color "></div>
+            <div className="detail-info-color bg-black"></div>
             <div className="count-container">
-              <div className="count-box">
-                <div className="count-minus">-</div>
-                <div className="detail-info-count ">1</div>
-                <div className="count-plus">+</div>
+              <div className="count-box flex h-16 w-32 items-center justify-between rounded border border-gray-400">
+                <div className="count-minus mx-2">-</div>
+                <div className="detail-info-count">1</div>
+                <div className="count-plus mx-2">+</div>
               </div>
-              <button type="button">Add To Card</button>
-              {/* <ShoppingCartModal
-                    handleClose={this.hideModal}
-                  isShow={this.state.showCartModal}
-                /> */}
+              <button
+                type="button"
+                className="cursor-pointer text-lg font-medium"
+              >
+                Add To Cart
+              </button>
+              {/* <ShoppingCartModal handleClose={this.hideModal} isShow={this.state.showCartModal} /> */}
             </div>
           </div>
-          <div className="detail-info-footer">
+          <div className="detail-info-footer flex gap-4">
             <div className="footer-column">
               <div className="detail-info-footer-cell">SKU</div>
               <div className="detail-info-footer-cell">Category</div>
@@ -100,8 +105,8 @@ function DetailInfo() {
               <div className="detail-info-footer-cell">: SS001</div>
               <div className="detail-info-footer-cell">: Tire</div>
               <div className="detail-info-footer-cell">: Tire, rims, Shop</div>
-              <div className="detail-info-footer-cell">
-                :<img src={faceBookIcon} alt="face-book-icon"></img>
+              <div className="detail-info-footer-cell flex gap-2">
+                <img src={faceBookIcon} alt="face-book-icon"></img>
                 <img src={linkedInIcon} alt="face-book-icon"></img>
                 <img src={twitterIcon} alt="face-book-icon"></img>
               </div>
