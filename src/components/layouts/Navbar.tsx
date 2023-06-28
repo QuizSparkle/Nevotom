@@ -82,20 +82,15 @@ const Navbar = (props: props) => {
               </div>
             ) : (
               <>
-                <ScrollLink
-                  to="/buy"
-                  duration={500}
-                  smooth
+                <Link
+                  to="/allproducts"
                   className="cursor-pointer hover:text-gray-200"
                 >
                   Buy
-                </ScrollLink>
-                <ScrollLink
-                  to="/sell"
-                  className="cursor-pointer hover:text-gray-200"
-                >
+                </Link>
+                <Link to="/sell" className="cursor-pointer hover:text-gray-200">
                   Sell
-                </ScrollLink>
+                </Link>
               </>
             )}
           </div>
@@ -104,10 +99,10 @@ const Navbar = (props: props) => {
         {/* center */}
         {props.connected && (
           <div
-            className="flex h-14 items-center space-x-2 rounded-md 
-            bg-gray-200 px-1 text-4xl font-bold text-black"
+            className="flex h-14 items-center space-x-1 
+            rounded-md bg-gray-200 px-1 font-semibold text-black xl:text-2xl"
           >
-            <img src={coin} alt="nft" className="w-[80px]" />
+            <img src={coin} alt="nft" className="md:w-[50px] xl:w-[80px]" />
             <p>9476</p>
           </div>
         )}
