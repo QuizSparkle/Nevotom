@@ -1,6 +1,6 @@
 import React from "react";
 import InputField from "./InputField";
-import DeliveryRibbon from "./DeliveryRibbon";
+import DeliveryRibbon from "../layouts/DeliveryRibbon";
 import Footer from "../layouts/Footer";
 
 type props = {

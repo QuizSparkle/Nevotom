@@ -17,6 +17,8 @@ import Checkout from "./components/checkout/Checkout";
 import ProductDetails from "./components/productDetails/ProductDetails";
 import ShoppingCartModal from "./components/cart/ShoppingCartModal";
 import Footer from "./components/layouts/Footer";
+import AllProducts from "./components/allProducts/AllProducts";
+import SellProduct from "./components/sellProduct/SellProduct";
 
 const chains = [fantomTestnet];
 const projectId = "edb6828b8024fe4e9f28bfb372f4c88f";
@@ -61,6 +63,8 @@ const App: FC = () => {
             }
           />
           <Route path="/product-detail" element={<ProductDetails />} />
+          <Route path="/allproducts" element={<AllProducts />} />
+          <Route path="/sell" element={<SellProduct />} />
           <Route
             path="/cartmodal"
             element={
