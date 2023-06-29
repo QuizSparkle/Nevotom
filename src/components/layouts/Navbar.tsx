@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { DAppProvider } from "@usedapp/core"
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { HiShoppingCart } from "react-icons/hi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
+import { config } from "../../SupportedChains"
 import logo from "../../assets/logo.png";
 import coin from "../../assets/Coin-No-BG.png";
+import { BuyTomForm } from "../Wallet/BuyTomAndDisplayBalance"
 
 // For Web3Modal
 import {
@@ -16,7 +19,7 @@ import {
 } from "@web3modal/ethereum";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { arbitrum, fantomTestnet, mainnet, polygon } from "wagmi/chains";
-import ConnectBtn from "./ConnectBtn";
+import {ConnectBtn} from "./ConnectBtn";
 import { Web3Modal } from "@web3modal/react";
 
 import { useAccount } from "wagmi";
@@ -32,7 +35,6 @@ const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({
     projectId: "edb6828b8024fe4e9f28bfb372f4c88f",
-    version: 2,
     chains,
   }),
   publicClient,
@@ -122,9 +124,6 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-            <WagmiConfig config={wagmiConfig}>
-              <ConnectBtn />
-            </WagmiConfig>
 
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
@@ -141,6 +140,10 @@ const Navbar = (props: props) => {
           {menu ? <IoMdClose size={"44"} /> : <HiOutlineMenuAlt3 size={"44"} />}
         </button>
       </div>
+      <DAppProvider config={config}>
+              <ConnectBtn />
+              <BuyTomForm/>
+            </DAppProvider>
       {/* navbar for smaller screens */}
       <Web3Modal
         projectId="edb6828b8024fe4e9f28bfb372f4c88f"
