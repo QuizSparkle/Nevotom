@@ -1,50 +1,46 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
-import { HiShoppingCart } from "react-icons/hi";
-import { RiAccountCircleFill } from "react-icons/ri";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { IoMdClose } from "react-icons/io";
-import logo from "../../assets/logo.png";
-import coin from "../../assets/Coin-No-BG.png";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Link as ScrollLink } from 'react-scroll'
+import { HiShoppingCart } from 'react-icons/hi'
+import { RiAccountCircleFill } from 'react-icons/ri'
+import { HiOutlineMenuAlt3 } from 'react-icons/hi'
+import { IoMdClose } from 'react-icons/io'
+import logo from '../../assets/logo.png'
+import coin from '../../assets/Coin-No-BG.png'
 
 // For Web3Modal
-import {
-  EthereumClient,
-  w3mConnectors,
-  w3mProvider,
-} from "@web3modal/ethereum";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { arbitrum, fantomTestnet, mainnet, polygon } from "wagmi/chains";
-import ConnectBtn from "./ConnectBtn";
-import { Web3Modal } from "@web3modal/react";
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { arbitrum, fantomTestnet, mainnet, polygon } from 'wagmi/chains'
+import ConnectBtn from './ConnectBtn'
+import { Web3Modal } from '@web3modal/react'
 
-import { useAccount } from "wagmi";
+import { useAccount } from 'wagmi'
 
-console.log("account : ", useAccount.name);
+console.log('account : ', useAccount.name)
 
-const chains = [arbitrum, mainnet, polygon, fantomTestnet];
+const chains = [arbitrum, mainnet, polygon, fantomTestnet]
 
 const { publicClient } = configureChains(chains, [
-  w3mProvider({ projectId: "edb6828b8024fe4e9f28bfb372f4c88f" }),
-]);
+  w3mProvider({ projectId: 'edb6828b8024fe4e9f28bfb372f4c88f' }),
+])
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({
-    projectId: "edb6828b8024fe4e9f28bfb372f4c88f",
+    projectId: 'edb6828b8024fe4e9f28bfb372f4c88f',
     version: 2,
     chains,
   }),
   publicClient,
-});
-const ethereumClient = new EthereumClient(wagmiConfig, chains);
+})
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 type props = {
-  connected: boolean;
-};
+  connected: boolean
+}
 
 const Navbar = (props: props) => {
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(false)
 
   return (
     <nav className="bg-[#444444] px-4 py-6 text-white lg:px-7">
@@ -92,18 +88,23 @@ const Navbar = (props: props) => {
               </>
             )}
           </div>
-        </div>
-
-        {/* center */}
-        {props.connected && (
-          <div
-            className="flex h-14 items-center space-x-1 
+          {/* center */}
+          <div>
+            {props.connected && (
+              <div
+                className=" flex h-14 items-center space-x-1 
             rounded-md bg-gray-200 px-1 font-semibold text-black xl:text-2xl"
-          >
-            <img src={coin} alt="nft" className="md:w-[50px] xl:w-[80px]" />
-            <p>9476</p>
+              >
+                <img
+                  src={coin}
+                  alt="nft"
+                  className="sm:w-[30px] md:w-[50px] xl:w-[80px]"
+                />
+                <p>9476</p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
         {/* right */}
         <div className="hidden w-full md:flex xl:w-[60%]">
           {/* search bar */}
@@ -133,7 +134,7 @@ const Navbar = (props: props) => {
           className="block p-2 transition-all ease-linear md:hidden"
           onClick={() => setMenu(!menu)}
         >
-          {menu ? <IoMdClose size={"44"} /> : <HiOutlineMenuAlt3 size={"44"} />}
+          {menu ? <IoMdClose size={'44'} /> : <HiOutlineMenuAlt3 size={'44'} />}
         </button>
       </div>
       {/* navbar for smaller screens */}
@@ -142,7 +143,7 @@ const Navbar = (props: props) => {
         ethereumClient={ethereumClient}
       />
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
