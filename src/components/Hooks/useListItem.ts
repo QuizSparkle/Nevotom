@@ -20,7 +20,7 @@ export const useListItem = (
 
   const contract = new Contract(contractAddress, marketplaceInterface);
 
-  const linkAddress = "0xfafedb041c0dd4fa2dc0d87a6b0979ee6fa7af5f"; 
+  const linkAddress = "0xfafedb041c0dd4fa2dc0d87a6b0979ee6fa7af5f";
   const erc20ABI = ERC20.abi;
   const erc20Interface = new utils.Interface(erc20ABI);
   const erc20Contract = new Contract(linkAddress, erc20Interface);
@@ -58,7 +58,7 @@ export const useListItem = (
       console.log("ok");
       listItemSend(name, imageLink, description, price, quantity);
     }
-  }, [approveErc20AndListItem]);
+  }, [approveErc20AndListItem, price]);
 
   const [state, setState] = useState(approveErc20AndListItem);
 
