@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './components/home/Home'
 import Navbar from './components/layouts/Navbar'
 import tire from './assets/products/tire1.png'
+import { DAppProvider } from "@usedapp/core"
+import { config } from "./SupportedChains"
 
 // Web3Modal Installation
 import { Web3Modal } from '@web3modal/react'
@@ -24,7 +26,7 @@ const projectId = 'edb6828b8024fe4e9f28bfb372f4c88f'
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 2, chains }),
+  connectors: w3mConnectors({ projectId, chains }),
   publicClient,
 })
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
@@ -103,6 +105,7 @@ const App: FC = () => {
   })
 
   return (
+    <DAppProvider config={config}>
     <div className="App h-[100vh]">
       <Router>
         <Navbar connected={true} />
@@ -142,7 +145,8 @@ const App: FC = () => {
         <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
       </Router>
     </div>
-  )
-}
+    </DAppProvider>
+  );
+};
 
 export default App

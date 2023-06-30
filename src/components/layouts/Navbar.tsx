@@ -1,19 +1,26 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Link as ScrollLink } from 'react-scroll'
-import { HiShoppingCart } from 'react-icons/hi'
-import { RiAccountCircleFill } from 'react-icons/ri'
-import { HiOutlineMenuAlt3 } from 'react-icons/hi'
-import { IoMdClose } from 'react-icons/io'
-import logo from '../../assets/logo.png'
-import coin from '../../assets/Coin-No-BG.png'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import { HiShoppingCart } from "react-icons/hi";
+import { RiAccountCircleFill } from "react-icons/ri";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
+import logo from "../../assets/logo.png";
+import coin from "../../assets/Coin-No-BG.png";
+import { BuyTomForm } from "../functionalities/BuyTomAndDisplayBalance"
+import { RegisterUserForm } from "../functionalities/RegisterUserForm"
+import { ClaimRewards } from "../functionalities/ClaimRewards"
 
 // For Web3Modal
-import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { configureChains, createConfig, WagmiConfig } from 'wagmi'
-import { arbitrum, fantomTestnet, mainnet, polygon } from 'wagmi/chains'
-import ConnectBtn from './ConnectBtn'
-import { Web3Modal } from '@web3modal/react'
+import {
+  EthereumClient,
+  w3mConnectors,
+  w3mProvider,
+} from "@web3modal/ethereum";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { arbitrum, fantomTestnet, mainnet, polygon } from "wagmi/chains";
+import {ConnectBtn} from "./ConnectBtn";
+import { Web3Modal } from "@web3modal/react";
 
 import { useAccount } from 'wagmi'
 
@@ -28,7 +35,6 @@ const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({
     projectId: 'edb6828b8024fe4e9f28bfb372f4c88f',
-    version: 2,
     chains,
   }),
   publicClient,
@@ -118,7 +124,7 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-            <WagmiConfig config={wagmiConfig}>
+          <WagmiConfig config={wagmiConfig}>
               <ConnectBtn />
             </WagmiConfig>
 
@@ -137,6 +143,12 @@ const Navbar = (props: props) => {
           {menu ? <IoMdClose size={'44'} /> : <HiOutlineMenuAlt3 size={'44'} />}
         </button>
       </div>
+
+
+              <BuyTomForm/>
+              <RegisterUserForm/>
+              <ClaimRewards></ClaimRewards>
+
       {/* navbar for smaller screens */}
       <Web3Modal
         projectId="edb6828b8024fe4e9f28bfb372f4c88f"

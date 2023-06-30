@@ -114,7 +114,10 @@ contract Marketplace is Ownable, ReentrancyGuard {
         decimals = _decimals;
     }
 
-    function activate(address _tomAddress, address _escrowAddress) public onlyOwner {
+    function activate(
+        address _tomAddress,
+        address _escrowAddress
+    ) public onlyOwner {
         tom = TOM(_tomAddress);
         escrow = Escrow(_escrowAddress);
     }
@@ -172,7 +175,15 @@ contract Marketplace is Ownable, ReentrancyGuard {
 
         tom.transferFrom(msg.sender, address(this), postingFee);
 
-        Item memory newItem = Item(name, image, description, price, quantity, postingFee, msg.sender);
+        Item memory newItem = Item(
+            name,
+            image,
+            description,
+            price,
+            quantity,
+            postingFee,
+            msg.sender
+        );
 
         uint256 itemId = _itemIdCounter.current();
 
@@ -180,7 +191,16 @@ contract Marketplace is Ownable, ReentrancyGuard {
 
         _itemIdCounter.increment();
 
-        emit ItemListed(msg.sender, itemId, name, image, description, price, quantity, postingFee);
+        emit ItemListed(
+            msg.sender,
+            itemId,
+            name,
+            image,
+            description,
+            price,
+            quantity,
+            postingFee
+        );
     }
 
     function updateItem(
@@ -192,19 +212,43 @@ contract Marketplace is Ownable, ReentrancyGuard {
         uint256 quantity
     ) external isUser(msg.sender) isListed(itemId) {
         require(msg.sender == items[itemId].seller, "Caller must be Seller");
-        require(price > items[itemId].price / 2, "New price must be more than half of the old price");
+        require(
+            price > items[itemId].price / 2,
+            "New price must be more than half of the old price"
+        );
         uint256 oldPostingFee = items[itemId].postingFee;
         uint256 newPostingFee = calculatePostingFee(price, quantity);
 
         if (newPostingFee > oldPostingFee) {
-            tom.transferFrom(msg.sender, address(this), newPostingFee - oldPostingFee);
+            tom.transferFrom(
+                msg.sender,
+                address(this),
+                newPostingFee - oldPostingFee
+            );
         } else {
             tom.transfer(msg.sender, oldPostingFee - newPostingFee);
         }
 
-        items[itemId] = Item(name, image, description, price, quantity, newPostingFee, msg.sender);
+        items[itemId] = Item(
+            name,
+            image,
+            description,
+            price,
+            quantity,
+            newPostingFee,
+            msg.sender
+        );
 
-        emit ItemUpdated(msg.sender, itemId, name, image, description, price, quantity, newPostingFee);
+        emit ItemUpdated(
+            msg.sender,
+            itemId,
+            name,
+            image,
+            description,
+            price,
+            quantity,
+            newPostingFee
+        );
     }
 
     /**
@@ -213,8 +257,13 @@ contract Marketplace is Ownable, ReentrancyGuard {
      * We also need to automate the canceling of sold out items using chainlink keepers maybe.
      */
 
-    function cancelListing(uint256 itemId) external isUser(msg.sender) isListed(itemId) {
-        require(msg.sender == items[itemId].seller || msg.sender == owner(), "Caller must be Seller or Owner");
+    function cancelListing(
+        uint256 itemId
+    ) external isUser(msg.sender) isListed(itemId) {
+        require(
+            msg.sender == items[itemId].seller || msg.sender == owner(),
+            "Caller must be Seller or Owner"
+        );
         delete (items[itemId]);
         emit ItemCanceled(msg.sender, itemId);
     }
@@ -227,7 +276,10 @@ contract Marketplace is Ownable, ReentrancyGuard {
      * This part needs further thinking as how to further secure this process
      */
 
-    function orderItem(uint256 itemId, uint256 quantity)
+    function orderItem(
+        uint256 itemId,
+        uint256 quantity
+    )
         public
         isListed(itemId)
         isUser(msg.sender)
@@ -242,9 +294,17 @@ contract Marketplace is Ownable, ReentrancyGuard {
             revert InsufficientTokenBalance();
         }
 
-        uint256 rewards = (((item.postingFee * quantity) / item.quantity) * 70) / 100;
+        uint256 rewards = (((item.postingFee * quantity) / item.quantity) *
+            70) / 100;
 
-        uint256 orderId = escrow.lockFunds(item.seller, msg.sender, itemId, item.price * quantity, quantity, rewards);
+        uint256 orderId = escrow.lockFunds(
+            item.seller,
+            msg.sender,
+            itemId,
+            item.price * quantity,
+            quantity,
+            rewards
+        );
 
         for (uint256 i = 0; i < quantity; i++) {
             item.quantity--;
@@ -253,21 +313,32 @@ contract Marketplace is Ownable, ReentrancyGuard {
         // tom.transfer(msg.sender, rewards);
 
         emit ItemUpdated(
-            item.seller, itemId, item.name, item.image, item.description, item.price, item.quantity, item.postingFee
+            item.seller,
+            itemId,
+            item.name,
+            item.image,
+            item.description,
+            item.price,
+            item.quantity,
+            item.postingFee
         );
 
         return orderId;
     }
 
-    function confirmDelivery(uint256 orderId) external isUser(msg.sender) nonReentrant {
+    function confirmDelivery(
+        uint256 orderId
+    ) external isUser(msg.sender) nonReentrant {
         escrow.releaseFunds(orderId, msg.sender);
-        (,,, uint256 totalPaid,,,) = escrow.getOrder(orderId);
+        (, , , uint256 totalPaid, , , ) = escrow.getOrder(orderId);
         users[msg.sender].spentAmount += totalPaid;
     }
 
-    function cancelOrder(uint256 orderId) external isUser(msg.sender) nonReentrant {
+    function cancelOrder(
+        uint256 orderId
+    ) external isUser(msg.sender) nonReentrant {
         escrow.refundFunds(orderId, msg.sender);
-        (,, uint256 itemId,, uint256 quantity,,) = escrow.getOrder(orderId);
+        (, , uint256 itemId, , uint256 quantity, , ) = escrow.getOrder(orderId);
         Item storage item = items[itemId];
         for (uint256 i = 0; i < quantity; i++) {
             item.quantity++;
@@ -281,8 +352,13 @@ contract Marketplace is Ownable, ReentrancyGuard {
 
     function claimRewards() public isUser(msg.sender) nonReentrant {
         User storage user = users[msg.sender];
-        require(user.spentAmount >= 500 * 10 ** decimals, "Not eligible for rewards yet");
-        uint256 rewards = calculateTOMAmount((REWARD_RATE * user.spentAmount) / 100);
+        require(
+            user.spentAmount >= 500 * 10 ** decimals,
+            "Not eligible for rewards yet"
+        );
+        uint256 rewards = calculateTOMAmount(
+            (REWARD_RATE * user.spentAmount) / 100
+        );
         tom.transfer(msg.sender, rewards);
         user.spentAmount = 0;
 
@@ -294,18 +370,27 @@ contract Marketplace is Ownable, ReentrancyGuard {
      * @dev both parties get 50 TOM
      */
 
-    function UseReferalLink(address referedBy) public isUser(referedBy) nonReentrant {
+    function UseReferalLink(
+        address referedBy
+    ) public isUser(referedBy) nonReentrant {
         registerUser(msg.sender);
         tom.transfer(msg.sender, 50 * 10 ** tom.decimals());
         tom.transfer(referedBy, 50 * 10 ** tom.decimals());
     }
 
-    function calculatePostingFee(uint256 price, uint256 quantity) public view returns (uint256 postingFee) {
+    function calculatePostingFee(
+        uint256 price,
+        uint256 quantity
+    ) public view returns (uint256 postingFee) {
         postingFee = calculateTOMAmount((FEE_RATE * price * quantity) / 100);
     }
 
-    function calculateTOMAmount(uint256 tokenAmount) public view returns (uint256) {
-        return (tokenAmount * TOM_USD_PRICE * 10 ** tom.decimals()) / 10 ** decimals;
+    function calculateTOMAmount(
+        uint256 tokenAmount
+    ) public view returns (uint256) {
+        return
+            (tokenAmount * TOM_USD_PRICE * 10 ** tom.decimals()) /
+            10 ** decimals;
     }
 
     function getUser(uint256 key) public view returns (address) {
@@ -316,10 +401,20 @@ contract Marketplace is Ownable, ReentrancyGuard {
         return users[user].spentAmount;
     }
 
-    function getItem(uint256 itemId)
+    function getItem(
+        uint256 itemId
+    )
         public
         view
-        returns (string memory, string memory, string memory, uint256, uint256, uint256, address)
+        returns (
+            string memory,
+            string memory,
+            string memory,
+            uint256,
+            uint256,
+            uint256,
+            address
+        )
     {
         return (
             items[itemId].name,

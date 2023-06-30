@@ -1,21 +1,65 @@
-import { useWeb3Modal } from "@web3modal/react";
-import React from "react";
-import { FaWallet } from "react-icons/fa";
+import { useEthers } from "@usedapp/core"
+import { Button, makeStyles } from "@material-ui/core"
+import { ConnectionRequiredMsg } from "../ConnectionRequiredMsg"
+import React from 'react'
 
-const ConnectBtn = () => {
-  const { open, close } = useWeb3Modal();
-  return (
-    <button
-      onClick={() => open()}
-      className="flex items-center rounded-md 
-          bg-primary p-2 px-3 transition-all hover:-translate-y-0.5 hover:shadow-md"
-    >
-      <span>
-        <FaWallet className="mr-2 text-xl text-white" />
-      </span>{" "}
-      Connect Wallet
-    </button>
-  );
-};
+const useStyles = makeStyles((theme) => ({
+    container: {
+        padding: theme.spacing(2),
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: theme.spacing(1)
+    },
+    div: {
+        display: "flex",
+        alignItems: "center"
+    },
+    address: {
+        marginRight: '10px',
+        textTransform: "initial"
+    },
+    connexion: {
+        marginRight: '72px',
+    }
+}
+))
 
-export default ConnectBtn;
+export const ConnectBtn = () => {
+    const classes = useStyles()
+    const { account, activateBrowserWallet, deactivate } = useEthers()
+
+    const isConnected = account !== undefined
+
+    return (
+        <div className={classes.container}>
+            <div>
+                {isConnected ? (
+                    <>
+                        <Button color="primary" variant="contained" className={classes.address}>
+                            {`${account?.slice(0, 6)}...${account?.slice(-4)}`}
+                        </Button>
+                        <Button variant="contained"
+                            onClick={deactivate} className={classes.connexion}>
+                            Disconnect
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                        <div className={classes.div}>
+                            <ConnectionRequiredMsg />
+                            <Button color="primary" variant="contained"
+                                onClick={() => {
+                                  console.log("Trying to connect...");
+                                  activateBrowserWallet();
+                              }}
+                                className={classes.connexion}>
+                                Connect
+                            </Button>
+                        </div>
+                    </>
+                )
+                }
+            </div>
+        </div >
+    )
+}
