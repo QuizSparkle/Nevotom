@@ -22,31 +22,31 @@ import { arbitrum, fantomTestnet, mainnet, polygon } from "wagmi/chains";
 import {ConnectBtn} from "./ConnectBtn";
 import { Web3Modal } from "@web3modal/react";
 
-import { useAccount } from "wagmi";
+import { useAccount } from 'wagmi'
 
-console.log("account : ", useAccount.name);
+console.log('account : ', useAccount.name)
 
-const chains = [arbitrum, mainnet, polygon, fantomTestnet];
+const chains = [arbitrum, mainnet, polygon, fantomTestnet]
 
 const { publicClient } = configureChains(chains, [
-  w3mProvider({ projectId: "edb6828b8024fe4e9f28bfb372f4c88f" }),
-]);
+  w3mProvider({ projectId: 'edb6828b8024fe4e9f28bfb372f4c88f' }),
+])
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({
-    projectId: "edb6828b8024fe4e9f28bfb372f4c88f",
+    projectId: 'edb6828b8024fe4e9f28bfb372f4c88f',
     chains,
   }),
   publicClient,
-});
-const ethereumClient = new EthereumClient(wagmiConfig, chains);
+})
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 type props = {
-  connected: boolean;
-};
+  connected: boolean
+}
 
 const Navbar = (props: props) => {
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(false)
 
   return (
     <nav className="bg-[#444444] px-4 py-6 text-white lg:px-7">
@@ -94,18 +94,23 @@ const Navbar = (props: props) => {
               </>
             )}
           </div>
-        </div>
-
-        {/* center */}
-        {props.connected && (
-          <div
-            className="flex h-14 items-center space-x-1 
+          {/* center */}
+          <div>
+            {props.connected && (
+              <div
+                className=" flex h-14 items-center space-x-1 
             rounded-md bg-gray-200 px-1 font-semibold text-black xl:text-2xl"
-          >
-            <img src={coin} alt="nft" className="md:w-[50px] xl:w-[80px]" />
-            <p>9476</p>
+              >
+                <img
+                  src={coin}
+                  alt="nft"
+                  className="sm:w-[30px] md:w-[50px] xl:w-[80px]"
+                />
+                <p>9476</p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
         {/* right */}
         <div className="hidden w-full md:flex xl:w-[60%]">
           {/* search bar */}
@@ -119,6 +124,9 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
+          <WagmiConfig config={wagmiConfig}>
+              <ConnectBtn />
+            </WagmiConfig>
 
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
@@ -132,11 +140,11 @@ const Navbar = (props: props) => {
           className="block p-2 transition-all ease-linear md:hidden"
           onClick={() => setMenu(!menu)}
         >
-          {menu ? <IoMdClose size={"44"} /> : <HiOutlineMenuAlt3 size={"44"} />}
+          {menu ? <IoMdClose size={'44'} /> : <HiOutlineMenuAlt3 size={'44'} />}
         </button>
       </div>
 
-              <ConnectBtn />
+
               <BuyTomForm/>
               <RegisterUserForm/>
               <ClaimRewards></ClaimRewards>
@@ -147,7 +155,7 @@ const Navbar = (props: props) => {
         ethereumClient={ethereumClient}
       />
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
