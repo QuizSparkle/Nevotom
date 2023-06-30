@@ -46,27 +46,27 @@ export const BuyTomForm = () => {
         console.log(newAmount)
     }
 
-    const { approveAndBuyTom, state: approveAndStakeErc20State, transactionHash: Receipt } = useBuyTomTokens()
+    const { approveAndBuyTom, state: approveErc20AndBuyState, transactionHash: Receipt } = useBuyTomTokens()
     const handleStakeSubmit = () => {
         const amountAsWei = utils.parseEther(amount.toString())
         return approveAndBuyTom(amountAsWei.toString())
     }
 
-    const isMining = approveAndStakeErc20State.status === "Mining"
+    const isMining = approveErc20AndBuyState.status === "Mining"
     // const hasZeroBalance = formattedTokenBalance === 0
     const hasZeroAmountSelected = parseFloat(amount.toString()) === 0
 
     const [showErc20ApprovalSuccess, setShowErc20ApprovalSuccess] = useState(false)
-    const [showStakeTokenSuccess, setStakeTokenSuccess] = useState(false)
+    const [showBuyTokenSuccess, setBuyTokenSuccess] = useState(false)
     const handleCloseSnack = () => {
         setShowErc20ApprovalSuccess(false)
-        setStakeTokenSuccess(false)
+        setBuyTokenSuccess(false)
     }
 
 
     /////**********************    Need to send the transaction hash to backend which should execute
                     //             the event catching and db integration */
-                    
+
     // const sendTransactionHashToBackend = async (transactionHash) => {
     //     try {
     //       const response = await fetch('YOUR_DJANGO_BACKEND_URL', {
@@ -88,17 +88,17 @@ export const BuyTomForm = () => {
                 notification.transactionName === "Approve ERC20 transfer").length > 0
         ) {
             setShowErc20ApprovalSuccess(true)
-            setStakeTokenSuccess(false)
+            setBuyTokenSuccess(false)
         }
         if (notifications.filter(
             (notification) =>
                 notification.type === "transactionSucceed" &&
-                notification.transactionName === "Stake Tokens").length > 0
+                notification.transactionName === "Buy Tom").length > 0
         ) {
             setShowErc20ApprovalSuccess(false)
-            setStakeTokenSuccess(true)
+            setBuyTokenSuccess(true)
         }
-    }, [notifications, showErc20ApprovalSuccess, showStakeTokenSuccess])
+    }, [notifications, showErc20ApprovalSuccess, showBuyTokenSuccess])
 
     return (
         <>
@@ -122,7 +122,7 @@ export const BuyTomForm = () => {
                     variant="contained"
                     size="large"
                     disabled={isMining || hasZeroAmountSelected }>
-                    {isMining ? <CircularProgress size={26} /> : "Stake"}
+                    {isMining ? <CircularProgress size={26} /> : "Buy"}
                 </Button>
             </div>
             <Snackbar
@@ -134,11 +134,11 @@ export const BuyTomForm = () => {
                 </Alert>
             </Snackbar>
             <Snackbar
-                open={showStakeTokenSuccess}
+                open={showBuyTokenSuccess}
                 autoHideDuration={5000}
                 onClose={handleCloseSnack}>
                 <Alert onClose={handleCloseSnack} severity="success">
-                    Tokens Staked!
+                    Tokens Bought!
                 </Alert>
             </Snackbar>
 

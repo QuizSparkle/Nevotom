@@ -3,6 +3,8 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/home/Home";
 import Navbar from "./components/layouts/Navbar";
+import { DAppProvider } from "@usedapp/core"
+import { config } from "./SupportedChains"
 
 // Web3Modal Installation
 import { Web3Modal } from "@web3modal/react";
@@ -44,6 +46,7 @@ const App: FC = () => {
   });
 
   return (
+    <DAppProvider config={config}>
     <div className="App h-[100vh]">
       <Router>
         <Navbar connected={true} />
@@ -77,6 +80,7 @@ const App: FC = () => {
         <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
       </Router>
     </div>
+    </DAppProvider>
   );
 };
 
