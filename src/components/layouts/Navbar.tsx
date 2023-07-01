@@ -11,13 +11,18 @@ import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../functionalities/RegisterUserForm'
 import { ClaimRewards } from '../functionalities/ClaimRewards'
 import { ConnectBtn } from './ConnectBtn'
+import { useEthers } from '@usedapp/core'
 
 type props = {
   connected: boolean
 }
 
 const Navbar = (props: props) => {
-  // const [menu, setMenu] = useState(false)
+  const [showDropdown, setShowDropdown] = useState(false)
+
+  const { account } = useEthers()
+
+  const isConnected = account !== undefined
 
   return (
     <nav
@@ -26,7 +31,7 @@ const Navbar = (props: props) => {
     >
       <div className="flex items-center justify-between">
         {/* left */}
-        <div className="flex items-center space-x-4 lg:space-x-16">
+        <div className="flex items-center space-x-4 xl:space-x-14">
           {/* logo */}
           <img
             src={logo}
@@ -42,23 +47,21 @@ const Navbar = (props: props) => {
             <Link to="/" className="cursor-pointer hover:text-gray-200">
               Home
             </Link>
-            {!props.connected ? (
-              <div>
-                <ScrollLink
+            {!isConnected ? (
+              <>
+                <Link
                   to="/about"
-                  duration={500}
-                  smooth
                   className="cursor-pointer hover:text-gray-200"
                 >
                   About
-                </ScrollLink>
-                <ScrollLink
+                </Link>
+                <Link
                   to="/contact"
                   className="cursor-pointer hover:text-gray-200"
                 >
                   Contact
-                </ScrollLink>
-              </div>
+                </Link>
+              </>
             ) : (
               <>
                 <Link
@@ -70,21 +73,56 @@ const Navbar = (props: props) => {
                 <Link to="/sell" className="cursor-pointer hover:text-gray-200">
                   Sell
                 </Link>
+                <Link
+                  to="/rewards"
+                  className="cursor-pointer hover:text-gray-200"
+                >
+                  Rewards
+                </Link>
               </>
             )}
           </div>
           {/* center */}
           <div>
-            {props.connected && (
-              <Link to="/rewards">
+            {isConnected && (
+              <Link
+                to="/rewards"
+                className="relative cursor-pointer hover:text-gray-200"
+                onMouseEnter={() => setShowDropdown(true)}
+              >
                 <div
                   className="flex items-center  space-x-1
-            rounded-md pr-1 font-semibold text-orange-400 
+            rounded-md py-1 pr-1 font-semibold text-orange-400 
             hover:bg-gray-900 xl:text-lg"
+                  onMouseLeave={() => setShowDropdown(false)}
                 >
                   <img src={coin} alt="nft" className="w-[35px]" />
                   <p>9476</p>
                 </div>
+
+                {showDropdown && (
+                  <div
+                    onMouseEnter={() => setShowDropdown(true)}
+                    onMouseLeave={() => setShowDropdown(false)}
+                    className="absolute top-10 rounded-md bg-white pt-2
+                     text-[0.9rem] text-black shadow-md"
+                  >
+                    <Link
+                      to="/buytom"
+                      className="block border-b px-6 py-1 hover:bg-gray-200
+                         hover:text-primary"
+                    >
+                      BuyTom
+                    </Link>
+                    <Link
+                      to="/amountspent"
+                      className="block w-max px-6 py-1 hover:bg-gray-200 
+                        hover:text-primary"
+                    >
+                      Amt Spent
+                    </Link>
+                  </div>
+                )}
               </Link>
             )}
           </div>
@@ -92,7 +130,7 @@ const Navbar = (props: props) => {
         {/* right */}
         <div className="flex xl:w-[60%]">
           {/* search bar */}
-          <div className="mx-6 hidden flex-1 lg:inline-block">
+          <div className="mx-6 hidden flex-1 md:inline-block">
             <input
               type="search"
               placeholder="searchNFT"
@@ -102,9 +140,7 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-            {/* <WagmiConfig config={wagmiConfig}> */}
-              <ConnectBtn />
-            {/* </WagmiConfig> */}
+            <ConnectBtn />
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>
@@ -120,10 +156,10 @@ const Navbar = (props: props) => {
           {menu ? <IoMdClose size={'44'} /> : <HiOutlineMenuAlt3 size={'44'} />}
         </button> */}
       </div>
-
+      {/* 
       <BuyTomForm />
       <RegisterUserForm />
-      <ClaimRewards></ClaimRewards>
+      <ClaimRewards></ClaimRewards> */}
     </nav>
   )
 }

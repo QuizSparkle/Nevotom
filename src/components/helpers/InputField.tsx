@@ -1,10 +1,10 @@
-import React from "react";
-import { AiOutlineCaretDown } from "react-icons/ai";
+import React from 'react'
+import { AiOutlineCaretDown } from 'react-icons/ai'
 
 type props = {
-  field: string;
-  dropDown: boolean;
-};
+  field: string
+  dropDown: boolean
+}
 
 const InputField = (props: props) => {
   return (
@@ -16,13 +16,13 @@ const InputField = (props: props) => {
           className="h-full w-full text-gray-700 outline-none"
         />
         <AiOutlineCaretDown
-          className={`absolute ${props.dropDown ? "visible" : "invisible"}
+          className={`absolute ${props.dropDown ? 'visible' : 'invisible'}
         right-2 top-[40%] cursor-pointer text-gray-600 
         `}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InputField;
+export default InputField
