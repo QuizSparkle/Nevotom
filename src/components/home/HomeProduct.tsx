@@ -1,15 +1,15 @@
-import React from "react";
-import { RiShieldStarFill } from "react-icons/ri";
-import { BiDollar } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { RiShieldStarFill } from 'react-icons/ri'
+import { BiDollar } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 
 type props = {
-  name: string;
-  img: string;
-  description: string;
-  price: number;
-  reward: boolean;
-};
+  name: string
+  img: string
+  description: string
+  price: number
+  reward: boolean
+}
 
 const HomeProduct = (props: props) => {
   return (
@@ -21,7 +21,7 @@ const HomeProduct = (props: props) => {
         <RiShieldStarFill
           className={`cursor-pointer text-3xl font-bold
        text-yellow-700 hover:text-yellow-500 ${
-         props.reward ? "visible" : "invisible"
+         props.reward ? 'visible' : 'invisible'
        } absolute left-2 top-1`}
         />
       </Link>
@@ -35,7 +35,7 @@ const HomeProduct = (props: props) => {
         </h2>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeProduct;
+export default HomeProduct
