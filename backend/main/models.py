@@ -33,3 +33,18 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+class Order(models.Model):
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"Order #{self.id}"

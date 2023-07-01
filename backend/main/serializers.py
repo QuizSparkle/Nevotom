@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Item
+from .models import User, Item, Order
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -18,3 +18,8 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = '__all__'
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['user', 'listing', 'quantity', 'status']
