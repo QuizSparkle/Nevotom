@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InputField from "../checkout/InputField";
+import InputField from "../helpers/InputField"
 import coinbg from "../../assets/Coin-bg.png";
 import { useListItem } from "../Hooks/useListItem"; // adjust the import path accordingly
 import { useNotifications } from "@usedapp/core";

@@ -1,5 +1,6 @@
-import React from "react";
-import hero from "../../assets/hero.png";
+import React from 'react'
+import hero from '../../assets/hero.png'
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -11,12 +12,13 @@ const Hero = () => {
       <div className="flex flex-col items-center space-y-4">
         <h1 className="text-5xl text-primary">NFTizeMarket</h1>
         <p className="text-xl text-gray-300">The safest Place to Buy</p>
-        <button
+        <Link
+          to="/allproducts"
           className="rounded-md bg-primary p-2 
-      px-5 text-gray-100 transition-all hover:scale-105"
+          px-5 text-gray-100 transition-all hover:scale-105"
         >
           Shop Now
-        </button>
+        </Link>
       </div>
       <div className="rounded-full border border-white bg-primary p-2">
         <img
@@ -26,7 +28,7 @@ const Hero = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

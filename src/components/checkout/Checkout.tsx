@@ -1,14 +1,14 @@
-import React from "react";
-import InputField from "./InputField";
-import DeliveryRibbon from "../layouts/DeliveryRibbon";
-import Footer from "../layouts/Footer";
+import React from 'react'
+import InputField from '../helpers/InputField'
+import DeliveryRibbon from '../layouts/DeliveryRibbon'
+import Footer from '../layouts/Footer'
 
 type props = {
-  productName: string;
-  subtotal: number;
-  productPrice: number;
-  total: number;
-};
+  productName: string
+  subtotal: number
+  productPrice: number
+  total: number
+}
 
 const Checkout = (props: props) => {
   return (
@@ -57,7 +57,7 @@ const Checkout = (props: props) => {
           <p className="text-left text-sm text-gray-500">
             Your personal data will be used to support your experience
             throughout this website, to manage access to your account, and for
-            other purposes described in our{" "}
+            other purposes described in our{' '}
             <span className="text-black">privacy policy.</span>
           </p>
 
@@ -76,7 +76,7 @@ const Checkout = (props: props) => {
       <DeliveryRibbon />
       <Footer />
     </section>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout
