@@ -10,6 +10,7 @@ import coin from '../../assets/Coin-No-BG.png'
 import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../functionalities/RegisterUserForm'
 import { ClaimRewards } from '../functionalities/ClaimRewards'
+import { ConnectBtn } from './ConnectBtn'
 
 type props = {
   connected: boolean
@@ -101,6 +102,9 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
+            {/* <WagmiConfig config={wagmiConfig}> */}
+              <ConnectBtn />
+            {/* </WagmiConfig> */}
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>
