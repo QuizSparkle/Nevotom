@@ -18,3 +18,21 @@ class ItemListAPIView(APIView):
         items = Item.objects.all()
         serializer = ItemSerializer(items, many=True)
         return Response(serializer.data)
+
+
+class CreateUserAPIView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'User created successfully'})
+        return Response(serializer.errors, status=400)
+
+
+class CreateItemAPIView(APIView):
+    def post(self, request):
+        serializer = ItemSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Item created successfully'})
+        return Response(serializer.errors, status=400)
