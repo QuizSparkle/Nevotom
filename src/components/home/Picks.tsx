@@ -84,6 +84,7 @@ const Picks = () => {
         >
           {products.map((product) => (
             <HomeProduct
+              key={product.price}
               img={product.img}
               description={product.description}
               price={product.price}

@@ -1,64 +1,42 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
-import { HiShoppingCart } from "react-icons/hi";
-import { RiAccountCircleFill } from "react-icons/ri";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { IoMdClose } from "react-icons/io";
-import logo from "../../assets/logo.png";
-import coin from "../../assets/Coin-No-BG.png";
-import { BuyTomForm } from "../functionalities/BuyTomAndDisplayBalance"
-import { RegisterUserForm } from "../functionalities/RegisterUserForm"
-import { ClaimRewards } from "../functionalities/ClaimRewards"
-
-// For Web3Modal
-import {
-  EthereumClient,
-  w3mConnectors,
-  w3mProvider,
-} from "@web3modal/ethereum";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { arbitrum, fantomTestnet, mainnet, polygon } from "wagmi/chains";
-import {ConnectBtn} from "./ConnectBtn";
-import { Web3Modal } from "@web3modal/react";
-
-import { useAccount } from 'wagmi'
-
-console.log('account : ', useAccount.name)
-
-const chains = [arbitrum, mainnet, polygon, fantomTestnet]
-
-const { publicClient } = configureChains(chains, [
-  w3mProvider({ projectId: 'edb6828b8024fe4e9f28bfb372f4c88f' }),
-])
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: w3mConnectors({
-    projectId: 'edb6828b8024fe4e9f28bfb372f4c88f',
-    chains,
-  }),
-  publicClient,
-})
-const ethereumClient = new EthereumClient(wagmiConfig, chains)
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Link as ScrollLink } from 'react-scroll'
+import { HiShoppingCart } from 'react-icons/hi'
+import { RiAccountCircleFill } from 'react-icons/ri'
+import { HiOutlineMenuAlt3 } from 'react-icons/hi'
+import { IoMdClose } from 'react-icons/io'
+import logo from '../../assets/logo.png'
+import coin from '../../assets/Coin-No-BG.png'
+import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
+import { RegisterUserForm } from '../functionalities/RegisterUserForm'
+import { ClaimRewards } from '../functionalities/ClaimRewards'
 
 type props = {
   connected: boolean
 }
 
 const Navbar = (props: props) => {
-  const [menu, setMenu] = useState(false)
+  // const [menu, setMenu] = useState(false)
 
   return (
-    <nav className="bg-[#444444] px-4 py-6 text-white lg:px-7">
+    <nav
+      className="bg-[#444444] px-4 py-6
+    text-white lg:px-7"
+    >
       <div className="flex items-center justify-between">
         {/* left */}
-        <div className="flex space-x-16">
-          <img src={logo} alt="NFtizeMarket" className="w-[210px]" />
+        <div className="flex items-center space-x-4 lg:space-x-16">
+          {/* logo */}
+          <img
+            src={logo}
+            alt="NFtizeMarket"
+            className="w-[90px] lg:w-[200px]"
+          />
 
           {/* navlinks */}
           <div
-            className="ml-4 flex items-center space-x-6 text-lg
-          text-white xl:text-xl"
+            className="flex items-center space-x-6 text-[1.1rem] text-white
+          lg:ml-4 lg:text-xl"
           >
             <Link to="/" className="cursor-pointer hover:text-gray-200">
               Home
@@ -97,24 +75,23 @@ const Navbar = (props: props) => {
           {/* center */}
           <div>
             {props.connected && (
-              <div
-                className=" flex h-14 items-center space-x-1 
-            rounded-md bg-gray-200 px-1 font-semibold text-black xl:text-2xl"
-              >
-                <img
-                  src={coin}
-                  alt="nft"
-                  className="sm:w-[30px] md:w-[50px] xl:w-[80px]"
-                />
-                <p>9476</p>
-              </div>
+              <Link to="/rewards">
+                <div
+                  className="flex items-center  space-x-1
+            rounded-md pr-1 font-semibold text-orange-400 
+            hover:bg-gray-900 xl:text-lg"
+                >
+                  <img src={coin} alt="nft" className="w-[35px]" />
+                  <p>9476</p>
+                </div>
+              </Link>
             )}
           </div>
         </div>
         {/* right */}
-        <div className="hidden w-full md:flex xl:w-[60%]">
+        <div className="flex xl:w-[60%]">
           {/* search bar */}
-          <div className="mx-6 flex-1">
+          <div className="mx-6 hidden flex-1 lg:inline-block">
             <input
               type="search"
               placeholder="searchNFT"
@@ -124,10 +101,6 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-          <WagmiConfig config={wagmiConfig}>
-              <ConnectBtn />
-            </WagmiConfig>
-
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>
@@ -136,24 +109,17 @@ const Navbar = (props: props) => {
             </Link>
           </div>
         </div>
-        <button
+        {/* <button
           className="block p-2 transition-all ease-linear md:hidden"
           onClick={() => setMenu(!menu)}
         >
           {menu ? <IoMdClose size={'44'} /> : <HiOutlineMenuAlt3 size={'44'} />}
-        </button>
+        </button> */}
       </div>
 
-
-              <BuyTomForm/>
-              <RegisterUserForm/>
-              <ClaimRewards></ClaimRewards>
-
-      {/* navbar for smaller screens */}
-      <Web3Modal
-        projectId="edb6828b8024fe4e9f28bfb372f4c88f"
-        ethereumClient={ethereumClient}
-      />
+      <BuyTomForm />
+      <RegisterUserForm />
+      <ClaimRewards></ClaimRewards>
     </nav>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import OrderedBlock from './OrderedBlock'
 import DeliveryRibbon from '../layouts/DeliveryRibbon'
+import { useNavigate } from 'react-router'
 
 interface OrderProduct {
   name: string
@@ -19,8 +20,9 @@ interface CartProps {
 }
 
 const Cart: React.FC<CartProps> = ({ ordered }) => {
+  const navigate = useNavigate()
   return (
-    <div className="p-4 px-2">
+    <div className="overflow-x-auto p-4 px-2">
       <main className="flex flex-col items-center gap-6">
         <h1 className="mt-10 text-center text-4xl font-bold">Cart</h1>
         <section className="mx-auto flex w-[1000px] items-start justify-between">
@@ -76,6 +78,7 @@ const Cart: React.FC<CartProps> = ({ ordered }) => {
               </div>
             </div>
             <button
+              onClick={() => navigate('/checkout')}
               className="mt-4 rounded-md border 
             border-black p-1 px-4"
             >
