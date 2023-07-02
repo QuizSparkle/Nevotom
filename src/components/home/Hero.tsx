@@ -10,12 +10,12 @@ const Hero = () => {
     sm:flex-row sm:space-x-36"
     >
       <div className="flex flex-col items-center space-y-4">
-        <h1 className="text-5xl text-primary">NFTizeMarket</h1>
-        <p className="text-xl text-gray-300">The safest Place to Buy</p>
+        <h1 className="text-6xl text-primary">NFTizeMarket</h1>
+        <p className="text-2xl text-gray-300">The safest Place to Buy</p>
         <Link
           to="/allproducts"
           className="rounded-md bg-primary p-2 
-          px-5 text-gray-100 transition-all hover:scale-105"
+          px-7 text-gray-100 transition-all hover:scale-105"
         >
           Shop Now
         </Link>
@@ -24,7 +24,7 @@ const Hero = () => {
         <img
           src={hero}
           alt="cartLogo"
-          className="w-[200px] object-contain sm:w-[310px]"
+          className="w-[200px] object-contain sm:w-[310px] xl:w-[380px]"
         />
       </div>
     </div>
