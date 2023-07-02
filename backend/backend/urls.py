@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import MyView, ItemListAPIView
+from main.views import MyView, ItemListAPIView, CreateUserAPIView, CreateItemAPIView, CreateOrderAPIView, UserOrdersAPIView, UpdateOrderAPIView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/myendpoint/', MyView.as_view()),
     path('api/items/', ItemListAPIView.as_view(), name='item-list'),
+    path('api/users/create/', CreateUserAPIView.as_view(), name='create_user'),
+    path('api/items/create/', CreateItemAPIView.as_view(), name='create_item'),
+    path('api/orders/create/', CreateOrderAPIView.as_view(), name='create_order'),
+    path('api/orders/user/<int:user_id>/', UserOrdersAPIView.as_view(), name='user_orders'),
+    path('api/orders/update/<int:id>/', UpdateOrderAPIView.as_view(), name='update_order'),
 ]
