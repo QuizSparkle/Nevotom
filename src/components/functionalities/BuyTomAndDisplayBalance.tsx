@@ -114,8 +114,8 @@ export const BuyTomForm = () => {
   }, [notifications, showErc20ApprovalSuccess, showBuyTokenSuccess])
 
   return (
-    <>
-      <div className={`${classes.container} py-10`}>
+ <section className="flex h-[53%] items-center">
+      <div className={`${classes.container}`}>
         <span>
           TOM Balance:{' '}
           {formattedTokenBalance ? formattedTokenBalance.toString() : '0'}
@@ -158,6 +158,6 @@ export const BuyTomForm = () => {
           Tokens Bought!
         </Alert>
       </Snackbar>
-    </>
+    </section>
   )
 }
