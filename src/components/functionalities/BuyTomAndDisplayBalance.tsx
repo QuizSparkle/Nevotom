@@ -118,9 +118,7 @@ export const BuyTomForm = () => {
       <div className={`${classes.container} py-10`}>
         <span>
           TOM Balance:{' '}
-          {formattedTokenBalance
-            ? formattedTokenBalance.toString()
-            : 'Loading...'}
+          {formattedTokenBalance ? formattedTokenBalance.toString() : '0'}
         </span>
         <TextField
           className={classes.input}

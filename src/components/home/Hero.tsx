@@ -1,5 +1,6 @@
 import React from 'react'
 import hero from '../../assets/hero.png'
+// import nftLogo from '../../assets/nftize-logo.png'
 import { Link } from 'react-router-dom'
 
 const Hero = () => {

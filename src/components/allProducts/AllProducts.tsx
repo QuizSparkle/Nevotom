@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { HiViewGrid } from "react-icons/hi";
-import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
-import { MdViewDay } from "react-icons/md";
-import { formatUnits } from "@ethersproject/units"
-import HomeProduct from "../home/HomeProduct";
-import DeliveryRibbon from "../layouts/DeliveryRibbon";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { HiViewGrid } from 'react-icons/hi'
+import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2'
+import { MdViewDay } from 'react-icons/md'
+import { formatUnits } from '@ethersproject/units'
+import HomeProduct from '../home/HomeProduct'
+import DeliveryRibbon from '../layouts/DeliveryRibbon'
 
 interface Product {
-  imageLink: string;
-  name: string;
-  description: string;
-  price: number;
-  reward: boolean;
+  imageLink: string
+  name: string
+  description: string
+  price: number
+  reward: boolean
 }
 
 const AllProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get<Product[]>("http://127.0.0.1:8000/api/items/");
-        setProducts(response.data);
+        const response = await axios.get<Product[]>(
+          'http://127.0.0.1:8000/api/items/'
+        )
+        setProducts(response.data)
       } catch (error) {
-        console.log("Error fetching products:", error);
+        console.log('Error fetching products:', error)
       }
-    };
+    }
 
-    fetchProducts();
-  }, []);
+    fetchProducts()
+  }, [])
 
   return (
     <div className="py-6">

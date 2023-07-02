@@ -5,7 +5,7 @@ import { HiShoppingCart } from 'react-icons/hi'
 import { RiAccountCircleFill } from 'react-icons/ri'
 import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { IoMdClose } from 'react-icons/io'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/nftize-logo.png'
 import coin from '../../assets/Coin-No-BG.png'
 import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../functionalities/RegisterUserForm'
@@ -51,11 +51,16 @@ const Navbar = (props: props) => {
         {/* left */}
         <div className="flex items-center space-x-4 xl:space-x-14">
           {/* logo */}
-          <img
-            src={logo}
-            alt="NFtizeMarket"
-            className="w-[90px] lg:w-[200px]"
-          />
+          <div className="flex items-center space-x-1">
+            <img
+              src={logo}
+              alt="NFtizeMarket"
+              className="w-[90px] lg:h-[100px] lg:w-[100px]"
+            />
+            <h4 className="hidden text-3xl font-semibold text-primary xl:inline-flex">
+              NFTizeMarket
+            </h4>
+          </div>
 
           {/* navlinks */}
           <div
@@ -115,11 +120,11 @@ const Navbar = (props: props) => {
                   onMouseLeave={() => setShowDropdown(false)}
                 >
                   <img src={coin} alt="nft" className="w-[35px]" />
-                  <p className="text-sm">
+                  <p className="text-xl">
                     {' '}
                     {formattedTokenBalance
                       ? formattedTokenBalance.toString()
-                      : 'Loading...'}
+                      : '0'}
                   </p>
                 </div>
 
