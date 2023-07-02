@@ -5,7 +5,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User, Item, Order
 from .serializers import UserSerializer, ItemSerializer, OrderSerializer
-from ..events import fetch_event
+import sys
+
+sys.path.append("..")
+from events import fetch_event
 
 
 class MyView(APIView):
@@ -18,8 +21,22 @@ class MyView(APIView):
 class ItemListAPIView(APIView):
     def get(self, request):
         items = Item.objects.all()
-        serializer = ItemSerializer(items, many=True)
-        return Response(serializer.data)
+        serialized_items = []
+        for item in items:
+            # print(item.imageLink.url)
+            serialized_item = {
+                "id": item.id,
+                "seller_wallet_address": item.seller_wallet_address,
+                "id_item": item.id_item,
+                "name": item.name,
+                "imageLink": item.imageLink.url,  # Get the full image URL
+                "description": item.description,
+                "price": item.price,
+                "quantity": item.quantity,
+                "postingFee": item.postingFee,
+            }
+            serialized_items.append(serialized_item)
+        return Response(serialized_items)
 
 
 class CreateUserAPIView(APIView):
@@ -31,7 +48,13 @@ class CreateUserAPIView(APIView):
         return Response(serializer.errors, status=400)
 
 
+from rest_framework.parsers import MultiPartParser, FormParser
+
+
 class CreateItemAPIView(APIView):
+    # This allows the view to handle file uploads
+    parser_classes = (MultiPartParser, FormParser)
+
     def post(self, request):
         # Fetch the event details using the provided parameters
         contract_name = request.data.get("contract_name")
@@ -40,22 +63,31 @@ class CreateItemAPIView(APIView):
         event_name = request.data.get("event_name")
 
         # Call fetch_event function
-        data = fetch_event(contract_name, chain_id, transaction_hash, event_name)
+        print(contract_name, chain_id, transaction_hash, event_name)
+        data = fetch_event(contract_name, chain_id, transaction_hash, "ItemListed")
+
+        print(data)
+        print("***")
+        print(request.data.get("postingFee"), request.FILES.get("image"))
         if data:
             # Create the Item object based on the fetched event data
             item_data = {
-                "seller_address": data["itemId"],
-                "itemId": data[
+                "seller_wallet_address": data["seller"],
+                "id_item": data[
                     "itemId"
-                ],  # This assumes that your Item model has a field called 'itemId'
+                ],  # Assuming your Item model has a field called 'itemId'
                 "name": data["name"],
-                "image": data["image"],
+                "imageLink": request.FILES.get(
+                    "image"
+                ),  # Getting the uploaded image file
                 "description": data["description"],
                 "price": data["price"],
                 "quantity": data["quantity"],
-                "postingFee": data["postingFee"],
+                "postingFee": request.data.get("postingFee"),
                 # ... Include other fields as necessary
             }
+
+            print(item_data)
 
             # Use the serializer to validate and save the item data
             item_serializer = ItemSerializer(data=item_data)
@@ -64,6 +96,7 @@ class CreateItemAPIView(APIView):
                 return Response({"message": "Item created successfully"})
             else:
                 # Handle serializer errors
+                print(item_serializer.errors)
                 return Response(item_serializer.errors, status=400)
         else:
             return Response({"message": "Failed to fetch event data"}, status=400)

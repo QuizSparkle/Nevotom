@@ -6,6 +6,7 @@ import { useNotifications } from "@usedapp/core";
 import Alert from "@material-ui/lab/Alert";
 import { formatUnits } from "@ethersproject/units";
 import { ethers, utils } from "ethers";
+import axios from "axios";
 
 const SellProduct = () => {
   // useState for form input fields
@@ -17,7 +18,7 @@ const SellProduct = () => {
 
   // Use the custom hook
   const formattedTokenBalance = price ? utils.parseEther(price.toString()) : 0;
-  const { approveAndListItem, state, chainId, transactionHash } = useListItem(
+  const { approveAndListItem, state, chainId, transactionHash, value } = useListItem(
     name,
     "",
     description,
@@ -25,11 +26,68 @@ const SellProduct = () => {
     quantity
   );
 
+  const chain_Id = chainId ? chainId : 0 
+
   const { notifications } = useNotifications();
 
-  const handleSubmit = () => {  
+  const handleSubmit = () => {
     approveAndListItem();
   };
+
+  const [apiCallTriggered, setApiCallTriggered] = useState(false);
+
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setSelectedImage(file || null);
+  };
+
+  useEffect(() => {
+    if (notifications.filter(
+      (notification) =>
+          notification.type === "transactionSucceed" &&
+          notification.transactionName === "List Item").length > 0 &&
+          apiCallTriggered
+  ) {
+    setApiCallTriggered(false);
+      // Second transaction "List Item" is in "Mining" status
+      // Create a FormData object to send the form data
+      const formData = new FormData();
+      formData.append("contract_name", "Marketplace");
+      formData.append("chain_id", chain_Id.toString());
+      formData.append("transaction_hash", transactionHash.toString());
+      formData.append("event_name", "ItemListed");
+      formData.append("image", selectedImage || "");
+      formData.append("postingFee", value[0].toString());
+
+      console.log("Marketplace", chain_Id.toString(), transactionHash.toString(), "ItemListed")
+  
+      // Make the API request to create the item
+      axios
+        .post("http://127.0.0.1:8000/api/items/create/", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          // Handle the response
+          if (response.status === 201 || response.status === 200) {
+            // Item created successfully
+            console.log("Item created successfully");
+          } else {
+            // Handle error
+            console.log("Failed to create item");
+          }
+        })
+        .catch((error) => {
+          // Handle error
+          console.log("Error creating item", error);
+        });
+    }
+  }, [notifications]);
+  
+  
 
   const isMining = state.status === "Mining"
 
@@ -96,10 +154,14 @@ const SellProduct = () => {
               type="file"
               alt="selectImage"
               className="rounded-md bg-gray-300 p-3 px-4"
+              onChange={handleImageChange}
             />
           </div>
           <Button
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit();
+              setApiCallTriggered(true);
+            }}
             className="w-[250px] rounded-md border border-black bg-white p-2 transition-colors hover:bg-primary hover:text-white"
             color="primary"
             variant="contained"

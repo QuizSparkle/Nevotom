@@ -24,14 +24,14 @@ class User(models.Model):
 
 
 class Item(models.Model):
-    seller_address = models.CharField(max_length=100)
-    itemId = models.IntegerField()
+    seller_wallet_address = models.CharField(max_length=100)
+    id_item = models.IntegerField()
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="item_images")
+    imageLink = models.ImageField(upload_to="item_images")
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=50, decimal_places=2)
     quantity = models.PositiveIntegerField()
-    posting_fee = models.DecimalField(max_digits=10, decimal_places=2)
+    postingFee = models.DecimalField(max_digits=50, decimal_places=2)
 
     @property
     def total_posting_fee(self):
