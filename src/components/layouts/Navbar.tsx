@@ -11,7 +11,8 @@ import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../functionalities/RegisterUserForm'
 import { ClaimRewards } from '../functionalities/ClaimRewards'
 import { ConnectBtn } from './ConnectBtn'
-import { useEthers } from '@usedapp/core'
+import { useEthers, useTokenBalance } from '@usedapp/core'
+import { formatUnits } from '@ethersproject/units'
 
 type props = {
   connected: boolean
@@ -23,6 +24,26 @@ const Navbar = (props: props) => {
   const { account } = useEthers()
 
   const isConnected = account !== undefined
+
+  // state and functions for register modal
+  const [regModal, setRegModal] = useState(false)
+  const openRegModal = () => {
+    !userRegistered && setRegModal(true)
+  }
+  const closeRegModal = () => {
+    setUserRegistered(true)
+    setRegModal(false)
+  }
+
+  // dummy user connected state
+  const [userRegistered, setUserRegistered] = useState(false)
+
+  // token balance
+  const tomAddress = '0xf4301508f1ad133486a96af29b401bd0bae2fff6'
+  const tokenBalance = useTokenBalance(tomAddress, account)
+  const formattedTokenBalance: number = tokenBalance
+    ? parseFloat(formatUnits(tokenBalance, 18))
+    : 0
 
   return (
     <nav
@@ -97,7 +118,12 @@ const Navbar = (props: props) => {
                   onMouseLeave={() => setShowDropdown(false)}
                 >
                   <img src={coin} alt="nft" className="w-[35px]" />
-                  <p>9476</p>
+                  <p className="text-sm">
+                    {' '}
+                    {formattedTokenBalance
+                      ? formattedTokenBalance.toString()
+                      : 'Loading...'}
+                  </p>
                 </div>
 
                 {showDropdown && (
@@ -140,7 +166,9 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-            <ConnectBtn />
+            <div onClick={openRegModal}>
+              <ConnectBtn />
+            </div>
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>
@@ -158,8 +186,32 @@ const Navbar = (props: props) => {
       </div>
       {/* 
       <BuyTomForm />
-      <RegisterUserForm />
       <ClaimRewards></ClaimRewards> */}
+      {/* registration modal */}
+      <section
+        className={`${
+          regModal ? 'absolute' : 'hidden'
+        } top-0 flex h-[100vh] w-[100vw] 
+      items-center justify-center bg-black/30`}
+      >
+        <main
+          className="flex w-[400px] flex-col items-center gap-4 
+      rounded-md bg-slate-50 p-10"
+        >
+          <h1
+            className="border-b border-gray-300  pb-5 text-lg
+           font-bold text-red-500"
+          >
+            Click on register button to register yourself on NFTizeMarket!
+          </h1>
+          {/* register button */}
+          <div>
+            <div className="" onClick={closeRegModal}>
+              <RegisterUserForm />
+            </div>
+          </div>
+        </main>
+      </section>
     </nav>
   )
 }
