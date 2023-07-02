@@ -27,7 +27,9 @@ const HomeProduct = (props: props) => {
       </Link>
       <img src={props.img} className="h-[140px] w-[140px]" alt={props.name} />
       <div className="flex flex-col items-start gap-1">
-        <strong className="text-xl text-gray-900">{props.name}</strong>
+        <strong className="text-right text-xl text-gray-900">
+          {props.name}
+        </strong>
         <p className="text-left text-sm text-gray-600">{props.description}</p>
         <h2 className="flex items-center text-lg text-black">
           <BiDollar />

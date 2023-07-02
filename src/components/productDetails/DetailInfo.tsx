@@ -1,17 +1,18 @@
-import React, { FC } from "react";
-import bigThumbImg from "../../assets/logos/big-thumb.png";
-import miniThumbImg from "../../assets/logos/mini-thumb.png";
-import linkedInIcon from "../../assets/logos/linked-in.svg";
-import twitterIcon from "../../assets/logos/twitter.svg";
-import faceBookIcon from "../../assets/logos/face-book.svg";
-import ShoppingCartModal from "./ProductDetails";
-import "./DetailInfo.css";
+import React, { FC } from 'react'
+import bigThumbImg from '../../assets/logos/big-thumb.png'
+import miniThumbImg from '../../assets/logos/mini-thumb.png'
+import linkedInIcon from '../../assets/logos/linked-in.svg'
+import twitterIcon from '../../assets/logos/twitter.svg'
+import faceBookIcon from '../../assets/logos/face-book.svg'
+import ShoppingCartModal from './ProductDetails'
+import './DetailInfo.css'
+import { Link } from 'react-router-dom'
 
 // type DetailProps = {};
 
 type DetailState = {
-  showCartModal: boolean;
-};
+  showCartModal: boolean
+}
 
 function DetailInfo() {
   // state: DetailState = {
@@ -53,7 +54,7 @@ function DetailInfo() {
               MIRAGE MR-AT172 285/65
             </div>
             <div className="detail-info-price text-lg font-semibold text-gray-600">
-              Rs. 50,000.00
+              $500.00
             </div>
 
             <div className="detail-info-shop">Shop: Tire House</div>
@@ -86,12 +87,14 @@ function DetailInfo() {
                 <div className="detail-info-count">1</div>
                 <div className="count-plus mx-2">+</div>
               </div>
-              <button
-                type="button"
-                className="cursor-pointer text-lg font-medium"
-              >
-                Add To Cart
-              </button>
+              <Link to="/cart">
+                <button
+                  type="button"
+                  className="cursor-pointer text-lg font-medium"
+                >
+                  Add To Cart
+                </button>
+              </Link>
               {/* <ShoppingCartModal handleClose={this.hideModal} isShow={this.state.showCartModal} /> */}
             </div>
           </div>
@@ -145,6 +148,6 @@ function DetailInfo() {
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default DetailInfo;
+export default DetailInfo

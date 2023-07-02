@@ -4,10 +4,11 @@ import tire from '../../assets/products/tire1.png'
 
 const products = [
   {
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM_efyxCR6QqVI8ljrKA23nkyPB3whn4ocSQ&usqp=CAU',
-    name: 'Iphone X',
-    description: 'an iphone for new generation',
-    price: 1000,
+    img: tire,
+    name: 'MIRAGE MR-AT172 285/65',
+    description:
+      'The MIRAGE MR-AT172 285/65 R17 is a tyre developed with advanced tread pattern',
+    price: 500,
     reward: true,
   },
   {

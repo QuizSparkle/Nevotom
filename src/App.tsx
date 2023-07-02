@@ -20,13 +20,13 @@ import Rewards from './components/rewards/Rewards'
 
 const orderProducts = [
   {
-    name: 'MIRAGE MR',
-    price: 60000,
-    quantity: 3,
-    subtotal: 90393,
-    rewards: 3,
-    status: 'Paid',
     img: tire,
+    name: 'MIRAGE MR-AT172 285/65',
+    quantity: 1,
+    price: 500,
+    subtotal: 60262,
+    rewards: 2,
+    status: 'Processing',
   },
   {
     name: 'MIRAGE MR',
