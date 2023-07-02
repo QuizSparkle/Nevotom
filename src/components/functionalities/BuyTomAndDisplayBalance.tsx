@@ -103,9 +103,9 @@ export const BuyTomForm = () => {
     return (
         <>
             <div className={classes.container}>
-            <div>
+            <span>
                     TOM Balance: {formattedTokenBalance ? formattedTokenBalance.toString() : 'Loading...'}
-                </div>
+                </span>
             <TextField
         className={classes.input}
         label="Amount to Buy"

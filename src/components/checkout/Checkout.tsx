@@ -74,7 +74,6 @@ const Checkout = (props: props) => {
       </main>
       {/* deliveryRibbon */}
       <DeliveryRibbon />
-      <Footer />
     </section>
   )
 }

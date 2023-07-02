@@ -10,7 +10,7 @@ import coin from '../../assets/Coin-No-BG.png'
 import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../functionalities/RegisterUserForm'
 import { ClaimRewards } from '../functionalities/ClaimRewards'
-import { ConnectBtn } from './ConnectBtn'
+import { RegisterAndConnect } from './ConnectBtn'
 import { useEthers, useTokenBalance } from '@usedapp/core'
 import { formatUnits } from '@ethersproject/units'
 
@@ -25,20 +25,17 @@ const Navbar = (props: props) => {
 
   const isConnected = account !== undefined
 
-  // state and functions for register modal
-  const [regModal, setRegModal] = useState(false)
-  const openRegModal = () => {
-    !userRegistered && setRegModal(true)
-  }
-  const closeRegModal = () => {
-    setUserRegistered(true)
-    setRegModal(false)
-  }
+  // const [regModal, setRegModal] = useState(false)
+  // const openRegModal = () => {
+  //   !userRegistered && setRegModal(true)
+  // }
+  // const closeRegModal = () => {
+  //   setUserRegistered(true)
+  //   setRegModal(false)
+  // }
 
-  // dummy user connected state
-  const [userRegistered, setUserRegistered] = useState(false)
+  // const [userRegistered, setUserRegistered] = useState(false)
 
-  // token balance
   const tomAddress = '0xf4301508f1ad133486a96af29b401bd0bae2fff6'
   const tokenBalance = useTokenBalance(tomAddress, account)
   const formattedTokenBalance: number = tokenBalance
@@ -166,9 +163,9 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-            <div onClick={openRegModal}>
-              <ConnectBtn />
-            </div>
+            {/* <div onClick={openRegModal}> */}
+            <RegisterAndConnect />
+            {/* </div> */}
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>
@@ -177,6 +174,7 @@ const Navbar = (props: props) => {
             </Link>
           </div>
         </div>
+        {/* <button
         {/* <button
           className="block p-2 transition-all ease-linear md:hidden"
           onClick={() => setMenu(!menu)}
@@ -188,7 +186,7 @@ const Navbar = (props: props) => {
       <BuyTomForm />
       <ClaimRewards></ClaimRewards> */}
       {/* registration modal */}
-      <section
+      {/* <section
         className={`${
           regModal ? 'absolute' : 'hidden'
         } top-0 flex h-[100vh] w-[100vw] 
@@ -204,14 +202,13 @@ const Navbar = (props: props) => {
           >
             Click on register button to register yourself on NFTizeMarket!
           </h1>
-          {/* register button */}
           <div>
             <div className="" onClick={closeRegModal}>
               <RegisterUserForm />
             </div>
           </div>
         </main>
-      </section>
+      </section> */}
     </nav>
   )
 }

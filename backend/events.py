@@ -4,16 +4,17 @@ from dotenv import load_dotenv
 import os
 
 
-load_dotenv("../contracts/.env")
+# load_dotenv("../contracts/.env")
 
 
 def get_web3_object(RPC_URL):
-    # rpc_url = os.getenv(RPC_URL)
     return Web3(Web3.HTTPProvider(RPC_URL))
 
 
 def get_chain_id(network_name):
-    with open("../contracts/networks.json", "r") as file:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open(networks_json_path) as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
@@ -24,7 +25,9 @@ def get_chain_id(network_name):
 
 
 def get_network_name(chain_id):
-    with open("../contracts/networks.json", "r") as file:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open(networks_json_path) as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
@@ -35,7 +38,9 @@ def get_network_name(chain_id):
 
 
 def get_rpc_url(chain_id):
-    with open("../contracts/networks.json", "r") as file:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open(networks_json_path) as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
@@ -46,11 +51,15 @@ def get_rpc_url(chain_id):
 
 
 def get_contract_address(contractName, chain_id):
-    # chain_id = get_chain_id(network_name)
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(
+        script_dir,
+        "..",
+        f"contracts/broadcast/DeployProtocol.s.sol/{chain_id}",
+        "run-latest.json",
+    )
     if chain_id is not None:
-        file_path = (
-            f"../contracts/broadcast/DeployProtocol.s.sol/{chain_id}/run-latest.json"
-        )
+        file_path = networks_json_path
         with open(file_path, "r") as file:
             data = json.load(file)
 
@@ -67,8 +76,15 @@ def get_contract_address(contractName, chain_id):
     return None
 
 
-def get_contract_abi(file_path):
-    with open(file_path) as f:
+def get_contract_abi(contract_name):
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(
+        script_dir,
+        "..",
+        f"contracts/out/{contract_name}.sol",
+        f"{contract_name}.json",
+    )
+    with open(networks_json_path) as f:
         abi = json.load(f)["abi"]
         return abi
 
@@ -99,17 +115,19 @@ def fetch_event_from_transaction(w3, contract, transaction_hash, event_name):
     return None
 
 
-def fetch_event(contract_name, chain_id, transaction_hash, event_name):
+def fetch_event(chain_id, contract_name, transaction_hash, event_name):
     RPC_URL = get_rpc_url(chain_id)
+
     w3 = get_web3_object(RPC_URL)
-    contract_abi = get_contract_abi(
-        f"../contracts/out/{contract_name}.sol/{contract_name}.json"
-    )
-    contract_address = get_contract_address(contract_name, chain_id)
+    contract_abi = get_contract_abi(contract_name)
+
+    contract_address = get_contract_address(f"{contract_name}", chain_id)
     contract_contract = w3.eth.contract(address=contract_address, abi=contract_abi)
+
     event_data = fetch_event_from_transaction(
         w3, contract_contract, transaction_hash, event_name
     )
+
     return event_data
 
 
@@ -301,7 +319,7 @@ Description: Claims rewards if amount spent > 500 dollars
 
 transaction_hash = "0xee9503b2aaf8a8ab55abdc7dc363cb5e83e65766716a50613283e9956e8a2346"
 event_name = "ItemListed"
-event_data = fetch_event("Marketplace", 4002, transaction_hash, event_name)
+event_data = fetch_event(4002, "Marketplace", transaction_hash, event_name)
 print(event_data)
 
 # transaction_hash = "0x2bc1a720b893883ce0a66eca8066f2dd51e2aab5000659a9604d6da9f09496bf"
