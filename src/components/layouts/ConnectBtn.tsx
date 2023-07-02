@@ -1,72 +1,89 @@
-import { useEthers } from '@usedapp/core'
-import { Button, makeStyles } from '@material-ui/core'
-import { ConnectionRequiredMsg } from '../ConnectionRequiredMsg'
-import React from 'react'
-import { StayPrimaryLandscape } from '@material-ui/icons'
+import React, { useState, useEffect } from 'react';
+import { useEthers } from '@usedapp/core';
+import { Button, makeStyles } from '@material-ui/core';
+import { useRegisterUser } from '../Hooks/useRegisterUser';
 
 const useStyles = makeStyles((theme) => ({
-  //   container: {
-  //     padding: theme.spacing(2),
-  //     display: 'flex',
-  //     justifyContent: 'flex-end',
-  //     gap: theme.spacing(1),
-  //   },
   div: {
     display: 'flex',
     alignItems: 'center',
   },
   address: {
-    // marginRight: '10px',
     textTransform: 'initial',
   },
-  connexion: {
+  connection: {
     color: '#fff',
     backgroundColor: '#8789FE',
-    // marginRight: '72px',
   },
-}))
+}));
 
-export const ConnectBtn = () => {
-  const classes = useStyles()
-  const { account, activateBrowserWallet, deactivate } = useEthers()
+export const RegisterAndConnect = () => {
+  const classes = useStyles();
+  const { account, activateBrowserWallet, deactivate, chainId } = useEthers();
+  const { Register, RegisterState } = useRegisterUser();
 
-  const isConnected = account !== undefined
+  const isConnected = !!account;
+  const isMining = RegisterState.status === 'Mining';
+
+  const [hasRegistered, setHasRegistered] = useState(false);
+  const [currentChainId, setCurrentChainId] = useState(chainId);
+
+  useEffect(() => {
+    const registerUser = async () => {
+      if (account && !hasRegistered) {
+        try {
+          await Register();
+          setHasRegistered(true);
+        } catch (error) {
+          console.error('Registration failed:', error);
+        }
+      }
+    };
+
+    registerUser();
+  }, [account]);
+
+  useEffect(() => {
+    if (chainId !== currentChainId) {
+      setHasRegistered(false);
+      setCurrentChainId(chainId);
+    }
+  }, [chainId]);
+
+  const handleConnect = () => {
+    if (!isConnected) {
+      activateBrowserWallet();
+    }
+  };
 
   return (
     <div>
-      <div>
-        {isConnected ? (
-          <>
-            <span className="mr-2 text-gray-300">
-              {`${account?.slice(0, 6)}...${account?.slice(-4)}`}
-            </span>
-            <Button
-              variant="contained"
-              onClick={deactivate}
-              className={classes.connexion}
-            >
-              Disconnect
-            </Button>
-          </>
-        ) : (
-          <>
-            <div className={classes.div}>
-              {/* <ConnectionRequiredMsg /> */}
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => {
-                  console.log('Trying to connect...')
-                  activateBrowserWallet()
-                }}
-                className={classes.connexion}
-              >
-                Connect
-              </Button>
-            </div>
-          </>
-        )}
-      </div>
+      {isConnected ? (
+        <>
+          <span className="mr-2 text-gray-300">
+            {`${account?.slice(0, 6)}...${account?.slice(-4)}`}
+          </span>
+          <Button
+            variant="contained"
+            onClick={deactivate}
+            className={classes.connection}
+          >
+            Disconnect
+          </Button>
+        </>
+      ) : (
+        <div className={classes.div}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={handleConnect}
+            className={classes.connection}
+            disabled={isMining}
+          >
+            {isMining ? 'Registering...' : 'Register & Connect'}
+          </Button>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};

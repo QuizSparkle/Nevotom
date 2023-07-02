@@ -10,7 +10,7 @@ import coin from '../../assets/Coin-No-BG.png'
 import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../functionalities/RegisterUserForm'
 import { ClaimRewards } from '../functionalities/ClaimRewards'
-import { ConnectBtn } from './ConnectBtn'
+import { RegisterAndConnect } from './ConnectBtn'
 import { useEthers } from '@usedapp/core'
 
 type props = {
@@ -111,16 +111,17 @@ const Navbar = (props: props) => {
                       to="/buytom"
                       className="block border-b px-6 py-1 hover:bg-gray-200
                          hover:text-primary"
+                    
                     >
                       BuyTom
                     </Link>
-                    <Link
+                    {/* <Link
                       to="/amountspent"
                       className="block w-max px-6 py-1 hover:bg-gray-200 
                         hover:text-primary"
                     >
                       Amt Spent
-                    </Link>
+                    </Link> */}
                   </div>
                 )}
               </Link>
@@ -140,7 +141,7 @@ const Navbar = (props: props) => {
           </div>
           {/* right-right */}
           <div className="flex space-x-3">
-            <ConnectBtn />
+            <RegisterAndConnect />
             <Link to="/cart">
               <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
             </Link>

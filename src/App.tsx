@@ -15,6 +15,7 @@ import AllProducts from './components/allProducts/AllProducts'
 import SellProduct from './components/sellProduct/SellProduct'
 import Cart from './components/cart/Cart'
 import Rewards from './components/rewards/Rewards'
+import { BuyTomForm } from './components/functionalities/BuyTomAndDisplayBalance'
 
 // sampleOrderedProducts
 
@@ -111,6 +112,7 @@ const App: FC = () => {
             <Route path="/allproducts" element={<AllProducts />} />
             <Route path="/sell" element={<SellProduct />} />
             <Route path="/rewards" element={<Rewards />} />
+            <Route path="/buytom" element={<BuyTomForm />} />
             <Route
               path="/cart"
               element={<Cart ordered={orderProducts} listed={orderProducts} />}

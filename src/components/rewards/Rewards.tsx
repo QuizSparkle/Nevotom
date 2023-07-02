@@ -4,6 +4,7 @@ import coin from '../../assets/Coin-No-BG.png'
 import ftm from '../../assets/ftm.png'
 import { SiTether } from 'react-icons/si'
 import DeliveryRibbon from '../layouts/DeliveryRibbon'
+import { ClaimRewards } from '../functionalities/ClaimRewards'
 
 const Rewards = () => {
   return (
@@ -17,7 +18,7 @@ const Rewards = () => {
           <div className="flex space-x-3">
             <span className="flex items-center space-x-1 text-[1.1rem]">
               <img src={coin} alt="nft" className="w-[35px]" />
-              <p>0.0034</p>
+              <p>0.3</p>
             </span>
             <p>-------------------------------------------</p>
             <span
@@ -31,7 +32,7 @@ const Rewards = () => {
           <div className="flex space-x-3">
             <span className="flex items-center space-x-1 text-[1.1rem]">
               <img src={coin} alt="nft" className="w-[35px]" />
-              <p>0.0034</p>
+              <p>0.1</p>
             </span>
             <p>-------------------------------------------</p>
             <span
@@ -45,18 +46,7 @@ const Rewards = () => {
           {/* bought and sold details */}
           <section className="flex flex-col gap-1">
             <div className="flex space-x-2 text-[1.2rem] font-semibold">
-              <h2>Total Bought: </h2>
-              <span className="flex items-center space-x-1 text-[1.1rem] font-medium">
-                <SiTether className="text-green-600" />
-                <p>7500</p>
-              </span>
-            </div>
-            <div className="flex space-x-2 text-[1.2rem] font-semibold">
-              <h2>Total Sold: </h2>
-              <span className="flex items-center space-x-1 text-[1.1rem] font-medium">
-                <SiTether className="text-green-600" />
-                <p>939</p>
-              </span>
+              <ClaimRewards/>
             </div>
           </section>
         </article>

@@ -4,16 +4,17 @@ from dotenv import load_dotenv
 import os
 
 
-load_dotenv("../contracts/.env")
+# load_dotenv("../contracts/.env")
 
 
 def get_web3_object(RPC_URL):
-    rpc_url = os.getenv(RPC_URL)
-    return Web3(Web3.HTTPProvider(rpc_url))
+    return Web3(Web3.HTTPProvider(RPC_URL))
 
 
 def get_chain_id(network_name):
-    with open("../contracts/networks.json", "r") as file:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open(networks_json_path) as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
@@ -23,12 +24,42 @@ def get_chain_id(network_name):
     return None
 
 
-def get_contract_address(contractName, network_name):
-    chain_id = get_chain_id(network_name)
+def get_network_name(chain_id):
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open(networks_json_path) as file:
+        data = json.load(file)
+
+    for network in data.get("networks", []):
+        if network.get("chainId") == chain_id:
+            return network.get("nameOfNetwork")
+
+    return None
+
+
+def get_rpc_url(chain_id):
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open(networks_json_path) as file:
+        data = json.load(file)
+
+    for network in data.get("networks", []):
+        if network.get("chainId") == chain_id:
+            return network.get("RPC_URL")
+
+    return None
+
+
+def get_contract_address(contractName, chain_id):
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(
+        script_dir,
+        "..",
+        f"contracts/broadcast/DeployProtocol.s.sol/{chain_id}",
+        "run-latest.json",
+    )
     if chain_id is not None:
-        file_path = (
-            f"../contracts/broadcast/DeployProtocol.s.sol/{chain_id}/run-latest.json"
-        )
+        file_path = networks_json_path
         with open(file_path, "r") as file:
             data = json.load(file)
 
@@ -45,8 +76,15 @@ def get_contract_address(contractName, network_name):
     return None
 
 
-def get_contract_abi(file_path):
-    with open(file_path) as f:
+def get_contract_abi(contract_name):
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    networks_json_path = os.path.join(
+        script_dir,
+        "..",
+        f"contracts/out/{contract_name}.sol",
+        f"{contract_name}.json",
+    )
+    with open(networks_json_path) as f:
         abi = json.load(f)["abi"]
         return abi
 
@@ -75,6 +113,22 @@ def fetch_event_from_transaction(w3, contract, transaction_hash, event_name):
             return decoded_log["args"]
 
     return None
+
+
+def fetch_event(chain_id, contract_name, transaction_hash, event_name):
+    RPC_URL = get_rpc_url(chain_id)
+
+    w3 = get_web3_object(RPC_URL)
+    contract_abi = get_contract_abi(contract_name)
+
+    contract_address = get_contract_address(f"{contract_name}", chain_id)
+    contract_contract = w3.eth.contract(address=contract_address, abi=contract_abi)
+
+    event_data = fetch_event_from_transaction(
+        w3, contract_contract, transaction_hash, event_name
+    )
+
+    return event_data
 
 
 # ******************************************************************************************
@@ -235,72 +289,70 @@ Description: Claims rewards if amount spent > 500 dollars
 # **********************************************  Examples *******************************************
 
 ##### ************************ SETUP ******************************************
-w3 = get_web3_object("FANTOM_RPC_URL")
+# w3 = get_web3_object("FANTOM_RPC_URL")
 
 
-marketplace_abi = get_contract_abi("../contracts/out/Marketplace.sol/Marketplace.json")
-escrow_abi = get_contract_abi("../contracts/out/Escrow.sol/Escrow.json")
+# marketplace_abi = get_contract_abi("../contracts/out/Marketplace.sol/Marketplace.json")
+# escrow_abi = get_contract_abi("../contracts/out/Escrow.sol/Escrow.json")
 
-marketplace_address = get_contract_address("Marketplace", "Fantom testnet")
-marketplace_contract = w3.eth.contract(address=marketplace_address, abi=marketplace_abi)
+# marketplace_address = get_contract_address("Marketplace", "Fantom testnet")
+# marketplace_contract = w3.eth.contract(address=marketplace_address, abi=marketplace_abi)
 
-escrow_address = get_contract_address("Escrow", "Fantom testnet")
-escrow_contract = w3.eth.contract(address=escrow_address, abi=escrow_abi)
+# escrow_address = get_contract_address("Escrow", "Fantom testnet")
+# escrow_contract = w3.eth.contract(address=escrow_address, abi=escrow_abi)
 
 # ***************************************************************************************************
 
-transaction_hash = "0x60b5bc6f5b53e106367d986f5b451b7440b1215d29cf9e8e8ab33156e0aeb33f"
-event_name = "userRegistered"
-event_data = fetch_event_from_transaction(
-    w3, marketplace_contract, transaction_hash, event_name
-)
-print(event_data)
+# transaction_hash = "0x60b5bc6f5b53e106367d986f5b451b7440b1215d29cf9e8e8ab33156e0aeb33f"
+# event_name = "userRegistered"
+# event_data = fetch_event_from_transaction(
+#     w3, marketplace_contract, transaction_hash, event_name
+# )
+# print(event_data)
 
-transaction_hash = "0xbebca6bdfcf1d2fd115fb172e337641e3346f1a4fb3015ac2a519dd6ec438943"
-event_name = "TokenBought"
-event_data = fetch_event_from_transaction(
-    w3, marketplace_contract, transaction_hash, event_name
-)
-print(event_data)
+# transaction_hash = "0xbebca6bdfcf1d2fd115fb172e337641e3346f1a4fb3015ac2a519dd6ec438943"
+# event_name = "TokenBought"
+# event_data = fetch_event_from_transaction(
+#     w3, marketplace_contract, transaction_hash, event_name
+# )
+# print(event_data)
 
 transaction_hash = "0xee9503b2aaf8a8ab55abdc7dc363cb5e83e65766716a50613283e9956e8a2346"
 event_name = "ItemListed"
-event_data = fetch_event_from_transaction(
-    w3, marketplace_contract, transaction_hash, event_name
-)
+event_data = fetch_event(4002, "Marketplace", transaction_hash, event_name)
 print(event_data)
 
-transaction_hash = "0x2bc1a720b893883ce0a66eca8066f2dd51e2aab5000659a9604d6da9f09496bf"
-event_name = "ItemUpdated"
-event_data = fetch_event_from_transaction(
-    w3, marketplace_contract, transaction_hash, event_name
-)
-print(event_data)
+# transaction_hash = "0x2bc1a720b893883ce0a66eca8066f2dd51e2aab5000659a9604d6da9f09496bf"
+# event_name = "ItemUpdated"
+# event_data = fetch_event_from_transaction(
+#     w3, marketplace_contract, transaction_hash, event_name
+# )
+# print(event_data)
 
-transaction_hash = "0x772785c5528a44a2065f0f5aa5be7a03fd1ca69d175536251a03e4741d60e09c"
-event_name = "ItemCanceled"
-event_data = fetch_event_from_transaction(
-    w3, marketplace_contract, transaction_hash, event_name
-)
-print(event_data)
+# transaction_hash = "0x772785c5528a44a2065f0f5aa5be7a03fd1ca69d175536251a03e4741d60e09c"
+# event_name = "ItemCanceled"
+# event_data = fetch_event_from_transaction(
+#     w3, marketplace_contract, transaction_hash, event_name
+# )
+# print(event_data)
 
-transaction_hash = "0xb51cb4d02dd2d44ae3f49b492b46ab7fd99d5a074f7fe27fe812bcd01380478b"
-event_name = "OrderSent"
-event_data = fetch_event_from_transaction(
-    w3, escrow_contract, transaction_hash, event_name
-)
-print(event_data)
+# transaction_hash = "0xb51cb4d02dd2d44ae3f49b492b46ab7fd99d5a074f7fe27fe812bcd01380478b"
+# event_name = "OrderSent"
+# event_data = fetch_event_from_transaction(
+#     w3, escrow_contract, transaction_hash, event_name
+# )
+# print(event_data)
 
-transaction_hash = "0x603ca4a15b7403a3ef3bc943ecb86091bdd04b66e9cf646767737c4f3595de97"
-event_name = "FundsRefunded"
-event_data = fetch_event_from_transaction(
-    w3, escrow_contract, transaction_hash, event_name
-)
-print(event_data)
+# transaction_hash = "0x603ca4a15b7403a3ef3bc943ecb86091bdd04b66e9cf646767737c4f3595de97"
+# event_name = "FundsRefunded"
+# event_data = fetch_event_from_transaction(
+#     w3, escrow_contract, transaction_hash, event_name
+# )
+# print(event_data)
 
-transaction_hash = "0x731879b0b5fd1b69a6770c2c144409daf589a31c8fc8075161ea9255d1522dab"
-event_name = "FundsReleased"
-event_data = fetch_event_from_transaction(
-    w3, escrow_contract, transaction_hash, event_name
-)
-print(event_data)
+# transaction_hash = "0x731879b0b5fd1b69a6770c2c144409daf589a31c8fc8075161ea9255d1522dab"
+# event_name = "FundsReleased"
+# event_data = fetch_event_from_transaction(
+#     w3, escrow_contract, transaction_hash, event_name
+# )
+# print(event_data)

@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { useClaimRewards } from "../Hooks/useClaimRewards"; 
+import { SiTether } from 'react-icons/si'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,9 +50,11 @@ export const ClaimRewards = () => {
     return (
         <>
             <div>
-            <div>
-                    USDT Spent : {formattedTokenBalance ? formattedTokenBalance.toString() : 'Loading...'}
-                </div>
+            <div className="flex items-center">
+            <SiTether className="text-green-600 mr-2" />
+            <span> Spent : {formattedTokenBalance ? formattedTokenBalance.toString() : 'Loading...'}</span>
+            </div>
+            
                 <Button
                     onClick={handleClaimSubmit}
                     className={classes.button}
