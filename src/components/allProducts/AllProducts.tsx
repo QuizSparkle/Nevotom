@@ -1,113 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { HiViewGrid } from "react-icons/hi";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { MdViewDay } from "react-icons/md";
-import p1 from "../../assets/products/blackoil.png";
-import p2 from "../../assets/products/grayoil.png";
-import p3 from "../../assets/products/pipe.png";
-import p4 from "../../assets/products/redoil.png";
-import p5 from "../../assets/products/tire1.png";
-import p6 from "../../assets/products/tire2.png";
+import { formatUnits } from "@ethersproject/units"
 import HomeProduct from "../home/HomeProduct";
 import DeliveryRibbon from "../layouts/DeliveryRibbon";
 
-const products = [
-  {
-    img: p1,
-    name: "Iphone X",
-    description: "an iphone for new generation",
-    price: 1000,
-    reward: true,
-  },
-  {
-    img: p2,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: false,
-  },
-  {
-    img: p3,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: true,
-  },
-  {
-    img: p1,
-
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: false,
-  },
-  {
-    img: p4,
-
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: true,
-  },
-  {
-    img: p5,
-    name: "Product4",
-    description: "Part Number: 8-38-383-393, shape:Ai ",
-    price: 3000,
-    reward: false,
-  },
-  {
-    img: p6,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai ",
-    price: 3000,
-    reward: true,
-  },
-  {
-    img: p1,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: true,
-  },
-  {
-    img: p3,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: true,
-  },
-  {
-    img: p2,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: false,
-  },
-  {
-    img: p5,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: true,
-  },
-  {
-    img: p1,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: true,
-  },
-  {
-    img: p6,
-    name: "Brake System",
-    description: "Part Number: 8-38-383-393, shape:Ai",
-    price: 3000,
-    reward: false,
-  },
-];
+interface Product {
+  imageLink: string;
+  name: string;
+  description: string;
+  price: number;
+  reward: boolean;
+}
 
 const AllProducts = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get<Product[]>("http://127.0.0.1:8000/api/items/");
+        setProducts(response.data);
+      } catch (error) {
+        console.log("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div className="py-6">
       <h1 className="my-14 text-center text-4xl font-bold">Shop</h1>
@@ -142,7 +66,6 @@ const AllProducts = () => {
                 />
               </div>
               {/* sort */}
-
               <div className="flex items-center space-x-2">
                 <h4>Sort By</h4>
                 <input
@@ -156,11 +79,12 @@ const AllProducts = () => {
         </div>
         {/* products display */}
         <main className="mx-auto grid w-[1300px] grid-cols-4 gap-4">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <HomeProduct
-              img={product.img}
+              key={index}
+              img={`http://127.0.0.1:8000/${product.imageLink}`}
               description={product.description}
-              price={product.price}
+              price={parseFloat((product.price / 10 ** 18).toFixed(2))}
               name={product.name}
               reward={product.reward}
             />

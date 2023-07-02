@@ -14,17 +14,38 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
-from main.views import MyView, ItemListAPIView, CreateUserAPIView, CreateItemAPIView, CreateOrderAPIView, UserOrdersAPIView, UpdateOrderAPIView
+from main.views import (
+    MyView,
+    ItemListAPIView,
+    CreateUserAPIView,
+    CreateItemAPIView,
+    CreateOrderAPIView,
+    UserOrdersAPIView,
+    UpdateOrderAPIView,
+)
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/myendpoint/', MyView.as_view()),
-    path('api/items/', ItemListAPIView.as_view(), name='item-list'),
-    path('api/users/create/', CreateUserAPIView.as_view(), name='create_user'),
-    path('api/items/create/', CreateItemAPIView.as_view(), name='create_item'),
-    path('api/orders/create/', CreateOrderAPIView.as_view(), name='create_order'),
-    path('api/orders/user/<int:user_id>/', UserOrdersAPIView.as_view(), name='user_orders'),
-    path('api/orders/update/<int:id>/', UpdateOrderAPIView.as_view(), name='update_order'),
-]
+    path("admin/", admin.site.urls),
+    path("api/myendpoint/", MyView.as_view()),
+    path("api/items/", ItemListAPIView.as_view(), name="item-list"),
+    path("api/users/create/", CreateUserAPIView.as_view(), name="create_user"),
+    path("api/items/create/", CreateItemAPIView.as_view(), name="create_item"),
+    path("api/orders/create/", CreateOrderAPIView.as_view(), name="create_order"),
+    path(
+        "api/orders/user/<int:user_id>/",
+        UserOrdersAPIView.as_view(),
+        name="user_orders",
+    ),
+    path(
+        "api/orders/update/<int:id>/", UpdateOrderAPIView.as_view(), name="update_order"
+    ),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# urlpatterns = [
+#     # Other URL patterns...
+#     path("api/items/", ItemListAPIView.as_view(), name="item-list"),
+# ]

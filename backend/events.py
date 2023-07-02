@@ -40,11 +40,13 @@ def get_network_name(chain_id):
 def get_rpc_url(chain_id):
     script_dir = os.path.dirname(os.path.realpath(__file__))
     networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    print(networks_json_path)
     with open(networks_json_path) as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
         if network.get("chainId") == chain_id:
+            print(chain_id)
             return network.get("RPC_URL")
 
     return None
@@ -115,14 +117,18 @@ def fetch_event_from_transaction(w3, contract, transaction_hash, event_name):
     return None
 
 
-def fetch_event(chain_id, contract_name, transaction_hash, event_name):
+def fetch_event(contract_name, chain_id, transaction_hash, event_name):
     RPC_URL = get_rpc_url(chain_id)
+    print(chain_id)
 
     w3 = get_web3_object(RPC_URL)
     contract_abi = get_contract_abi(contract_name)
+    # print(contract_abi)
 
     contract_address = get_contract_address(f"{contract_name}", chain_id)
+    # print(contract_address)
     contract_contract = w3.eth.contract(address=contract_address, abi=contract_abi)
+    print("*********************************************")
 
     event_data = fetch_event_from_transaction(
         w3, contract_contract, transaction_hash, event_name
@@ -319,7 +325,7 @@ Description: Claims rewards if amount spent > 500 dollars
 
 transaction_hash = "0xee9503b2aaf8a8ab55abdc7dc363cb5e83e65766716a50613283e9956e8a2346"
 event_name = "ItemListed"
-event_data = fetch_event(4002, "Marketplace", transaction_hash, event_name)
+event_data = fetch_event("Marketplace", "4002", transaction_hash, event_name)
 print(event_data)
 
 # transaction_hash = "0x2bc1a720b893883ce0a66eca8066f2dd51e2aab5000659a9604d6da9f09496bf"

@@ -3,7 +3,7 @@ import { useEthers, useContractFunction, useCall } from '@usedapp/core'
 import { Contract } from '@ethersproject/contracts'
 import { utils } from 'ethers'
 import Marketplace from '../../chain-info/out/Marketplace.sol/Marketplace.json'
-import ERC20 from '../../chain-info/out/ERC20.sol/ERC20.json'
+import Tom from '../../chain-info/out/Tom.sol/TOM.json'
 import { BigNumber } from 'ethers'
 
 export const useListItem = (
@@ -21,13 +21,13 @@ export const useListItem = (
 
   const contract = new Contract(contractAddress, marketplaceInterface)
 
-  const linkAddress = '0xfafedb041c0dd4fa2dc0d87a6b0979ee6fa7af5f'
-  const erc20ABI = ERC20.abi
-  const erc20Interface = new utils.Interface(erc20ABI)
-  const erc20Contract = new Contract(linkAddress, erc20Interface)
+  const TOMAddress = '0xf4301508f1ad133486a96af29b401bd0bae2fff6'
+  const TOMABI = Tom.abi
+  const TOMInterface = new utils.Interface(TOMABI)
+  const TOMContract = new Contract(TOMAddress, TOMInterface)
 
   const { send: approveErc20Send, state: approveErc20AndListItem } =
-    useContractFunction(erc20Contract, 'approve', {
+    useContractFunction(TOMContract, 'approve', {
       transactionName: 'Approve ERC20 transfer',
     })
 
@@ -63,7 +63,9 @@ export const useListItem = (
 
   const [state, setState] = useState(approveErc20AndListItem)
 
-  const transactionHash = ''
+  const [transactionHash, settransactionHash] = useState('0x')
+
+  // const transactionHash = ''
 
   useEffect(() => {
     if (approveErc20AndListItem.status === 'Success') {
@@ -75,12 +77,12 @@ export const useListItem = (
 
   useEffect(() => {
     if (listItemState.status === 'Mining' && listItemState.transaction) {
-      const transactionHash = listItemState.transaction.hash
+      settransactionHash(listItemState.transaction.hash)
       if (transactionHash) {
         console.log('Transaction Hash:', transactionHash)
       }
     }
   }, [listItemState])
 
-  return { approveAndListItem, state, chainId, transactionHash }
+  return { approveAndListItem, state, chainId, transactionHash, value }
 }
