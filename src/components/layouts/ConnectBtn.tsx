@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useEthers } from '@usedapp/core'
+import { useEthers, useCall } from '@usedapp/core'
 import { Button, makeStyles } from '@material-ui/core'
+import { Contract } from '@ethersproject/contracts'
+import { utils } from 'ethers'
 import { useRegisterUser } from '../Hooks/useRegisterUser'
+import { getContractAddress } from '../helpers/ContractAddress'
+import Marketplace from '../../chain-info/out/Marketplace.sol/Marketplace.json'
+
 
 const useStyles = makeStyles((theme) => ({
   div: {
@@ -24,6 +29,26 @@ export const RegisterAndConnect = () => {
 
   const isConnected = !!account
   const isMining = RegisterState.status === 'Mining'
+
+  const chain_Id = chainId ? chainId : 0
+
+  const contractAddress = getContractAddress(
+    chain_Id.toString(),
+    'marketplace_Address'
+  )
+
+  const contractABI = Marketplace.abi
+  const marketplaceInterface = new utils.Interface(contractABI)
+  const contract = new Contract(contractAddress, marketplaceInterface)
+
+  const { value, error } =
+    useCall(
+      contractAddress && {
+        contract: contract,
+        method: 'isRegistered',
+        args: [account],
+      }
+    ) ?? {}
 
   const [hasRegistered, setHasRegistered] = useState(false)
   const [currentChainId, setCurrentChainId] = useState(chainId)

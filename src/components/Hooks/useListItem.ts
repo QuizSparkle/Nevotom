@@ -5,6 +5,7 @@ import { utils } from 'ethers'
 import Marketplace from '../../chain-info/out/Marketplace.sol/Marketplace.json'
 import Tom from '../../chain-info/out/Tom.sol/TOM.json'
 import { BigNumber } from 'ethers'
+import { getContractAddress } from '../helpers/ContractAddress'
 
 export const useListItem = (
   name: string,
@@ -15,13 +16,18 @@ export const useListItem = (
 ) => {
   const { chainId, account, library } = useEthers()
 
-  const contractAddress = '0xA9729e8D472345B02eB1C61DD86f692A6EA84fF8'
+  const chain_Id = chainId ? chainId : 0
+
+  const contractAddress = getContractAddress(
+    chain_Id.toString(),
+    'marketplace_Address'
+  )
   const contractABI = Marketplace.abi
   const marketplaceInterface = new utils.Interface(contractABI)
 
   const contract = new Contract(contractAddress, marketplaceInterface)
 
-  const TOMAddress = '0xf4301508f1ad133486a96af29b401bd0bae2fff6'
+  const TOMAddress = getContractAddress(chain_Id.toString(), 'tom_address')
   const TOMABI = Tom.abi
   const TOMInterface = new utils.Interface(TOMABI)
   const TOMContract = new Contract(TOMAddress, TOMInterface)

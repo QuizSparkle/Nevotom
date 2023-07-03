@@ -47,7 +47,9 @@ urlpatterns = [
         name="user_orders",
     ),
     path(
-        "api/orders/update/<int:id>/", UpdateOrderAPIView.as_view(), name="update_order"
+        "api/orders/update/<str:order_id>/",
+        UpdateOrderAPIView.as_view(),
+        name="update_order",
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

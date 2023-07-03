@@ -1,1 +1,1 @@
-DROP TABLE main_order;
+DELETE FROM main_item;

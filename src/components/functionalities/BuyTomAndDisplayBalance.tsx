@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import { useBuyTomTokens } from '../Hooks/useBuyTomTokens'
+import { getContractAddress } from '../helpers/ContractAddress'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,12 +35,7 @@ export const BuyTomForm = () => {
   const { notifications } = useNotifications()
   const classes = useStyles()
 
-  const { account } = useEthers()
-  const tomAddress = '0xf4301508f1ad133486a96af29b401bd0bae2fff6'
-  const tokenBalance = useTokenBalance(tomAddress, account)
-  const formattedTokenBalance: number = tokenBalance
-    ? parseFloat(formatUnits(tokenBalance, 18))
-    : 0
+  const { account  } = useEthers()
 
   const [amount, setAmount] = useState<
     number | string | Array<number | string>
@@ -54,12 +50,24 @@ export const BuyTomForm = () => {
   const {
     approveAndBuyTom,
     state: approveErc20AndBuyState,
+    chainId,
     transactionHash: Receipt,
   } = useBuyTomTokens()
   const handleStakeSubmit = () => {
     const amountAsWei = utils.parseEther(amount.toString())
     return approveAndBuyTom(amountAsWei.toString())
   }
+
+  const chain_Id = chainId ? chainId : 0
+
+  const tomAddress = getContractAddress(
+    chain_Id.toString(),
+    'tom_address'
+  )
+  const tokenBalance = useTokenBalance(tomAddress, account)
+  const formattedTokenBalance: number = tokenBalance
+    ? parseFloat(formatUnits(tokenBalance, 18))
+    : 0
 
   const isMining = approveErc20AndBuyState.status === 'Mining'
   // const hasZeroBalance = formattedTokenBalance === 0
@@ -114,17 +122,15 @@ export const BuyTomForm = () => {
   }, [notifications, showErc20ApprovalSuccess, showBuyTokenSuccess])
 
   return (
-    <>
-      <div className={`${classes.container} py-10`}>
+ <section className="flex h-[53%] items-center">
+      <div className={`${classes.container}`}>
         <span>
           TOM Balance:{' '}
-          {formattedTokenBalance
-            ? formattedTokenBalance.toString()
-            : 'Loading...'}
+          {formattedTokenBalance ? formattedTokenBalance.toString() : '0'}
         </span>
         <TextField
           className={classes.input}
-          label="Amount to Buy"
+          label="Amount to Buy in USDT"
           variant="outlined"
           type="number"
           value={amount}
@@ -160,6 +166,6 @@ export const BuyTomForm = () => {
           Tokens Bought!
         </Alert>
       </Snackbar>
-    </>
+    </section>
   )
 }

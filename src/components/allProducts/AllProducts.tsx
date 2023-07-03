@@ -18,21 +18,22 @@ interface Product {
 }
 
 const AllProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get<Product[]>("http://127.0.0.1:8000/api/items/");
-        setProducts(response.data);
+        const response = await axios.get<Product[]>(
+          'http://127.0.0.1:8000/api/items/'
+        )
+        setProducts(response.data)
       } catch (error) {
-        console.log("Error fetching products:", error);
+        console.log('Error fetching products:', error)
       }
-    };
+    }
 
-    fetchProducts();
-  }, []);
+    fetchProducts()
+  }, [])
 
   return (
     <div className="py-6">

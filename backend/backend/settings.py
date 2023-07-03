@@ -78,6 +78,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

@@ -20,6 +20,8 @@ import { utils, BigNumber } from 'ethers'
 import {  ethers } from 'ethers';
 import axios from "axios";
 import { CancelOrderButton, ConfirmDeliveryButton } from '../functionalities/OrderButtons';
+import { getContractAddress } from '../helpers/ContractAddress'
+
 
 interface OrderProduct {
   name: string;
@@ -43,11 +45,6 @@ const Cart = ({  }) => {
   const item_id = queryParams.get('item_id');
   const quantity = queryParams.get('quantity');
 
-  const contractAddress = '0xA9729e8D472345B02eB1C61DD86f692A6EA84fF8'
-  const contractABI = Marketplace.abi
-  const marketplaceInterface = new utils.Interface(contractABI)
-
-  const contract = new Contract(contractAddress, marketplaceInterface)
 
   const parsed_item_id = item_id ? parseInt(item_id) : 0;
   const parsed_quantity = quantity ? parseInt(quantity) : 0;
@@ -62,6 +59,17 @@ const Cart = ({  }) => {
   const handleCheckout = () => {
     approveAndOrderItem();
   };
+
+  const chain_Id = chainId ? chainId : 0
+
+  const contractAddress = getContractAddress(
+    chain_Id.toString(),
+    'marketplace_Address'
+  )
+  const contractABI = Marketplace.abi
+  const marketplaceInterface = new utils.Interface(contractABI)
+
+  const contract = new Contract(contractAddress, marketplaceInterface)
 
   const useValue = (): number | undefined => {
     const { value, error } = useCall(
@@ -92,7 +100,6 @@ const Cart = ({  }) => {
   }
 
   const [apiCallTriggered, setApiCallTriggered] = useState(false);
-  const chain_Id = chainId ? chainId : 0 
 
   useEffect(() => {
     if (notifications.filter(
@@ -184,7 +191,7 @@ const Cart = ({  }) => {
           <div className="flex flex-col gap-4">
             <h2 className="text-left text-2xl font-semibold">Ordered Products</h2>
             <div className="flex flex-col items-start gap-3">
-              <div className="flex items-center justify-end space-x-9 rounded-md bg-yellow-100 py-1 pl-20 pr-6">
+              <div className="flex items-center justify-end space-x-6 rounded-md bg-yellow-100 py-1 pl-20 pr-6">
                 <strong>Product</strong>
                 <strong>Price</strong>
                 <strong>Quantity</strong>
@@ -193,14 +200,14 @@ const Cart = ({  }) => {
               </div>
               <div className="my-4 flex flex-col gap-6">
                 {orders.map((p, i) => (
-                  <div className="flex items-center justify-end space-x-9" key={i}>
+                  <div className="flex items-center justify-end space-x-7" key={i}>
                     <OrderedBlock
                       name={p.name}
                       img={p.img}
                       price={parseFloat(formatUnits(((p.price).toString())))}
                       quantity={p.quantity}
                       status={p.status}
-                      rewards={parseFloat(formatUnits(((p.rewards.toString()))))}
+                      rewards={parseFloat(parseFloat(formatUnits(p.rewards.toString())).toFixed(1))}
                     />
                     <div>
                       <CancelOrderButton order_id={BigNumber.from(p.order_id)} />

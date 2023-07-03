@@ -6,22 +6,34 @@ import Marketplace from '../../chain-info/out/Marketplace.sol/Marketplace.json'
 import Escrow from '../../chain-info/out/Escrow.sol/Escrow.json'
 import ERC20 from '../../chain-info/out/ERC20.sol/ERC20.json'
 import { ethers } from 'ethers'
+import { getContractAddress } from '../helpers/ContractAddress'
 
 export const useOrderItem = (itemId: number, quantity: number) => {
   const { chainId, account, library } = useEthers()
 
-  const contractAddress = '0xA9729e8D472345B02eB1C61DD86f692A6EA84fF8'
+  const chain_Id = chainId ? chainId : 0
+
+  const contractAddress = getContractAddress(
+    chain_Id.toString(),
+    'marketplace_Address'
+  )
   const contractABI = Marketplace.abi
   const marketplaceInterface = new utils.Interface(contractABI)
 
   const contract = new Contract(contractAddress, marketplaceInterface)
 
-  const linkAddress = '0xfafedb041c0dd4fa2dc0d87a6b0979ee6fa7af5f'
+  const faucetAddress = getContractAddress(
+    chain_Id.toString(),
+    'faucet_token_address'
+  )
   const erc20ABI = ERC20.abi
   const erc20Interface = new utils.Interface(erc20ABI)
-  const erc20Contract = new Contract(linkAddress, erc20Interface)
+  const erc20Contract = new Contract(faucetAddress, erc20Interface)
 
-  const escrowAddress = '0xd97fd145689ce4bfbad40c1af2473b5a338a329f'
+  const escrowAddress = getContractAddress(
+    chain_Id.toString(),
+    'escrow_address'
+  )
   const escrowABI = Escrow.abi
   const escrowInterface = new utils.Interface(escrowABI)
   const escrowContract = new Contract(escrowAddress, escrowInterface)

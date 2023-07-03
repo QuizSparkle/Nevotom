@@ -3,9 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from .models import User, Item, Order
 from .serializers import UserSerializer, ItemSerializer, OrderSerializer
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 import sys
 
 sys.path.append("..")
@@ -193,9 +195,24 @@ class UserOrdersAPIView(APIView):
 
 
 class UpdateOrderAPIView(APIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-    lookup_field = "id"
+    def put(self, request, order_id):
+        state = request.data.get(
+            "state"
+        )  # Get the desired new state from the request data
+
+        try:
+            order = Order.objects.get(order_id=order_id)
+        except Order.DoesNotExist:
+            return Response(
+                {"error": f"Order with ID {order_id} does not exist"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        order.state = state
+        order.save()
+
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
 
 
 class CancelOrderAPIView(APIView):

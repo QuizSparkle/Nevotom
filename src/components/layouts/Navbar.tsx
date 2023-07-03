@@ -5,7 +5,7 @@ import { HiShoppingCart } from 'react-icons/hi'
 import { RiAccountCircleFill } from 'react-icons/ri'
 import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { IoMdClose } from 'react-icons/io'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/nftize-logo.png'
 import coin from '../../assets/Coin-No-BG.png'
 import { BuyTomForm } from '../functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../functionalities/RegisterUserForm'
@@ -13,6 +13,7 @@ import { ClaimRewards } from '../functionalities/ClaimRewards'
 import { RegisterAndConnect } from './ConnectBtn'
 import { useEthers, useTokenBalance } from '@usedapp/core'
 import { formatUnits } from '@ethersproject/units'
+import { getContractAddress } from '../helpers/ContractAddress'
 
 type props = {
   connected: boolean
@@ -21,7 +22,7 @@ type props = {
 const Navbar = (props: props) => {
   const [showDropdown, setShowDropdown] = useState(false)
 
-  const { account } = useEthers()
+  const { account, chainId } = useEthers()
 
   const isConnected = account !== undefined
 
@@ -36,7 +37,12 @@ const Navbar = (props: props) => {
 
   // const [userRegistered, setUserRegistered] = useState(false)
 
-  const tomAddress = '0xf4301508f1ad133486a96af29b401bd0bae2fff6'
+  const chain_Id = chainId ? chainId : 0
+
+  const tomAddress = getContractAddress(
+    chain_Id.toString(),
+    'tom_address'
+  )
   const tokenBalance = useTokenBalance(tomAddress, account)
   const formattedTokenBalance: number = tokenBalance
     ? parseFloat(formatUnits(tokenBalance, 18))
@@ -49,13 +55,18 @@ const Navbar = (props: props) => {
     >
       <div className="flex items-center justify-between">
         {/* left */}
-        <div className="flex items-center space-x-4 xl:space-x-14">
+        <div className="flex items-center space-x-4 xl:space-x-30">
           {/* logo */}
-          <img
-            src={logo}
-            alt="NFtizeMarket"
-            className="w-[90px] lg:w-[200px]"
-          />
+          <div className="flex items-center space-x-1">
+            <img
+              src={logo}
+              alt="NFtizeMarket"
+              className="w-[90px] lg:h-[100px] lg:w-[100px]"
+            />
+            <h4 className="hidden text-3xl font-semibold text-primary xl:inline-flex">
+              NFTizeMarket
+            </h4>
+          </div>
 
           {/* navlinks */}
           <div
@@ -115,11 +126,11 @@ const Navbar = (props: props) => {
                   onMouseLeave={() => setShowDropdown(false)}
                 >
                   <img src={coin} alt="nft" className="w-[35px]" />
-                  <p className="text-sm">
+                  <p className="text-xl">
                     {' '}
                     {formattedTokenBalance
                       ? formattedTokenBalance.toString()
-                      : 'Loading...'}
+                      : '0'}
                   </p>
                 </div>
 
@@ -151,7 +162,7 @@ const Navbar = (props: props) => {
           </div>
         </div>
         {/* right */}
-        <div className="flex xl:w-[60%]">
+        <div className="flex xl:w-[45%]">
           {/* search bar */}
           <div className="mx-6 hidden flex-1 md:inline-block">
             <input
