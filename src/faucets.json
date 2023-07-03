@@ -4,10 +4,10 @@
             "nameOfNetwork": "Fantom Opera Mainnet",
             "RPC_URL": "https://rpc.fantom.network",
             "chainId": "250",
-            "marketplace_Address": "",
-            "tom_address": "",
-            "escrow_address": "",
-            "faucet_token_address": ""
+            "marketplace_Address": "0x546Ec06222D237c442346a173A5e9C7D33094E07",
+            "tom_address": "0xd3a3f1033fbbc5405ee49e6b71380cab73468306",
+            "escrow_address": "0xffb620b62cb9f0f8a05a3ed44c71adbe48d6ae04",
+            "faucet_token_address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A"
         },
         {
             "nameOfNetwork": "Fantom testnet",
