@@ -4,8 +4,9 @@ import { Contract } from '@ethersproject/contracts'
 import { utils } from 'ethers'
 import Marketplace from '../../chain-info/out/Marketplace.sol/Marketplace.json'
 import ERC20 from '../../chain-info/out/ERC20.sol/ERC20.json'
+import { BigNumber } from 'ethers';
 
-export const useConfirmDelivery = (orderId: number) => {
+export const useConfirmDelivery = (orderId: BigNumber) => {
   const { chainId, account, library } = useEthers()
 
   const contractAddress = '0xA9729e8D472345B02eB1C61DD86f692A6EA84fF8'

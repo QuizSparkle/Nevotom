@@ -25,6 +25,7 @@ from main.views import (
     CreateOrderAPIView,
     UserOrdersAPIView,
     UpdateOrderAPIView,
+    ProductDetailAPIView,
 )
 
 
@@ -32,11 +33,16 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/myendpoint/", MyView.as_view()),
     path("api/items/", ItemListAPIView.as_view(), name="item-list"),
+    path(
+        "api/items/<int:id_item>/",
+        ProductDetailAPIView.as_view(),
+        name="product_detail",
+    ),
     path("api/users/create/", CreateUserAPIView.as_view(), name="create_user"),
     path("api/items/create/", CreateItemAPIView.as_view(), name="create_item"),
     path("api/orders/create/", CreateOrderAPIView.as_view(), name="create_order"),
     path(
-        "api/orders/user/<int:user_id>/",
+        "api/orders/user/",
         UserOrdersAPIView.as_view(),
         name="user_orders",
     ),

@@ -1,1 +1,1 @@
-DROP TABLE main_item;
+DROP TABLE main_order;

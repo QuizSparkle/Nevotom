@@ -108,14 +108,17 @@ const App: FC = () => {
                 />
               }
             />
-            <Route path="/product-detail" element={<ProductDetails />} />
+            <Route
+              path="/product-detail/:item_id"
+              element={<ProductDetails />}
+            />
             <Route path="/allproducts" element={<AllProducts />} />
             <Route path="/sell" element={<SellProduct />} />
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/buytom" element={<BuyTomForm />} />
             <Route
               path="/cart"
-              element={<Cart ordered={orderProducts} listed={orderProducts} />}
+              element={<Cart />}
             />
             <Route
               path="/cartmodal"

@@ -1,12 +1,12 @@
 -- SQLite
-CREATE TABLE "main_item" (
+CREATE TABLE "main_order" (
 "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "seller_wallet_address" varchar(100) NOT NULL, 
-    "id_item" integer NOT NULL, 
-    "name" varchar(254) NOT NULL, 
-    "imageLink" varchar(100), 
-    "description" varchar(254) NOT NULL, 
+    "seller_wallet_address" varchar(100) NOT NULL,
+    "buyer_wallet_address" varchar(100) NOT NULL,
+    "order_id" varchar(100) NOT NULL NOT NULL, 
+    "item_id" integer NOT NULL,  
     "price" double NOT NULL, 
     "quantity" integer NOT NULL, 
-    "postingFee" double
+    "rewards" double,
+    "state" integer NOT NULL
 );

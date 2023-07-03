@@ -180,7 +180,6 @@ const Navbar = (props: props) => {
           </div>
         </div>
         {/* <button
-        {/* <button
           className="block p-2 transition-all ease-linear md:hidden"
           onClick={() => setMenu(!menu)}
         >

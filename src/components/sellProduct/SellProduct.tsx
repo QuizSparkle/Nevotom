@@ -15,6 +15,7 @@ const SellProduct = () => {
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   
+  
 
   // Use the custom hook
   const formattedTokenBalance = price ? utils.parseEther(price.toString()) : 0;
