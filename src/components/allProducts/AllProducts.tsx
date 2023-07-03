@@ -6,8 +6,10 @@ import { MdViewDay } from "react-icons/md";
 import { formatUnits } from "@ethersproject/units"
 import HomeProduct from "../home/HomeProduct";
 import DeliveryRibbon from "../layouts/DeliveryRibbon";
+import { Link } from 'react-router-dom'; 
 
 interface Product {
+  id_item: number,
   imageLink: string;
   name: string;
   description: string;
@@ -80,6 +82,10 @@ const AllProducts = () => {
         {/* products display */}
         <main className="mx-auto grid w-[1300px] grid-cols-4 gap-4">
           {products.map((product, index) => (
+            <Link
+            to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
+            key={index}
+          >
             <HomeProduct
               key={index}
               img={`http://127.0.0.1:8000/${product.imageLink}`}
@@ -88,6 +94,7 @@ const AllProducts = () => {
               name={product.name}
               reward={product.reward}
             />
+            </Link>
           ))}
         </main>
         <DeliveryRibbon />

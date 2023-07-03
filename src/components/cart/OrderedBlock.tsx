@@ -7,7 +7,6 @@ interface Product {
   name: any
   price: any
   quantity: number
-  subtotal: number
   rewards: number
   status: string
 }
@@ -15,7 +14,7 @@ const OrderedBlock = (props: Product) => {
   return (
     <div
       className="flex items-center justify-start
-     space-x-8"
+     space-x-12"
     >
       {/* image */}
       <img
@@ -25,7 +24,7 @@ const OrderedBlock = (props: Product) => {
       bg-gray-300"
       />
       {/* productName */}
-      <h3 className="text-center text-gray-400">{props.name}</h3>
+      <h3 className="text-center text-gray-800">{props.name}</h3>
       {/* price */}
       <span className="flex items-center space-x-1 text-[1.1rem]">
         <SiTether className="text-green-600" />
@@ -33,14 +32,9 @@ const OrderedBlock = (props: Product) => {
       </span>
       {/* quantity */}
       <h4 className="rounded-md border p-1">{props.quantity}</h4>
-      {/* subtotal */}
-      <span className="flex items-center space-x-1 text-[1.1rem]">
-        <SiTether className="text-green-600" />
-        <p>{props.subtotal}</p>
-      </span>
       {/* rewards */}
       <span className="flex items-center space-x-1 text-[1.1rem]">
-        <img src={nft} alt="nft" className="w-[35px]" />
+        <img src={nft} alt="nft" className="w-[50px]" />
         <p>{props.rewards}</p>
       </span>
       {/* paid */}

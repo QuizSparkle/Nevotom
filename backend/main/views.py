@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User, Item, Order
 from .serializers import UserSerializer, ItemSerializer, OrderSerializer
+from django.shortcuts import get_object_or_404
 import sys
 
 sys.path.append("..")
@@ -37,6 +38,26 @@ class ItemListAPIView(APIView):
             }
             serialized_items.append(serialized_item)
         return Response(serialized_items)
+
+
+from django.shortcuts import get_object_or_404
+
+
+class ProductDetailAPIView(APIView):
+    def get(self, request, id_item):
+        product = get_object_or_404(Item, id_item=id_item)
+        serialized_product = {
+            "id": product.id,
+            "seller_wallet_address": product.seller_wallet_address,
+            "id_item": product.id_item,
+            "name": product.name,
+            "imageLink": product.imageLink.url,
+            "description": product.description,
+            "price": product.price,
+            "quantity": product.quantity,
+            "postingFee": product.postingFee,
+        }
+        return Response(serialized_product)
 
 
 class CreateUserAPIView(APIView):
@@ -108,54 +129,67 @@ class CreateOrderAPIView(APIView):
         chain_id = request.data.get("chain_id")
         transaction_hash = request.data.get("transaction_hash")
         event_name = request.data.get("event_name")
-        item_id = request.data.get("item_id")
+        # item_id = request.data.get("item_id")
 
         # Fetch the event details and other necessary data using the provided parameters
         # ...
         data = fetch_event(contract_name, chain_id, transaction_hash, event_name)
-        if data:
-            # Lookup the item based on the given item_id
-            try:
-                item = Item.objects.get(id=data["itemId"])
-            except Item.DoesNotExist:
-                # Handle case where item with the given item_id does not exist
-                return Response({"message": "Item Not Found"})
+        # if data:
+        #     # Lookup the item based on the given item_id
+        #     try:
+        #         item = Item.objects.get(id=data["itemId"])
+        #     except Item.DoesNotExist:
+        #         # Handle case where item with the given item_id does not exist
+        #         return Response({"message": "Item Not Found"})
 
-            # Create the Order object based on the fetched event data and item connection
-            order_data = {
-                "user": data["name"],  # User data from the fetched event
-                "item": item,  # Connect the item object to the order
-                "quantity": data["quantity"],  # Quantity from the fetched event
-                "status": "pending",  # Provide the initial status
-            }
+        # Create the Order object based on the fetched event data and item connection
+        order_data = {
+            "seller_wallet_address": data["seller"],
+            "buyer_wallet_address": data["buyer"],
+            "order_id": str(data["order"]),  # User data from the fetched event
+            "item_id": data["itemId"],  # Connect the item object to the order
+            "price": data["price"],
+            "quantity": data["quantity"],  # Quantity from the fetched event
+            "rewards": data["rewards"],
+            "state": "paid",  # Provide the initial status
+        }
+        print(order_data)
+        print(event_name)
 
-            order_serializer = OrderSerializer(data=order_data)
-            if order_serializer.is_valid():
-                order = order_serializer.save()
-                return order
-            else:
-                # Handle serializer errors
-                return Response({"message": "Wrong arguments"})
+        order_serializer = OrderSerializer(data=order_data)
 
-            serializer = OrderSerializer()
-            if serializer.is_valid():
-                order = serializer.save()  # Save the order to the database
-
-                # Decrease the quantity of the listing
-                order.listing = listing
-                listing.quantity -= order.quantity
-                listing.save()
-
+        if order_serializer.is_valid():
+            order_serializer.save()
             return Response({"message": "Order created successfully"})
-        return Response(serializer.errors, status=400)
+        else:
+            # Handle serializer errors
+            print(order_serializer.errors)
+            return Response(order_serializer.errors, status=400)
+        # else:
+        #     return Response({"message": "Failed to fetch event data"}, status=400)
 
 
 class UserOrdersAPIView(APIView):
-    serializer_class = OrderSerializer
-
-    def get_queryset(self):
-        user_id = self.kwargs["user_id"]
-        return Order.objects.filter(user_id=user_id)
+    def get(self, request):
+        orders = Order.objects.all()
+        serialized_orders = []
+        for order in orders:
+            try:
+                item = Item.objects.get(id_item=order.item_id)
+                serialized_order = {
+                    "order_id": order.order_id,
+                    "img": item.imageLink.url,
+                    "name": item.name,
+                    "price": order.price,
+                    "quantity": order.quantity,
+                    "rewards": order.rewards,
+                    "status": order.state,
+                }
+                serialized_orders.append(serialized_order)
+            except Item.DoesNotExist:
+                # Handle the case where the item does not exist
+                continue
+        return Response(serialized_orders)
 
 
 class UpdateOrderAPIView(APIView):

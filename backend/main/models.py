@@ -43,15 +43,19 @@ class Item(models.Model):
 
 class Order(models.Model):
     STATUS_CHOICES = (
-        ("pending", "Pending"),
+        ("paid", "Paid"),
         ("confirmed", "Confirmed"),
         ("cancelled", "Cancelled"),
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    listing = models.ForeignKey(Item, on_delete=models.CASCADE)
+    seller_wallet_address = models.CharField(max_length=100)
+    buyer_wallet_address = models.CharField(max_length=100)
+    order_id = models.CharField(max_length=100)
+    item_id = models.IntegerField()
+    price = models.DecimalField(max_digits=50, decimal_places=2)
     quantity = models.PositiveIntegerField()
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
+    rewards = models.DecimalField(max_digits=50, decimal_places=2)
+    state = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
 
     def __str__(self):
         return f"Order #{self.id}"
