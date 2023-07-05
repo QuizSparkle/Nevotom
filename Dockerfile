@@ -2,7 +2,7 @@ FROM python:3.10
 
 
 # Copy the backend code to the container
-COPY ./backend /app/backend/backend
+COPY ./backend /app/backend
 
 
 # Copy the contracts directory to /app/contracts inside the container

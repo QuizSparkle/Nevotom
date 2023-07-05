@@ -41,7 +41,9 @@ def get_rpc_url(chain_id):
     # script_dir = os.path.dirname(os.path.realpath(__file__))
     # networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
     # print("./networks.json")
-    with open("./networks.json") as file:
+    networks_json_path = os.path.join(os.path.dirname(__file__), "networks.json")
+
+    with open(networks_json_path) as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
