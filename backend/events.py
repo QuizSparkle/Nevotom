@@ -38,7 +38,7 @@ def get_network_name(chain_id):
 
 
 def get_rpc_url(chain_id):
-    networks_json_path = os.path.join("./networks.json")
+    networks_json_path = "./networks.json"
 
     with open(networks_json_path) as file:
         data = json.load(file)
