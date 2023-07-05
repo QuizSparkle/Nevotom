@@ -12,9 +12,9 @@ def get_web3_object(RPC_URL):
 
 
 def get_chain_id(network_name):
-    script_dir = os.path.dirname(os.path.realpath(__file__))
-    networks_json_path = os.path.join(script_dir, "contracts", "networks.json")
-    with open(networks_json_path) as file:
+    # script_dir = os.path.dirname(os.path.realpath(__file__))
+    # networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open("./networks.json") as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
@@ -25,9 +25,9 @@ def get_chain_id(network_name):
 
 
 def get_network_name(chain_id):
-    script_dir = os.path.dirname(os.path.realpath(__file__))
-    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
-    with open(networks_json_path) as file:
+    # script_dir = os.path.dirname(os.path.realpath(__file__))
+    # networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    with open("./networks.json") as file:
         data = json.load(file)
 
     for network in data.get("networks", []):
@@ -38,9 +38,9 @@ def get_network_name(chain_id):
 
 
 def get_rpc_url(chain_id):
-    script_dir = os.path.dirname(os.path.realpath(__file__))
-    networks_json_path = os.path.join("app/contracts", "networks.json")
-    print(networks_json_path)
+    # script_dir = os.path.dirname(os.path.realpath(__file__))
+    # networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    print("./networks.json")
     with open(networks_json_path) as file:
         data = json.load(file)
 
@@ -53,14 +53,15 @@ def get_rpc_url(chain_id):
 
 
 def get_contract_address(contractName, chain_id):
-    script_dir = os.path.dirname(os.path.realpath(__file__))
-    networks_json_path = os.path.join(
-        script_dir,
-        f"contracts/broadcast/DeployProtocol.s.sol/{chain_id}",
-        "run-latest.json",
-    )
+    # script_dir = os.path.dirname(os.path.realpath(__file__))
+    # networks_json_path = os.path.join(
+    #     script_dir,
+    #     "..",
+    #     f"contracts/broadcast/DeployProtocol.s.sol/{chain_id}",
+    #     "run-latest.json",
+    # )
     if chain_id is not None:
-        file_path = networks_json_path
+        file_path = "./broadcast/DeployProtocol.s.sol"
         with open(file_path, "r") as file:
             data = json.load(file)
 
@@ -78,13 +79,14 @@ def get_contract_address(contractName, chain_id):
 
 
 def get_contract_abi(contract_name):
-    script_dir = os.path.dirname(os.path.realpath(__file__))
-    networks_json_path = os.path.join(
-        script_dir,
-        f"contracts/out/{contract_name}.sol",
-        f"{contract_name}.json",
-    )
-    with open(networks_json_path) as f:
+    # script_dir = os.path.dirname(os.path.realpath(__file__))
+    # networks_json_path = os.path.join(
+    #     script_dir,
+    #     "..",
+    #     f"contracts/out/{contract_name}.sol",
+    #     f"{contract_name}.json",
+    # )
+    with open(f"out/{contract_name}.sol") as f:
         abi = json.load(f)["abi"]
         return abi
 
