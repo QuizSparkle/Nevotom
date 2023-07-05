@@ -84,6 +84,8 @@ CORS_ORIGIN_WHITELIST = [
     "https://12xhkolho3.execute-api.us-west-2.amazonaws.com",
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
