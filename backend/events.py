@@ -60,7 +60,7 @@ def get_contract_address(contractName, chain_id):
     #     "run-latest.json",
     # )
     if chain_id is not None:
-        file_path = "./broadcast/DeployProtocol.s.sol"
+        file_path = "./broadcast/DeployProtocol.s.sol/{chain_id}/run-latest.json"
         with open(file_path, "r") as file:
             data = json.load(file)
 
