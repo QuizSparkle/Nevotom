@@ -1,13 +1,16 @@
 FROM python:3.10
 
-# Set the working directory to /app/backend
-WORKDIR /app/backend
+# Set the working directory to /app
+WORKDIR /app
 
 # Copy the backend code to the container
 COPY . .
 
+# Change the working directory to /app/backend
+WORKDIR /app/backend
+
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r ../requirements.txt
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
