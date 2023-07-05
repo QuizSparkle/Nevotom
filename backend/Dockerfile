@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # RUN python manage.py migrate
 
 # Start the Django development server
-CMD ["python3", "manage.py", "runserver", "127.0.0.1:8000"]
+CMD ["python3", "manage.py", "runserver", "127.0.0.1:8000
