@@ -16,10 +16,10 @@ COPY ../contracts /app/contracts
 WORKDIR /app/backend
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 # Apply database migrations
-RUN python manage.py migrate
+# RUN python manage.py migrate
 
 # Start the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
