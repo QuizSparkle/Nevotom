@@ -1,25 +1,25 @@
 FROM python:3.10
 
-# Set the working directory to the backend folder
-WORKDIR /backend
+# Set the working directory to /app/backend
+WORKDIR /app/backend
 
 # Copy the backend code to the container
-COPY ./backend .
+COPY . .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the contracts directory to the container
-COPY ./contracts /contracts
+# Copy the contracts directory to /app/contracts inside the container
+COPY ../contracts /app/contracts
 
-# Set the working directory to the backend folder
-WORKDIR /backend
+# Change the working directory back to /app/backend
+WORKDIR /app/backend
 
 # Collect static files
-# RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
 
 # Apply database migrations
-# RUN python manage.py migrate
+RUN python manage.py migrate
 
 # Start the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
