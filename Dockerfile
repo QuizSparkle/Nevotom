@@ -1,19 +1,18 @@
 FROM python:3.10
 
-# Set the working directory to /app/backend
-WORKDIR /app/backend
 
 # Copy the backend code to the container
-COPY . .
+COPY ./backend /app/backend
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the contracts directory to /app/contracts inside the container
-COPY ../contracts /app/contracts
+COPY ./contracts /app/contracts
 
 # Change the working directory back to /app/backend
 WORKDIR /app/backend
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Collect static files
 # RUN python manage.py collectstatic --noinput
