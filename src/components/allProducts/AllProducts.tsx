@@ -24,7 +24,7 @@ const AllProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get<Product[]>(
-          'https://a3auc4mssg.execute-api.us-west-2.amazonaws.com//api/items/'
+          'https://a3auc4mssg.execute-api.us-west-2.amazonaws.com/api/items/'
         )
         setProducts(response.data)
       } catch (error) {
