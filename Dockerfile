@@ -13,8 +13,6 @@ WORKDIR /app/backend
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install gunicorn
 
-CMD ["python3", "manage.py", "runserver", ".0.0.0:8000"]
-
 # Start the Django development server
-CMD ["/usr/local/bin/gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
+CMD ["/usr/local/bin/gunicorn", "--bind", "0.0.0.0:8000", "backend.backend.wsgi:application"]
 
