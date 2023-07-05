@@ -78,13 +78,6 @@ def get_contract_address(contractName, chain_id):
 
 
 def get_contract_abi(contract_name):
-    # script_dir = os.path.dirname(os.path.realpath(__file__))
-    # networks_json_path = os.path.join(
-    #     script_dir,
-    #     "..",
-    #     f"contracts/out/{contract_name}.sol",
-    #     f"{contract_name}.json",
-    # )
     with open(f"./out/{contract_name}.sol/{contract_name}.json") as f:
         abi = json.load(f)["abi"]
         return abi
