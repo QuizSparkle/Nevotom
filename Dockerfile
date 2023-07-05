@@ -5,7 +5,7 @@ FROM python:3.10
 COPY . /app/backend
 
 # Change the working directory back to /app/backend
-WORKDIR /app/
+WORKDIR /app/backend
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
