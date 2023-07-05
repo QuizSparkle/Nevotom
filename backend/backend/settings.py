@@ -79,7 +79,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://12xhkolho3.execute-api.us-west-2.amazonaws.com",
 ]
 
-CORS_ORIGIN_WHITELIST = [
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://12xhkolho3.execute-api.us-west-2.amazonaws.com",
 ]
@@ -138,7 +138,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 
 # MEDIA_URL = "/item_images/"
