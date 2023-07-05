@@ -85,7 +85,7 @@ def get_contract_abi(contract_name):
     #     f"contracts/out/{contract_name}.sol",
     #     f"{contract_name}.json",
     # )
-    with open(f"./out/{contract_name}.sol") as f:
+    with open(f"./out/{contract_name}.sol/{contract_name}.json") as f:
         abi = json.load(f)["abi"]
         return abi
 
