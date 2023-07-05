@@ -52,15 +52,8 @@ def get_rpc_url(chain_id):
 
 
 def get_contract_address(contractName, chain_id):
-    # script_dir = os.path.dirname(os.path.realpath(__file__))
-    # networks_json_path = os.path.join(
-    #     script_dir,
-    #     "..",
-    #     f"contracts/broadcast/DeployProtocol.s.sol/{chain_id}",
-    #     "run-latest.json",
-    # )
     if chain_id is not None:
-        file_path = "./broadcast/DeployProtocol.s.sol/{chain_id}/run-latest.json"
+        file_path = f"./broadcast/DeployProtocol.s.sol/{chain_id}/run-latest.json"
         with open(file_path, "r") as file:
             data = json.load(file)
 
