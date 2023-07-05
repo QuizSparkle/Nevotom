@@ -76,10 +76,12 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://uycwwee93g.execute-api.us-west-2.amazonaws.com",
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://uycwwee93g.execute-api.us-west-2.amazonaws.com",
 ]
 
 
