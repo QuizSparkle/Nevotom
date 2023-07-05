@@ -79,7 +79,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://12xhkolho3.execute-api.us-west-2.amazonaws.com",
 ]
 
-CORS_ALLOWED_ORIGINS = [
+CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://12xhkolho3.execute-api.us-west-2.amazonaws.com",
 ]
