@@ -17,5 +17,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # RUN python manage.py migrate
 
 # Start the Django development server
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
-
+CMD ["python3", "manage.py", "runserver", ".0.0.0:8000"]

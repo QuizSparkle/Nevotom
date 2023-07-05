@@ -1,5 +1,7 @@
 FROM python:3.10
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Copy the backend code to the container
 COPY . /app/backend
@@ -9,7 +11,10 @@ WORKDIR /app/backend
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install gunicorn
+
+CMD ["python3", "manage.py", "runserver", ".0.0.0:8000"]
 
 # Start the Django development server
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
+CMD ["/usr/local/bin/gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
 
