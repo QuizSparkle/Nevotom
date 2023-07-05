@@ -1,10 +1,10 @@
 FROM python:3.10
 
 # Set the working directory to the backend folder
-WORKDIR ./backend
+WORKDIR /backend
 
 # Copy the backend code to the container
-COPY . .
+COPY ./backend
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
