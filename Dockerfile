@@ -2,7 +2,7 @@ FROM python:3.10
 
 
 # Copy the backend code to the container
-COPY ./backend /app/backend
+COPY . /app/backend
 
 # Change the working directory back to /app/backend
 WORKDIR /app/backend
