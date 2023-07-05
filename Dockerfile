@@ -4,10 +4,6 @@ FROM python:3.10
 # Copy the backend code to the container
 COPY ./backend /app/backend
 
-
-# Copy the contracts directory to /app/contracts inside the container
-COPY ./contracts /app/contracts
-
 # Change the working directory back to /app/backend
 WORKDIR /app/backend
 
