@@ -9,7 +9,7 @@ COPY ./backend /app/backend
 COPY ./contracts /app/contracts
 
 # Change the working directory back to /app/backend
-WORKDIR /app/backend
+WORKDIR /app
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
