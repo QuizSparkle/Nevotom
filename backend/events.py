@@ -13,7 +13,7 @@ def get_web3_object(RPC_URL):
 
 def get_chain_id(network_name):
     script_dir = os.path.dirname(os.path.realpath(__file__))
-    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    networks_json_path = os.path.join(script_dir, "contracts", "networks.json")
     with open(networks_json_path) as file:
         data = json.load(file)
 
@@ -39,7 +39,7 @@ def get_network_name(chain_id):
 
 def get_rpc_url(chain_id):
     script_dir = os.path.dirname(os.path.realpath(__file__))
-    networks_json_path = os.path.join(script_dir, "..", "contracts", "networks.json")
+    networks_json_path = os.path.join(script_dir, "contracts", "networks.json")
     print(networks_json_path)
     with open(networks_json_path) as file:
         data = json.load(file)
@@ -56,7 +56,6 @@ def get_contract_address(contractName, chain_id):
     script_dir = os.path.dirname(os.path.realpath(__file__))
     networks_json_path = os.path.join(
         script_dir,
-        "..",
         f"contracts/broadcast/DeployProtocol.s.sol/{chain_id}",
         "run-latest.json",
     )
@@ -82,7 +81,6 @@ def get_contract_abi(contract_name):
     script_dir = os.path.dirname(os.path.realpath(__file__))
     networks_json_path = os.path.join(
         script_dir,
-        "..",
         f"contracts/out/{contract_name}.sol",
         f"{contract_name}.json",
     )

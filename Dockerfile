@@ -6,7 +6,7 @@ COPY ./backend /app/backend
 
 
 # Copy the contracts directory to /app/contracts inside the container
-COPY ./contracts .
+COPY ./contracts /app/contracts
 
 # Change the working directory back to /app/backend
 WORKDIR /app/backend
