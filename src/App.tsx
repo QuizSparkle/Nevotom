@@ -78,7 +78,7 @@ const orderProducts = [
 
 const App: FC = () => {
   useEffect(() => {
-    fetch('https://0tp092loq8.execute-api.us-west-2.amazonaws.com/api/endpoint') // Replace `endpoint` with the actual API endpoint in your Django app
+    fetch('http://18.236.73.110/api/endpoint') // Replace `endpoint` with the actual API endpoint in your Django app
       .then((response) => response.json())
       .then((data) => {
         // Handle the received data

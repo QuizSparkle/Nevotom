@@ -59,9 +59,9 @@ const CancelOrderButton: FC<CancelOrderButtonProps> = ({ order_id }) => {
 
       const formData = new FormData();
       formData.append('state', "Cancelled");
-  
+      
       axios
-        .put(`https://0tp092loq8.execute-api.us-west-2.amazonaws.com/api/orders/update/${order_id.toString()}/`, formData)
+        .put(`http://18.236.73.110/api/orders/update/${order_id.toString()}/`, formData)
         .then((response) => {
           // Handle the response
           if (response.status === 201 || response.status === 200) {
@@ -151,7 +151,7 @@ const ConfirmDeliveryButton: FC<ConfirmDeliveryButtonProps> = ({ order_id }) => 
       formData.append('state', "Confirmed");
   
       axios
-        .put(`https://0tp092loq8.execute-api.us-west-2.amazonaws.com/api/orders/update/${order_id.toString()}/`, formData)
+        .put(`http://18.236.73.110/api/orders/update/${order_id.toString()}/`, formData)
         .then((response) => {
           // Handle the response
           if (response.status === 201 || response.status === 200) {
