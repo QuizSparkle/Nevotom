@@ -5,3 +5,4 @@ djangorestframework
 pillow
 django-cors-headers
 gunicorn
+django-sslserver
