@@ -24,7 +24,7 @@ const AllProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get<Product[]>(
-          'https://5uu62iqlpe.execute-api.us-west-2.amazonaws.com/api/items/'
+          'https://0tp092loq8.execute-api.us-west-2.amazonaws.com/api/items/'
         )
         setProducts(response.data)
       } catch (error) {
@@ -89,7 +89,7 @@ const AllProducts = () => {
           >
             <HomeProduct
               key={index}
-              img={`https://5uu62iqlpe.execute-api.us-west-2.amazonaws.com/${product.imageLink}`}
+              img={`https://0tp092loq8.execute-api.us-west-2.amazonaws.com/${product.imageLink}`}
               description={product.description}
               price={parseFloat((product.price / 10 ** 18).toFixed(2))}
               name={product.name}
