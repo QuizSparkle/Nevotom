@@ -121,7 +121,7 @@ const Cart = ({  }) => {
   
       // Make the API request to create the item
       axios
-        .post("http://18.236.73.110/api/orders/create/", formData, {
+        .post("https://18.236.73.110/api/orders/create/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -172,7 +172,7 @@ const Cart = ({  }) => {
     const fetchOrders = async () => {
       console.log("we here")
       try {
-        const response = await axios.get<OrderProduct[]>("http://18.236.73.110/api/orders/user/");
+        const response = await axios.get<OrderProduct[]>("https://18.236.73.110/api/orders/user/");
         console.log(response)
         setOrders(response.data);
       } catch (error) {
