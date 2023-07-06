@@ -1,20 +1,26 @@
-FROM python:3.10
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+FROM public.ecr.aws/zeet/lambdahandler:latest as base
 
-# Copy the backend code to the container
-RUN apt-get update && apt-get install -y libsqlite3-dev && rm -rf /var/lib/apt/lists/*
+RUN yum install -y amazon-linux-extras && amazon-linux-extras install -y python3.10
+RUN ln -s /usr/bin/python3.10 /usr/bin/python3 || true
 
-COPY . /app/backend
+RUN ln -s /usr/bin/pip3.10 /usr/bin/pip3 || true
 
-# Change the working directory back to /app/backend
-WORKDIR /app/backend
+ 
+WORKDIR /app
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install gunicorn
+COPY . .
 
-# Start the Django development server
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]
+RUN sed -i 's/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \["*"\]/g' ./*/settings.py
 
+
+
+ARG UVICORN_HOST
+ARG ZEET_APP
+ARG ZEET_PROJECT
+ARG GIT_COMMIT_SHA
+ARG ZEET_ENVIRONMENT
+ARG GUNICORN_CMD_ARGS
+ARG PYTHONUNBUFFERED
+
+RUN pip3 install -r requirements.txt
