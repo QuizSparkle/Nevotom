@@ -143,5 +143,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 # MEDIA_URL = "/item_images/"
 # MEDIA_ROOT = os.path.join(BASE_DIR, "item_images")
