@@ -121,7 +121,7 @@ const Cart = ({  }) => {
   
       // Make the API request to create the item
       axios
-        .post("https://18.236.73.110/api/orders/create/", formData, {
+        .post("https://18.236.73.110:8000/api/orders/create/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

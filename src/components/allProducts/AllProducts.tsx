@@ -17,8 +17,8 @@ interface Product {
   reward: boolean;
 }
 
-axios.defaults.baseURL = 'https://18.236.73.110:8000'; // Set your API base URL
-axios.defaults.withCredentials = true; // Enable sending cookies with requests
+// axios.defaults.baseURL = 'https://18.236.73.110:8000'; // Set your API base URL
+// axios.defaults.withCredentials = true; // Enable sending cookies with requests
 
 
 const AllProducts = () => {
@@ -28,7 +28,7 @@ const AllProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get<Product[]>(
-          'https://18.236.73.110/api/items/'
+          'https://18.236.73.110:8000/api/items/'
         )
         setProducts(response.data)
       } catch (error) {
@@ -93,7 +93,7 @@ const AllProducts = () => {
           >
             <HomeProduct
               key={index}
-              img={`http://18.236.73.110/${product.imageLink}`}
+              img={`https://18.236.73.110:8000/${product.imageLink}`}
               description={product.description}
               price={parseFloat((product.price / 10 ** 18).toFixed(2))}
               name={product.name}

@@ -26,7 +26,7 @@ const DetailInfo: FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://18.236.73.110/api/items/${item_id}/`);
+        const response = await fetch(`https://18.236.73.110:8000/api/items/${item_id}/`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {

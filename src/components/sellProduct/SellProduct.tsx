@@ -66,7 +66,7 @@ const SellProduct = () => {
   
       // Make the API request to create the item
       axios
-        .post("https://18.236.73.110/api/items/create/", formData, {
+        .post("https://18.236.73.110:8000/api/items/create/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
