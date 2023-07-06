@@ -1,7 +1,7 @@
 {
   "name": "nftizemarket",
   "version": "0.1.0",
-  "proxy": "https://5uu62iqlpe.execute-api.us-west-2.amazonaws.com/",
+  "proxy": "https://0tp092loq8.execute-api.us-west-2.amazonaws.com",
   "private": true,
   "dependencies": {
     "@ethersproject/units": "^5.5.0",
