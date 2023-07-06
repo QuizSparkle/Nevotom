@@ -52,8 +52,3 @@ urlpatterns = [
         name="update_order",
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# urlpatterns = [
-#     # Other URL patterns...
-#     path("api/items/", ItemListAPIView.as_view(), name="item-list"),
-# ]
