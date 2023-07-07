@@ -2,7 +2,7 @@
     "networks": [
         {
             "nameOfNetwork": "Fantom Opera Mainnet",
-            "RPC_URL": "",
+            "RPC_URL": "https://rpc.fantom.network",
             "chainId": "250"
         },
         {
