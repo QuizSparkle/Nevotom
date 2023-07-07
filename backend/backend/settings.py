@@ -154,5 +154,5 @@ SECURE_HSTS_SECONDS = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_FRAME_DENY = False
 
-MEDIA_URL = "/item_images/"
+MEDIA_URL = ""
 MEDIA_ROOT = os.path.join(BASE_DIR, "item_images")
