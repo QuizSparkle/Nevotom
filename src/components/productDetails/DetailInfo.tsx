@@ -58,18 +58,18 @@ const DetailInfo: FC = () => {
           {/* Mini Thumbs */}
           <div className="flex flex-col gap-8">
             <div className="detail-img-thumb">
-              <img src={product.imageLink} alt="mini-thumb" />
+              <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="mini-thumb" />
             </div>
             <div className="detail-img-thumb">
-              <img src={product.imageLink} alt="mini-thumb" />
+              <img src={`https://18.236.73.110:8000/${product.imageLink}`}alt="mini-thumb" />
             </div>
             <div className="detail-img-thumb">
-              <img src={product.imageLink} alt="mini-thumb" />
+              <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="mini-thumb" />
             </div>
           </div>
           {/* Big Thumb */}
           <div className="detail-big-thumb">
-            <img src={product.imageLink} alt="big-thumb" />
+            <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="big-thumb" />
           </div>
         </div>
 
@@ -120,10 +120,10 @@ const DetailInfo: FC = () => {
         </div>
         <div className="thumb-box">
           <div className="thumb">
-            <img src={product.imageLink} alt="big-thumb" />
+            <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="big-thumb" />
           </div>
           <div className="thumb">
-            <img src={product.imageLink} alt="big-thumb" />
+            <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="big-thumb" />
           </div>
         </div>
       </div>
