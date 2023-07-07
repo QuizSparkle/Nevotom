@@ -203,8 +203,7 @@ const Cart = ({  }) => {
                   <div className="flex items-center justify-end space-x-7" key={i}>
                     <OrderedBlock
                       name={p.name}
-                      img={p.img}
-                      price={parseFloat(formatUnits(((p.price).toString())))}
+                      img={`https://18.236.73.110:8000/${p.img}`}
                       quantity={p.quantity}
                       status={p.status}
                       rewards={parseFloat(parseFloat(formatUnits(p.rewards.toString())).toFixed(1))}
