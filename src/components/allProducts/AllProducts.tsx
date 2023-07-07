@@ -93,7 +93,7 @@ const AllProducts = () => {
           >
             <HomeProduct
               key={index}
-              img={`https://18.236.73.110:8000${product.imageLink}`}
+              img={`https://18.236.73.110:8000/${product.imageLink}`}
               description={product.description}
               price={parseFloat((product.price / 10 ** 18).toFixed(2))}
               name={product.name}
