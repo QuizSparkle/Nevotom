@@ -1,3 +1,6 @@
+# App hosted on https://12xhkolho3.execute-api.us-west-2.amazonaws.com/
+
+
 ## NFTizeMarket
 
 NFT application that brings together affiliate marketers and businesses to sell products Incorporating NFT rewards and incentives to both buyers and sellers.
