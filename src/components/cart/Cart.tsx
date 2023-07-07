@@ -204,6 +204,7 @@ const Cart = ({  }) => {
                     <OrderedBlock
                       name={p.name}
                       img={`https://18.236.73.110:8000/${p.img}`}
+                      price={parseFloat(formatUnits(((p.price).toString())))}
                       quantity={p.quantity}
                       status={p.status}
                       rewards={parseFloat(parseFloat(formatUnits(p.rewards.toString())).toFixed(1))}
