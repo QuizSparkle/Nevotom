@@ -172,27 +172,25 @@ class CreateOrderAPIView(APIView):
 
 
 class UserOrdersAPIView(APIView):
-    def get(self, request):
-        orders = Order.objects.all()
-        account = request.data.get("account")
+    def get(self, request, account):
+        orders = Order.objects.filter(account=account)
         serialized_orders = []
         for order in orders:
-            if account == order.buyer_wallet_address:
-                try:
-                    item = Item.objects.get(id_item=order.item_id)
-                    serialized_order = {
-                        "order_id": order.order_id,
-                        "img": item.imageLink.url,
-                        "name": item.name,
-                        "price": order.price,
-                        "quantity": order.quantity,
-                        "rewards": order.rewards,
-                        "status": order.state,
-                    }
-                    serialized_orders.append(serialized_order)
-                except Item.DoesNotExist:
-                    # Handle the case where the item does not exist
-                    continue
+            try:
+                item = Item.objects.get(id_item=order.item_id)
+                serialized_order = {
+                    "order_id": order.order_id,
+                    "img": item.imageLink.url,
+                    "name": item.name,
+                    "price": order.price,
+                    "quantity": order.quantity,
+                    "rewards": order.rewards,
+                    "status": order.state,
+                }
+                serialized_orders.append(serialized_order)
+            except Item.DoesNotExist:
+                # Handle the case where the item does not exist
+                continue
         return Response(serialized_orders)
 
 

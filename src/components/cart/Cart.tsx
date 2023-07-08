@@ -170,19 +170,20 @@ const Cart = ({  }) => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const formData = new FormData();
-      formData.append("account", account);
-      try {
-        const response = await axios.get<OrderProduct[]>("https://18.236.73.110:8000/api/orders/user/", formData);
-        console.log(response)
-        setOrders(response.data);
-      } catch (error) {
-        console.log("Error fetching products:", error);
+      if (account) {
+        try {
+          const response = await axios.get<OrderProduct[]>(`https://18.236.73.110:8000/api/orders/user/?account=${account}`);
+          console.log(response)
+          setOrders(response.data);
+        } catch (error) {
+          console.log("Error fetching products:", error);
+        }
       }
     };
 
     fetchOrders();
-  }, []);
+}, [account]); // account is added as a dependency
+
 
   return (
     <div className="overflow-x-auto p-4 px-2">

@@ -42,7 +42,7 @@ urlpatterns = [
     path("api/items/create/", CreateItemAPIView.as_view(), name="create_item"),
     path("api/orders/create/", CreateOrderAPIView.as_view(), name="create_order"),
     path(
-        "api/orders/user/",
+        "api/orders/user/<str:account>/",
         UserOrdersAPIView.as_view(),
         name="user_orders",
     ),
