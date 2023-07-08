@@ -173,7 +173,9 @@ class CreateOrderAPIView(APIView):
 
 class UserOrdersAPIView(APIView):
     def get(self, request, account):
+        print(account)
         orders = Order.objects.filter(buyer_wallet_address=account)
+        print(orders)
         serialized_orders = []
         for order in orders:
             try:
