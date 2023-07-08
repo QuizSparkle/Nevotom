@@ -172,7 +172,7 @@ const Cart = ({  }) => {
     const fetchOrders = async () => {
       if (account) {
         try {
-          const response = await axios.get<OrderProduct[]>(`https://18.236.73.110:8000/api/orders/user/?account=${account}`);
+          const response = await axios.get<OrderProduct[]>(`https://18.236.73.110:8000/api/orders/user/${account}/`);
           console.log(response)
           setOrders(response.data);
         } catch (error) {
