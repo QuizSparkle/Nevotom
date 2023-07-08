@@ -170,9 +170,10 @@ const Cart = ({  }) => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      console.log("we here")
+      const formData = new FormData();
+      formData.append("account", account);
       try {
-        const response = await axios.get<OrderProduct[]>("https://18.236.73.110:8000/api/orders/user/");
+        const response = await axios.get<OrderProduct[]>("https://18.236.73.110:8000/api/orders/user/", formData);
         console.log(response)
         setOrders(response.data);
       } catch (error) {
