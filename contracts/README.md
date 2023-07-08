@@ -33,3 +33,7 @@ Head over to [faucets.fantom.network](https://faucet.fantom.network/) and get so
 ```
 forge script script/DeployProtocol.s.sol:DeployMarketplace --broadcast --rpc-url ${FANTOM_RPC_URL} --verify --etherscan-api-key ${FTMSCAN_API_KEY} 
 ```
+
+4. Tokens used to buy items:
+ - Link : 0xfaFedb041c0DD4fA2Dc0d87a6B0979Ee6FA7af5F (for Testnet)
+ - USDT : 0x049d68029688eAbF473097a2fC38ef61633A3C7A (for mainnet)
