@@ -1,4 +1,4 @@
-# App hosted on https://12xhkolho3.execute-api.us-west-2.amazonaws.com/
+# App hosted on https://n5a5synti3.execute-api.us-west-2.amazonaws.com/
 
 
 ## NFTizeMarket
