@@ -50,8 +50,8 @@ const Navbar = (props: props) => {
 
   return (
     <nav
-      className="bg-[#444444] px-4 py-6
-    text-white lg:px-7"
+      className="bg-black/60 px-4 pt-3 md:pb-4
+    text-white lg:px-7 border-b border-white/30"
     >
       <div className="flex items-center justify-between">
         {/* left */}
@@ -63,14 +63,14 @@ const Navbar = (props: props) => {
               alt="NFtizeMarket"
               className="w-[90px] lg:h-[100px] lg:w-[100px]"
             />
-            <h4 className="hidden text-3xl font-semibold text-primary xl:inline-flex">
-              NFTizeMarket
+            <h4 className="hidden text-3xl font-semibold text-gray-100 xl:inline-flex">
+               NEVOTOM
             </h4>
           </div>
 
           {/* navlinks */}
           <div
-            className="flex items-center space-x-6 text-[1.1rem] text-white
+            className="flex items-center space-x-6 text-[1.1rem] text-gray-200
           lg:ml-4 lg:text-xl"
           >
             <Link to="/" className="cursor-pointer hover:text-gray-200">
@@ -162,14 +162,15 @@ const Navbar = (props: props) => {
           </div>
         </div>
         {/* right */}
-        <div className="flex xl:w-[45%]">
+        <div className="flex-1 flex">
           {/* search bar */}
-          <div className="mx-6 hidden flex-1 md:inline-block">
+          <div className="mx-6 hidden border rounded-md 
+          border-gray-800 flex-1 md:inline-block">
             <input
               type="search"
               placeholder="searchNFT"
-              className="w-full rounded-sm bg-white/10 p-2 px-4
-               text-white outline-none placeholder:text-gray-200"
+              className="w-full rounded-sm bg-black/20 p-2 px-4
+               text-white outline-none placeholder:text-gray-300"
             />
           </div>
           {/* right-right */}
