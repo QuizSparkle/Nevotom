@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   connection: {
     color: '#fff',
-    backgroundColor: '#8789FE',
+    backgroundColor: '#aa2bff',
   },
 }))
 

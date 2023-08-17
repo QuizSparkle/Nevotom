@@ -64,22 +64,24 @@ const products = [
 
 const Picks = () => {
   return (
-    <article id="/toppicks" className="px-10 py-16 pb-24">
-      <div className="flex flex-col items-center gap-16">
+    <article className='bg-black/60 flex justify-center items-center'>
+    <div id="/toppic" className="w-full max-w-[1600px]
+    border-y border-white/30  px-10 py-16 pb-24">
+      <div className="flex flex-col gap-16">
         {/* top picks header */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="flex items-start flex-col gap-3">
+          <h1 className="text-3xl font-bold text-gray-100">
             Top Picks For You
           </h1>
-          <p className="text-sm text-gray-600">
+          {/* <p className="text-sm text-gray-200">
             Find a bright ideal to suit your taste with our great selection of
             products
-          </p>
+          </p> */}
         </div>
         {/* products */}
         <div
           className="custom-scrollbar mx-auto flex h-max w-full max-w-[1400px] flex-col 
-        justify-center gap-4 space-x-4 overflow-x-auto overflow-y-auto
+        justify-center gap-4 space-x-1 overflow-x-auto overflow-y-auto
          py-10 md:flex-row md:justify-start
          "
         >
@@ -95,6 +97,7 @@ const Picks = () => {
           ))}
         </div>
       </div>
+    </div>
     </article>
   )
 }

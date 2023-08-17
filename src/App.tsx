@@ -89,10 +89,14 @@ const App: FC = () => {
         console.error(error)
       })
   })
-
+      // bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-green-300 via-blue-500 to-purple-600"
   return (
     <DAppProvider config={config}>
-      <div className="App h-[100vh]">
+      <div className="relative App h-[100vh]  
+      bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]
+       from-green-700 via-blue-600 to-purple-900 
+      ">
+      {/* <div className="absolute circle  rounded-full"></div> */}
         <Router>
           <Navbar connected={true} />
           <Routes>

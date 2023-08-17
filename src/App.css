@@ -26,3 +26,134 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #8789fe;
 }
+
+
+/* gradient Background */
+
+.app-container {
+  background: #f3f3ff;
+  min-height: 940px;
+  width: 100%;
+  height: 100vh;
+}
+
+.circle {
+  width: 450px;
+  height: 450px;
+  background: linear-gradient(to bottom, #fa39ad 40%, #fe6c4c 50%);
+  filter: blur(120px);
+}
+
+.red {
+  background: #fe624d;
+  border: 2px solid #ee5e4b;
+}
+
+.yellow {
+  background: #FFC432;
+  border: 2px solid #F2BD3A;
+}
+
+.green {
+  background: #5BDE47;
+  border: 2px solid #5FC651;
+}
+
+.app-color-yellow {
+  color: #FFA41D;
+}
+
+.app-color-black {
+  color: #292B48;
+}
+
+.app-color-gray {
+  color: #877F95;
+}
+
+.app-color-lavendar {
+  color: #9EA1CF;
+}
+
+.app-color-pink {
+  color: #FB28CD;
+}
+
+.app-bg-lavendar {
+  background: #D5D7FF;
+
+}
+
+.app-bg-light-white {
+  background: #F7F8FF;
+}
+
+.app-bg-light-white-2 {
+  background: #EFF2FC;
+}
+
+.app-color-dribbble {
+  color: #E04B85;
+}
+
+.app-shadow {
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.03);
+}
+
+.app-title {
+  background: linear-gradient(45deg, #fb28cd, #7c65d7);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+span.active {
+  position: relative;
+  color: #292b48;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+span.active::after {
+  content: '';
+  width: 200%;
+  height: 2px;
+  background: #292b48;
+  position: absolute;
+  bottom: -20px;
+}
+
+.switch-checkbox {
+  display: none;
+}
+
+.switch {
+  position: relative;
+}
+
+.switch-bg {
+  height: 24px;
+  width: 44px;
+  background: #fb28cd;
+  border-radius: 15px;
+}
+
+.switch-indicator {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background: #fb28cd;
+  border: 5px solid white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: .2s ease-out;
+}
+
+.switch-checkbox:checked~.switch-indicator {
+  transform: translateX(100%);
+}
+
+.switch-checkbox:checked~.switch-bg {
+  background: #e9ecfa;
+}

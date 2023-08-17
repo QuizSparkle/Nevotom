@@ -16,8 +16,9 @@ const HomeProduct = (props: props) => {
   return (
     <div
       onClick={() => navigation('/product-detail')}
-      className="relative flex h-[260px] min-w-[270px] cursor-default flex-col items-center
-     justify-between border-l border-gray-100 p-2 transition-all ease-linear hover:shadow-md"
+      className="relative flex min-w-[270px] cursor-default flex-col 
+      items-center justify-between  
+     bg-black/50 p-4 transition-all ease-linear hover:shadow-md"
     >
       <Link to="/rewards">
         <RiShieldStarFill
@@ -29,16 +30,18 @@ const HomeProduct = (props: props) => {
       </Link>
       <img src={props.img} className="h-[140px] w-[140px]" alt={props.name} />
       <div className="flex flex-col items-start gap-1">
-        <strong className="text-left text-xl text-gray-900">
+        <strong className="text-left text-xl text-gray-200">
           {props.name}
         </strong>
-        <p className="text-left text-sm text-gray-600">
+        <p className="text-left text-sm text-gray-400">
           {props.description.slice(0, 30)}
         </p>
-        <h2 className="flex items-center text-lg text-black">
+        <h2 className="flex items-center font-semibold text-lg text-gray-300">
           <BiDollar />
           {props.price}
         </h2>
+        <button className='bg-highlight 
+        px-5 rounded-md py- text-gray-200 '>BUY</button>
       </div>
     </div>
   )
