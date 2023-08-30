@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const DeliveryRibbon = () => {
   return (
@@ -8,7 +8,7 @@ const DeliveryRibbon = () => {
         <div className="flex flex-col items-start gap-1 font-semibold">
           <h2>Free Delivery</h2>
           <p className="w-[82%] text-left text-sm font-normal text-gray-500">
-            For all oders over $50, consectetur adipim scing elit.{" "}
+            For all oders over $50, consectetur adipim scing elit.{' '}
           </p>
         </div>
         {/* 90 days return */}
@@ -27,7 +27,7 @@ const DeliveryRibbon = () => {
         </div>
       </main>
     </section>
-  );
-};
+  )
+}
 
-export default DeliveryRibbon;
+export default DeliveryRibbon
