@@ -16,6 +16,8 @@ import SellProduct from './components/sellProduct/SellProduct'
 import Cart from './components/cart/Cart'
 import Rewards from './components/rewards/Rewards'
 import { BuyTomForm } from './components/functionalities/BuyTomAndDisplayBalance'
+import SearchBar from './components/layouts/SearchBar'
+import Sidebar from './components/home/Sidebar'
 
 // sampleOrderedProducts
 
@@ -89,55 +91,60 @@ const App: FC = () => {
         console.error(error)
       })
   })
-      // bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-green-300 via-blue-500 to-purple-600"
+  // bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-green-300 via-blue-500 to-purple-600"
   return (
     <DAppProvider config={config}>
-      <div className="relative App h-[100vh]  
+      <div
+        className="App relative flex h-[100vh] overflow-hidden
       bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]
-       from-green-700 via-blue-600 to-purple-900 
-      ">
-      {/* <div className="absolute circle  rounded-full"></div> */}
+       from-green-700 via-blue-600 to-purple-900
+      "
+      >
+        {/* <div className="absolute circle  rounded-full"></div> */}
         <Router>
           <Navbar connected={true} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/checkout"
-              element={
-                <Checkout
-                  productName="product1"
-                  productPrice={40}
-                  subtotal={20}
-                  total={60}
-                />
-              }
-            />
-            <Route
-              path="/product-detail/:item_id"
-              element={<ProductDetails />}
-            />
-            <Route path="/allproducts" element={<AllProducts />} />
-            <Route path="/sell" element={<SellProduct />} />
-            <Route path="/rewards" element={<Rewards />} />
-            <Route path="/buytom" element={<BuyTomForm />} />
-            <Route
-              path="/cart"
-              element={<Cart />}
-            />
-            <Route
-              path="/cartmodal"
-              element={
-                <CartPopup
-                  handleClose={() => false}
-                  // handleClose="sdfsdf"
-                  isShow={true}
-                  // goodsCount={12}
-                />
-              }
-            />
-          </Routes>
-          <Footer />
+          <div className="flex flex-col bg-black/60">
+            <SearchBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/checkout"
+                element={
+                  <Checkout
+                    productName="product1"
+                    productPrice={40}
+                    subtotal={20}
+                    total={60}
+                  />
+                }
+              />
+              <Route
+                path="/product-detail/:item_id"
+                element={<ProductDetails />}
+              />
+              <Route path="/allproducts" element={<AllProducts />} />
+              <Route path="/sell" element={<SellProduct />} />
+              <Route path="/rewards" element={<Rewards />} />
+              <Route path="/buytom" element={<BuyTomForm />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route
+                path="/cartmodal"
+                element={
+                  <CartPopup
+                    handleClose={() => false}
+                    // handleClose="sdfsdf"
+                    isShow={true}
+                    // goodsCount={12}
+                  />
+                }
+              />
+            </Routes>
+            {/* <Footer /> */}
+          </div>
         </Router>
+        <div className="hidden xl:inline-flex">
+          <Sidebar />
+        </div>
       </div>
     </DAppProvider>
   )

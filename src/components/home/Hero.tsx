@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
-    <div className="flex items-center justify-center bg-black/60">
+    <div className="flex flex-col px-8 ">
       <div
-        className="flex h-[450px] w-full max-w-[1600px] flex-col-reverse items-center justify-center 
-      gap-10  sm:h-[480px] 
-    sm:flex-row sm:space-x-36"
+        className="flex w-full max-w-[1600px] items-center
+         justify-center sm:flex-row sm:space-x-36"
       >
-        <div className="flex flex-col items-start space-y-8">
-          <h1 className="text-6xl text-white">NFTizeMarket</h1>
-          <p className="text-left text-2xl text-gray-200">
-            NFT application that brings \ together{' '}
+        <div className="flex-full flex w-full flex-col items-start space-y-4">
+          {/* <h1 className="text-3xl font-semibold text-white">NFTizeMarket</h1> */}
+          <p className="w-full text-left xl:text-[2.6rem] text-[1.8rem] font-semibold text-gray-200">
+            NFT application that brings together{' '}
             <span className="text-highlight">affiliate marketers</span> and
-            businesses to sell products Incorporating NFT rewards and incentives
-            to both buyers and sellers.
+            businesses
+            {/* to sell products Incorporating NFT rewards and incentives
+            to both buyers and sellers. */}
           </p>
           <Link
             to="/allproducts"

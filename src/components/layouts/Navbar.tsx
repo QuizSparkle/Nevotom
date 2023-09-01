@@ -39,10 +39,7 @@ const Navbar = (props: props) => {
 
   const chain_Id = chainId ? chainId : 0
 
-  const tomAddress = getContractAddress(
-    chain_Id.toString(),
-    'tom_address'
-  )
+  const tomAddress = getContractAddress(chain_Id.toString(), 'tom_address')
   const tokenBalance = useTokenBalance(tomAddress, account)
   const formattedTokenBalance: number = tokenBalance
     ? parseFloat(formatUnits(tokenBalance, 18))
@@ -50,43 +47,47 @@ const Navbar = (props: props) => {
 
   return (
     <nav
-      className="bg-black/60 px-4 pt-3 md:pb-4
-    text-white lg:px-7 border-b border-white/30"
+      className="h-full border-b border-white/30 bg-black/60 pl-1
+      pr-4 pt-3 text-white md:pb-4 lg:px-7 max-w-[300px]"
     >
-      <div className="flex items-center justify-between">
+      <div className="h-full flex flex-col items-start justify-start">
         {/* left */}
-        <div className="flex items-center space-x-4 xl:space-x-30">
-          {/* logo */}
-          <div className="flex items-center space-x-1">
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            {/* logo */}
+          <div
+            className="flex flex-col items-center
+           justify-center space-x-1 xl:flex-row pb-3"
+          >
             <img
               src={logo}
               alt="NFtizeMarket"
               className="w-[90px] lg:h-[100px] lg:w-[100px]"
             />
-            <h4 className="hidden text-3xl font-semibold text-gray-100 xl:inline-flex">
-               NEVOTOM
+            <h4 className="text-[1.4rem] font-semibold text-gray-100 xl:text-2xl">
+              NEVOTOM
             </h4>
           </div>
 
           {/* navlinks */}
           <div
-            className="flex items-center space-x-6 text-[1.1rem] text-gray-200
-          lg:ml-4 lg:text-xl"
+            className="w-[90%] pl-5 pt-6 border-t border-white/10 mb-5 flex flex-col justify-start items-start space-y-1 text-[1.4rem]
+            text-gray-200 lg:text-xl"
           >
-            <Link to="/" className="cursor-pointer hover:text-gray-200">
+            <Link to="/" className="w-full text-highlight text-left cursor-pointer  hover:text-highlight">
               Home
             </Link>
             {!isConnected ? (
               <>
                 <Link
                   to="/about"
-                  className="cursor-pointer hover:text-gray-200"
+                  className="cursor-pointer hover:text-highlight"
                 >
                   About
                 </Link>
                 <Link
                   to="/contact"
-                  className="cursor-pointer hover:text-gray-200"
+                  className="cursor-pointer hover:text-highlight"
                 >
                   Contact
                 </Link>
@@ -95,32 +96,49 @@ const Navbar = (props: props) => {
               <>
                 <Link
                   to="/allproducts"
-                  className="cursor-pointer hover:text-gray-200"
+                  className="cursor-pointer hover:text-highlight"
                 >
                   Buy
                 </Link>
-                <Link to="/sell" className="cursor-pointer hover:text-gray-200">
+                <Link
+                  to="/sell"
+                  className="cursor-pointer hover:text-highlight"
+                >
                   Sell
                 </Link>
                 <Link
                   to="/rewards"
-                  className="cursor-pointer hover:text-gray-200"
+                  className="cursor-pointer hover:text-highlight"
                 >
                   Rewards
                 </Link>
               </>
             )}
           </div>
-          {/* center */}
-          <div>
+          {/* cart and account */}
+          <div className="w-[90%] pl-5 py-5 border-t border-white/10 flex flex-col space-y-3">
+            <Link to="/cart" className="text-gray-20 hover:text-highlight flex items-center text-xl">
+              <HiShoppingCart className="text-xl " />
+              <span>Cart</span>{' '}
+            </Link>
+            <Link to="/account" className="text-gray-200 hover:text-highlight flex items-center text-xl">
+              <RiAccountCircleFill className="text-xl" />
+              <span>Account</span>{' '}
+            </Link>
+          </div>
+
+          {/* rewards and tokens */}
+          <div className='w-[90%] pl-5 flex flex-col items-start pt-5 border-t
+           border-white/30 text-gray-200'>
+            <h4 className='text-xl'>Tom</h4>
             {isConnected && (
               <Link
                 to="/rewards"
-                className="relative cursor-pointer hover:text-gray-200"
+                className="relative cursor-pointer hover:text-highlight"
                 onMouseEnter={() => setShowDropdown(true)}
               >
                 <div
-                  className="flex items-center  space-x-1
+                  className="flex space-x-1
             rounded-md py-1 pr-1 font-semibold text-orange-400 
             hover:bg-gray-900 xl:text-lg"
                   onMouseLeave={() => setShowDropdown(false)}
@@ -143,15 +161,15 @@ const Navbar = (props: props) => {
                   >
                     <Link
                       to="/buytom"
-                      className="block border-b px-6 py-1 hover:bg-gray-200
-                         hover:text-primary"
+                      className="hover:text-primary block border-b px-6 py-1
+                         hover:bg-gray-200"
                     >
                       BuyTom
                     </Link>
                     <Link
                       to="/amountspent"
-                      className="block w-max px-6 py-1 hover:bg-gray-200 
-                        hover:text-primary"
+                      className="hover:text-primary block w-max px-6 py-1 
+                        hover:bg-gray-200"
                     >
                       Amt Spent
                     </Link>
@@ -160,31 +178,12 @@ const Navbar = (props: props) => {
               </Link>
             )}
           </div>
-        </div>
-        {/* right */}
-        <div className="flex-1 flex">
-          {/* search bar */}
-          <div className="mx-6 hidden border rounded-md 
-          border-gray-800 flex-1 md:inline-block">
-            <input
-              type="search"
-              placeholder="searchNFT"
-              className="w-full rounded-sm bg-black/20 p-2 px-4
-               text-white outline-none placeholder:text-gray-300"
-            />
           </div>
-          {/* right-right */}
-          <div className="flex space-x-3">
-            {/* <div onClick={openRegModal}> */}
+          {/* bottom */}
+          <div className="flex">
             <RegisterAndConnect />
-            {/* </div> */}
-            <Link to="/cart">
-              <HiShoppingCart className="text-3xl text-white hover:text-gray-200" />
-            </Link>
-            <Link to="/account">
-              <RiAccountCircleFill className="text-3xl text-white hover:text-gray-200" />
-            </Link>
           </div>
+          {/* bottom */}
         </div>
         {/* <button
           className="block p-2 transition-all ease-linear md:hidden"
