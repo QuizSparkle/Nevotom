@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import OrderedBlock from './OrderedBlock';
-import DeliveryRibbon from '../layouts/DeliveryRibbon';
+import DeliveryRibbon from '../Old-folders/layouts/DeliveryRibbon';
 import { useNavigate } from 'react-router-dom';
 import { useOrderItem } from '../Hooks/useOrderItem';
 import { useLocation } from 'react-router-dom';

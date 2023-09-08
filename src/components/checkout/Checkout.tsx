@@ -1,7 +1,7 @@
 import React from 'react'
 import InputField from '../helpers/InputField'
-import DeliveryRibbon from '../layouts/DeliveryRibbon'
-import Footer from '../layouts/Footer'
+import DeliveryRibbon from '../Old-folders/layouts/DeliveryRibbon'
+import Footer from '../Old-folders/layouts/Footer'
 
 type props = {
   productName: string

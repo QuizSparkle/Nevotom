@@ -1,25 +1,32 @@
-import React, { useEffect, FC } from 'react'
-import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from './components/home/Home'
-import Navbar from './components/layouts/Navbar'
-import tire from './assets/products/tire1.png'
-import { DAppProvider } from '@usedapp/core'
-import { config } from './SupportedChains'
-
-import Checkout from './components/checkout/Checkout'
-import ProductDetails from './components/productDetails/ProductDetails'
-import CartPopup from './components/productDetails/CartPopup'
-import Footer from './components/layouts/Footer'
-import AllProducts from './components/allProducts/AllProducts'
-import SellProduct from './components/sellProduct/SellProduct'
-import Cart from './components/cart/Cart'
-import Rewards from './components/rewards/Rewards'
-import { BuyTomForm } from './components/functionalities/BuyTomAndDisplayBalance'
-import SearchBar from './components/layouts/SearchBar'
-import Sidebar from './components/home/Sidebar'
-
+import React, { useEffect, FC } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import tire from './assets/products/tire1.png';
+import { DAppProvider } from '@usedapp/core';
+import { config } from './SupportedChains';
+import Checkout from './components/checkout/Checkout';
+import ProductDetails from './components/productDetails/ProductDetails';
+import CartPopup from './components/productDetails/CartPopup';
+import Footer from './layouts/Footer';
+import AllProducts from './components/allProducts/AllProducts';
+import SellProduct from './components/sellProduct/SellProduct';
+import Cart from './components/cart/Cart';
+import Rewards from './components/rewards/Rewards';
+import { BuyTomForm } from './components/functionalities/BuyTomAndDisplayBalance';
+import Postlist from './components/post/Postlist';
+import Headnav from './layouts/Headnav';
+import Sidenav from './layouts/Sidenav';
+import Products from './components/allProducts/Products';
 // sampleOrderedProducts
+
+// Css files
+import './assets/vendor/simple-datatables/style.css';
+import './assets/vendor/remixicon/remixicon.css';
+import './assets/vendor/quill/quill.bubble.css';
+import './assets/vendor/quill/quill.snow.css';
+import './assets/vendor/boxicons/css/boxicons.min.css';
+import './assets/vendor/bootstrap-icons/bootstrap-icons.css';
+import './assets/vendor/bootstrap/css/bootstrap.min.css';
+import './assets/css/style.css';
 
 const orderProducts = [
   {
@@ -84,29 +91,23 @@ const App: FC = () => {
       .then((response) => response.json())
       .then((data) => {
         // Handle the received data
-        console.log('data : ', data)
+        console.log('data: ', data)
       })
       .catch((error) => {
         // Handle errors
         console.error(error)
       })
-  })
-  // bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-green-300 via-blue-500 to-purple-600"
+  }, [])
   return (
-    <DAppProvider config={config}>
-      <div
-        className="App relative flex h-[100vh] overflow-hidden
-      bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]
-       from-green-700 via-blue-600 to-purple-900
-      "
-      >
-        {/* <div className="absolute circle  rounded-full"></div> */}
-        <Router>
-          <Navbar connected={true} />
-          <div className="flex flex-col bg-black/60">
-            <SearchBar />
+    <Router>
+      <Headnav />
+      <Sidenav />
+      <main id="main" className="main">
+        <section className="section dashboard">
+          <div className="row">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Products />} />
+              <Route path="/postlist" element={<Postlist />} />
               <Route
                 path="/checkout"
                 element={
@@ -139,14 +140,11 @@ const App: FC = () => {
                 }
               />
             </Routes>
-            {/* <Footer /> */}
           </div>
-        </Router>
-        <div className="hidden xl:inline-flex">
-          <Sidebar />
-        </div>
-      </div>
-    </DAppProvider>
+        </section>
+      </main>
+      <Footer />
+    </Router>
   )
 }
 

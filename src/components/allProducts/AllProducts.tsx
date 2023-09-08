@@ -4,8 +4,8 @@ import { HiViewGrid } from "react-icons/hi";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { MdViewDay } from "react-icons/md";
 import { formatUnits } from "@ethersproject/units"
-import HomeProduct from "../home/HomeProduct";
-import DeliveryRibbon from "../layouts/DeliveryRibbon";
+import HomeProduct from "../Old-folders/home/HomeProduct";
+import DeliveryRibbon from "../Old-folders/layouts/DeliveryRibbon";
 import { Link } from 'react-router-dom'; 
 
 interface Product {
