@@ -3,7 +3,7 @@ import nft from '../../assets/Tom-cardspng.png'
 import coin from '../../assets/Coin-No-BG.png'
 import ftm from '../../assets/ftm.png'
 import { SiTether } from 'react-icons/si'
-import DeliveryRibbon from '../layouts/DeliveryRibbon'
+import DeliveryRibbon from '../Old-folders/layouts/DeliveryRibbon'
 import { ClaimRewards } from '../functionalities/ClaimRewards'
 
 const Rewards = () => {
