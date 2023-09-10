@@ -8,7 +8,7 @@ const Sidenav: React.FC = () => {
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-heading">Marketplace</li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="products.html">
+          <a className="nav-link collapsed" href="/">
             <FontAwesomeIcon icon={faTh} />
             <span>Products</span>
           </a>
@@ -20,19 +20,19 @@ const Sidenav: React.FC = () => {
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="cart.html">
+          <a className="nav-link collapsed" href="/cart">
             <FontAwesomeIcon icon={faShoppingCart} />
             <span>Cart</span>
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="cart.html">
+          <a className="nav-link collapsed" href="/Checkhistory">
             <FontAwesomeIcon icon={faCreditCard} />
             <span>Checkout</span>
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="index.html">
+          <a className="nav-link collapsed" href="/sell">
             <FontAwesomeIcon icon={faStore} />
             <span>Sell</span>
           </a>
@@ -47,7 +47,7 @@ const Sidenav: React.FC = () => {
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="wallet.html">
+          <a className="nav-link collapsed" href="/rewards">
             <FontAwesomeIcon icon={faGift} />
             <span>Rewards</span>
           </a>

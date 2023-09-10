@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Topselling from '../allProducts/Topselling'
 import Sidebar from '../../layouts/Sidebar'
 
-const Notification: React.FC = () => {
+const Reward: React.FC = () => {
   return (
     <>
       
@@ -13,9 +13,9 @@ const Notification: React.FC = () => {
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="index.html">Notications</a>
+                <a href="index.html">Rewards</a>
               </li>
-              <li className="breadcrumb-item active">page</li>
+              <li className="breadcrumb-item active">gift</li>
             </ol>
           </nav>
         </div>
@@ -29,11 +29,11 @@ const Notification: React.FC = () => {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">
-                    Notifications <span>/Today</span>
+                    Rewards <span>/Today</span>
                   </h5>
 
                   {/* Line Chart */}
-                  <div id="reportsChart">Notification card</div>
+                  <div id="reportsChart">Rewards list card</div>
 
                   {/* End Line Chart */}
                 </div>
@@ -51,4 +51,4 @@ const Notification: React.FC = () => {
   )
 }
 
-export default Notification
+export default Reward

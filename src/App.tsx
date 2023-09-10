@@ -3,14 +3,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import tire from './assets/products/tire1.png';
 import { DAppProvider } from '@usedapp/core';
 import { config } from './SupportedChains';
-import Checkout from './components/checkout/Checkout';
-import ProductDetails from './components/productDetails/ProductDetails';
+import ProductDetails from './components/productDetails/Old-ProductDetails';
 import CartPopup from './components/productDetails/CartPopup';
 import Footer from './layouts/Footer';
 import AllProducts from './components/allProducts/AllProducts';
-import SellProduct from './components/sellProduct/SellProduct';
+import Sell from './components/sellProduct/sell';
 import Cart from './components/cart/Cart';
-import Rewards from './components/rewards/Rewards';
+import Notification from './components/notification/Notification';
+import Checkout from './components/checkout/Checkout';
+import Checkhistory from './components/checkout/Checkhistory';
+import Rewards from './components/rewards/Old-Rewards';
+import Postdetails from './components/post/Postdetails';
+import Reward from './components/rewards/Reward'
 import { BuyTomForm } from './components/functionalities/BuyTomAndDisplayBalance';
 import Postlist from './components/post/Postlist';
 import Headnav from './layouts/Headnav';
@@ -108,14 +112,18 @@ const App: FC = () => {
             <Routes>
               <Route path="/" element={<Products />} />
               <Route path="/postlist" element={<Postlist />} />
+              <Route path="/Checkhistory" element={<Checkhistory />} />
+              <Route path="/Notification" element={<Notification />} />
+              <Route path="/Postdetails" element={<Postdetails />} />
+              <Route path="/Reward" element={<Reward />} />
               <Route
                 path="/checkout"
                 element={
                   <Checkout
-                    productName="product1"
-                    productPrice={40}
-                    subtotal={20}
-                    total={60}
+                    // productName="product1"
+                    // productPrice={40}
+                    // subtotal={20}
+                    // total={60}
                   />
                 }
               />
@@ -124,7 +132,7 @@ const App: FC = () => {
                 element={<ProductDetails />}
               />
               <Route path="/allproducts" element={<AllProducts />} />
-              <Route path="/sell" element={<SellProduct />} />
+              <Route path="/sell" element={<Sell />} />
               <Route path="/rewards" element={<Rewards />} />
               <Route path="/buytom" element={<BuyTomForm />} />
               <Route path="/cart" element={<Cart />} />

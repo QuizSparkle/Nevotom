@@ -4,7 +4,7 @@ import miniThumbImg from '../../assets/logos/mini-thumb.png';
 import linkedInIcon from '../../assets/logos/linked-in.svg';
 import twitterIcon from '../../assets/logos/twitter.svg';
 import faceBookIcon from '../../assets/logos/face-book.svg';
-import ShoppingCartModal from './ProductDetails';
+import ShoppingCartModal from './Old-ProductDetails';
 import './DetailInfo.css';
 import { Link, useParams } from 'react-router-dom';
 
