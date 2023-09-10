@@ -20,6 +20,7 @@ import Postlist from './components/post/Postlist';
 import Headnav from './layouts/Headnav';
 import Sidenav from './layouts/Sidenav';
 import Products from './components/allProducts/Products';
+import Notfound_page from './components/Notfound_page'
 // sampleOrderedProducts
 
 // Css files
@@ -147,6 +148,7 @@ const App: FC = () => {
                   />
                 }
               />
+              <Route Component={Notfound_page} />
             </Routes>
           </div>
         </section>
