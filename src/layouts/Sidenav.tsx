@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTh, faFile, faShoppingCart, faCreditCard, faStore, faHeart, faGift, faWallet, faUser, faEnvelope, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,82 +9,82 @@ const Sidenav: React.FC = () => {
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-heading">Marketplace</li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/">
+          <Link className="nav-link collapsed" to="/">
             <FontAwesomeIcon icon={faTh} />
             <span>Products</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/postlist">
+          <Link className="nav-link collapsed" to="/postlist">
             <FontAwesomeIcon icon={faFile} />
             <span>Posts</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/cart">
+          <Link className="nav-link collapsed" to="/cart">
             <FontAwesomeIcon icon={faShoppingCart} />
             <span>Cart</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/checkhistory">
+          <Link className="nav-link collapsed" to="/checkhistory">
             <FontAwesomeIcon icon={faCreditCard} />
             <span>Checkout</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/sell">
+          <Link className="nav-link collapsed" to="/sell">
             <FontAwesomeIcon icon={faStore} />
             <span>Sell</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/sell">
+          <Link className="nav-link collapsed" to="/marketers">
             <FontAwesomeIcon icon={faUser} />
             <span>Marketers</span>
-          </a>
+          </Link>
         </li>
 
         <li className="nav-heading">Pages</li>
 
         <li className="nav-item">
-          <a className="nav-link collapsed" href="wallet.html">
+          <Link className="nav-link collapsed" to="/favourites">
             <FontAwesomeIcon icon={faHeart} />
             <span>Favourite</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/rewards">
+          <Link className="nav-link collapsed" to="/reward">
             <FontAwesomeIcon icon={faGift} />
             <span>Rewards</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="wallet.html">
+          <Link className="nav-link collapsed" to="/wallet">
             <FontAwesomeIcon icon={faWallet} />
             <span>Wallet</span>
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="users-profile.html">
+          <Link className="nav-link collapsed" to="/profile">
             <FontAwesomeIcon icon={faUser} />
             <span>Profile</span>
-          </a>
+          </Link>
         </li>
         {/* End Profile Page Nav */}
 
         <li className="nav-item">
-          <a className="nav-link collapsed" href="pages-contact.html">
+          <Link className="nav-link collapsed" to="/">
             <FontAwesomeIcon icon={faEnvelope} />
             <span>Contact</span>
-          </a>
+          </Link>
         </li>
         {/* End Contact Page Nav */}
         <li className="nav-item">
-          <a className="nav-link collapsed" href="pages-faq.html">
+          <Link className="nav-link collapsed" to="/">
             <FontAwesomeIcon icon={faQuestionCircle} />
             <span>F.A.Q</span>
-          </a>
+          </Link>
         </li>
         {/* End F.A.Q Page Nav */}
       </ul>

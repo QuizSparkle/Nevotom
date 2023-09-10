@@ -11,7 +11,7 @@ const Wallet = () => {
         <nav>
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="index.html">Wallets</a>
+              <a href="/wallet">Wallets</a>
             </li>
             <li className="breadcrumb-item active">mywallet</li>
           </ol>

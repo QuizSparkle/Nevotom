@@ -12,13 +12,16 @@ import Cart from './components/cart/Cart';
 import Notification from './components/notification/Notification';
 import Checkout from './components/checkout/Checkout';
 import Checkhistory from './components/checkout/Checkhistory';
-import Rewards from './components/rewards/Old-Rewards';
 import Postdetails from './components/post/Postdetails';
-import Reward from './components/rewards/Reward'
 import { BuyTomForm } from './components/functionalities/BuyTomAndDisplayBalance';
 import Postlist from './components/post/Postlist';
 import Headnav from './layouts/Headnav';
 import Sidenav from './layouts/Sidenav';
+import Marketers from './components/Marketers';
+import Profile from './components/profile/Profile';
+import Wallet from './components/wallet/Wallet'
+import Reward from './components/rewards/Reward';
+import Favourites from './components/allProducts/Favourites';
 import Products from './components/allProducts/Products';
 import Notfound_page from './components/Notfound_page'
 // sampleOrderedProducts
@@ -117,6 +120,7 @@ const App: FC = () => {
               <Route path="/notification" element={<Notification />} />
               <Route path="/postdetails" element={<Postdetails />} />
               <Route path="/reward" element={<Reward />} />
+              <Route path="/wallet" element={<Wallet />} />
               <Route
                 path="/checkout"
                 element={
@@ -134,9 +138,11 @@ const App: FC = () => {
               />
               <Route path="/allproducts" element={<AllProducts />} />
               <Route path="/sell" element={<Sell />} />
-              <Route path="/rewards" element={<Rewards />} />
               <Route path="/buytom" element={<BuyTomForm />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/marketers" element={<Marketers />} />
+              <Route path="/favourites" element={<Favourites />} />
+              <Route path="/profile" element={<Profile />} />
               <Route
                 path="/cartmodal"
                 element={
