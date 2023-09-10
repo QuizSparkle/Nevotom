@@ -26,7 +26,7 @@ const Sidenav: React.FC = () => {
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/Checkhistory">
+          <a className="nav-link collapsed" href="/checkhistory">
             <FontAwesomeIcon icon={faCreditCard} />
             <span>Checkout</span>
           </a>
@@ -35,6 +35,12 @@ const Sidenav: React.FC = () => {
           <a className="nav-link collapsed" href="/sell">
             <FontAwesomeIcon icon={faStore} />
             <span>Sell</span>
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link collapsed" href="/sell">
+            <FontAwesomeIcon icon={faUser} />
+            <span>Marketers</span>
           </a>
         </li>
 

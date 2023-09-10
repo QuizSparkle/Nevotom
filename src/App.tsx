@@ -113,10 +113,10 @@ const App: FC = () => {
             <Routes>
               <Route path="/" element={<Products />} />
               <Route path="/postlist" element={<Postlist />} />
-              <Route path="/Checkhistory" element={<Checkhistory />} />
-              <Route path="/Notification" element={<Notification />} />
-              <Route path="/Postdetails" element={<Postdetails />} />
-              <Route path="/Reward" element={<Reward />} />
+              <Route path="/checkhistory" element={<Checkhistory />} />
+              <Route path="/notification" element={<Notification />} />
+              <Route path="/postdetails" element={<Postdetails />} />
+              <Route path="/reward" element={<Reward />} />
               <Route
                 path="/checkout"
                 element={
