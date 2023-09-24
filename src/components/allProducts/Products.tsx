@@ -1,4 +1,5 @@
 import React from 'react';
+import AllProducts from './AllProducts';
 
 const Products = () => {
   return (
@@ -34,6 +35,7 @@ const Products = () => {
               <div className="card-body">
                 <h5 className="card-title">Listed <span>| Today</span></h5>
                 <h3>Products</h3>
+                <AllProducts />
               </div>
             </div>
           </div>
