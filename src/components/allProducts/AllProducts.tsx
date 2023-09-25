@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { HiViewGrid } from "react-icons/hi";
-import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
-import { MdViewDay } from "react-icons/md";
-import { formatUnits } from "@ethersproject/units"
-import HomeProduct from "../Old-folders/home/HomeProduct";
-import DeliveryRibbon from "../Old-folders/layouts/DeliveryRibbon";
-import { Link } from 'react-router-dom'; 
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { HiViewGrid } from 'react-icons/hi'
+import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2'
+import { MdViewDay } from 'react-icons/md'
+import { formatUnits } from '@ethersproject/units'
+import HomeProduct from '../Old-folders/home/HomeProduct'
+import DeliveryRibbon from '../Old-folders/layouts/DeliveryRibbon'
+import { Link } from 'react-router-dom'
+import CategoryProducts from './CategoryProducts'
 
 interface Product {
-  id_item: number,
-  imageLink: string;
-  name: string;
-  description: string;
-  price: number;
-  reward: boolean;
+  id_item: number
+  imageLink: string
+  name: string
+  description: string
+  price: number
+  reward: boolean
 }
 
 const AllProducts = () => {
@@ -36,69 +37,55 @@ const AllProducts = () => {
   }, [])
 
   return (
-    <div className="py-6">
-      <h1 className="my-14 text-center text-4xl font-bold">Shop</h1>
+    <div className="py-2">
+      {/* <h1 className="my-14 text-center text-4xl font-bold">Shop</h1> */}
       <div className="flex flex-col gap-10">
         {/* inner nav */}
-        <div className="bg-[#D4D4D4] p-4 px-6">
-          <div className="flex items-center justify-between">
+        <div className="rounded-md bg-white/40 p-2 px-6">
+          <div className="flex items-center justify-between text-[1rem]">
             {/* left */}
             <div className="flex items-center space-x-3">
               <div
                 className="flex items-center space-x-2 border-r-2
                border-gray-400 pr-2"
               >
-                <p className="flex items-center space-x-2 ">
+                <div className="flex items-center space-x-2 ">
                   <HiOutlineAdjustmentsHorizontal />
-                  <span> Filter</span>
-                </p>
+                  <span className="font-semibold">Filter</span>
+                </div>
                 <HiViewGrid />
                 <MdViewDay />
               </div>
-              <p>Showing 1-20 of 40 results</p>
+              <div>Showing 1-20 of 40 results</div>
             </div>
             {/* right */}
-            <div className="flex space-x-3">
+            <div className="flex items-center space-x-3 text-[1.2rem] font-medium">
               {/* show */}
-              <div className="flex items-center space-x-2">
-                <h4>Show</h4>
+              <div className="flex  items-center space-x-2">
+                <span>Show</span>
                 <input
                   type="text"
                   placeholder="16"
-                  className="w-[40px] p-2 text-gray-400"
+                  className="w-[40px] rounded-md bg-black/10 p-1 placeholder:text-gray-600"
                 />
               </div>
               {/* sort */}
-              <div className="flex items-center space-x-2">
-                <h4>Sort By</h4>
+              <div className="flex items-center space-x-2 text-[1.2rem]">
+                <span>Sort By</span>
                 <input
                   type="text"
-                  placeholder="Default"
-                  className="p-2 text-gray-400"
+                  placeholder="default"
+                  className="rounded-md bg-black/10 p-2 placeholder:text-gray-600"
                 />
               </div>
             </div>
           </div>
         </div>
         {/* products display */}
-        <main className="mx-auto grid w-[1300px] grid-cols-4 gap-4">
-          {products.map((product, index) => (
-            <Link
-            to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
-            key={index}
-          >
-            <HomeProduct
-              key={index}
-              img={`http://127.0.0.1:8000/${product.imageLink}`}
-              description={product.description}
-              price={parseFloat((product.price / 10 ** 18).toFixed(2))}
-              name={product.name}
-              reward={product.reward}
-            />
-            </Link>
-          ))}
-        </main>
-        <DeliveryRibbon />
+        {/* {products.map((product, index) => ( */}
+          <CategoryProducts />
+        {/* ))} */}
+        {/* <DeliveryRibbon /> */}
       </div>
     </div>
   )
