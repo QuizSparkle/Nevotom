@@ -16,8 +16,8 @@ const HomeProduct = (props: props) => {
   return (
     <div
       onClick={() => navigation('/product-detail')}
-      className="relative flex h-[250px] w-[200px] cursor-default flex-col 
-      items-center justify-between rounded-md bg-white/70 max-w-[210px]
+      className="relative flex h-[250px] w-[200px] max-w-[210px] cursor-default flex-col 
+      items-center justify-between overflow-hidden rounded-md bg-white/70
       p-2 transition-all ease-linear hover:shadow-md xl:w-[280px]"
     >
       <Link to="/rewards">
@@ -35,25 +35,36 @@ const HomeProduct = (props: props) => {
           alt={props.name}
         />
       </div>
-      <div className="flex flex-col items-start gap-1">
+      <div className="flex h-max w-full flex-col items-start gap-1 px-1">
         <div className="flex w-full items-center justify-between">
           <strong className="text-left text-[1rem] text-gray-800">
-            {props.name}
+            {props.name.slice(0, 15)}
           </strong>
           <h2 className="flex items-center text-lg font-semibold text-gray-900">
             <BiDollar />
             {props.price}
           </h2>
         </div>
-        <p className="w-full text-left text-sm text-gray-600">
-          {props.description.slice(0, 30)}
-        </p>
-        {/* <button
+        <div className="h-max w-full overflow-hidden">
+          <p className="w-full text-center text-sm text-gray-600">
+            {props.description.slice(0, 30)}
+          </p>
+        </div>
+      </div>
+      {/* Buttons */}
+      <div className="flex w-full items-start justify-between">
+        <button
           className="py- 
-        rounded-md bg-highlight px-5 text-gray-200 "
+        rounded-md bg-green-600 hover:text-gray-700 px-2 text-[0.9rem] font-semibold text-gray-200 "
         >
-          BUY
-        </button> */}
+          Buy
+        </button>
+        <button
+          className="py- 
+        rounded-md bg-red-600 px-2 hover:text-gray-700 text-[0.9rem] font-semibold text-gray-200 "
+        >
+          Post
+        </button>
       </div>
     </div>
   )

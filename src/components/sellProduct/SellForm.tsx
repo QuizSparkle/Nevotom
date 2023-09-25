@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button, CircularProgress, Snackbar } from "@material-ui/core";
-import coinbg from "../../assets/Coin-bg.png";
+import sellImage from './3dimage.jpg'
 import { useListItem } from "../Hooks/useListItem"; 
 import { useNotifications } from "@usedapp/core";
 import Alert from "@material-ui/lab/Alert";
@@ -8,7 +8,7 @@ import { formatUnits } from "@ethersproject/units";
 import { ethers, utils } from "ethers";
 import axios from "axios";
 
-const SellProduct = () => {
+const SellForm = () => {
   // useState for form input fields
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -120,29 +120,29 @@ const SellProduct = () => {
 
   return (
     <div>
-      <h1 className="my-10 text-center text-4xl">SELL</h1>
-      <div className="mx-auto flex justify-between py-6 md:w-[700px]">
+      {/* <h1 className="my-10 text-center text-4xl">SELL</h1> */}
+      <div className="flex text-gray-100 justify-between py-6 px-2 w-full">
         {/* left */}
-        <div className="flex flex-col gap-4">
-          <label htmlFor="name" style={{ fontWeight: 'bold', color: 'black' }}>Item Name</label>
+        <div className="flex flex-col text-gray-100 gap-4 flex-1">
+          <label htmlFor="name" className='font-bold text-gray-100'>Item Name</label>
           <Input
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <label htmlFor="description" style={{ fontWeight: 'bold', color: 'black' }}>Description</label>
+          <label htmlFor="description" className='font-bold text-gray-100'>Description</label>
           <Input
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <label htmlFor="price" style={{ fontWeight: 'bold', color: 'black' }}>Price</label>
+          <label htmlFor="price" className='font-bold text-gray-100'>Price</label>
           <Input
             id="price"
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
           />
-          <label htmlFor="quantity" style={{ fontWeight: 'bold', color: 'black' }}>Quantity</label>
+          <label htmlFor="quantity" className='font-bold text-gray-100'>Quantity</label>
           <Input
             id="quantity"
             value={quantity}
@@ -154,7 +154,7 @@ const SellProduct = () => {
             <input
               type="file"
               alt="selectImage"
-              className="rounded-md bg-gray-300 p-3 px-4"
+              className="rounded-md bg-black/30 text-gray-300 p-3 px-4"
               onChange={handleImageChange}
             />
           </div>
@@ -163,7 +163,8 @@ const SellProduct = () => {
               handleSubmit();
               setApiCallTriggered(true);
             }}
-            className="w-[250px] rounded-md border border-black bg-white p-2 transition-colors hover:bg-primary hover:text-white"
+            className="w-[250px] rounded-md 
+             bg-purple-800 p-2 transition-colors hover:bg-primary hover:text-white"
             color="primary"
             variant="contained"
             disabled={isMining}
@@ -172,13 +173,13 @@ const SellProduct = () => {
           </Button>
         </div>
         {/* right */}
-        <div>
+        {/* <div className='flex justify-end w-full'>
           <img
-            src={coinbg}
-            className="w-[300px] rounded-full"
+            src={sellImage}
+            className="w-[90%] rounded-md md:inline-flex hidden"
             alt="logo"
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Snackbar for success notification */}
@@ -206,4 +207,4 @@ const SellProduct = () => {
   );
 };
 
-export default SellProduct;
+export default SellForm;
