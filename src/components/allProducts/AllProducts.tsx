@@ -17,6 +17,10 @@ interface Product {
   reward: boolean
 }
 
+// axios.defaults.baseURL = 'https://18.236.73.110:8000'; // Set your API base URL
+// axios.defaults.withCredentials = true; // Enable sending cookies with requests
+
+
 const AllProducts = () => {
   const [products, setProducts] = useState<Product[]>([])
 
@@ -24,7 +28,7 @@ const AllProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get<Product[]>(
-          'http://127.0.0.1:8000/api/items/'
+          'https://18.236.73.110:8000/api/items/'
         )
         setProducts(response.data)
       } catch (error) {

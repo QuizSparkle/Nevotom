@@ -1,36 +1,55 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.17;
+pragma solidity ^0.8.17;
 
-import 'forge-std/Script.sol';
-import 'forge-std/Test.sol';
-import '../src/Marketplace.sol';
+import "forge-std/Script.sol";
+import "forge-std/Test.sol";
+import "../src/core/Marketplace.sol";
 
 contract DeployMarketplace is Script {
-  uint256 deployerPrivateKey = vm.envUint('DEPLOYER_PRIVATE_KEY');
-  address deployerAddress = vm.envAddress('DEPLOYER_ADDRESS');
+    uint256 deployerPrivateKey = vm.envUint("DEPLOYER_PRIVATE_KEY_TRON");
+    address deployerAddress = vm.envAddress("DEPLOYER_ADDRESS_TRON");
 
-  address LINK = 0xfaFedb041c0DD4fA2Dc0d87a6B0979Ee6FA7af5F; //For testnet
-  address USDT = 0x049d68029688eAbF473097a2fC38ef61633A3C7A; // For mainnet
+    // address LINK = 0xfaFedb041c0DD4fA2Dc0d87a6B0979Ee6FA7af5F; //For matic  testnet
+    // address USDT = 0x049d68029688eAbF473097a2fC38ef61633A3C7A; // For matic mainnet
 
-  Marketplace private marketplace;
-  TOM private tom;
-  Escrow private escrow;
+    address USDT = 0xECa9bC828A3005B9a3b909f2cc5c2a54794DE05F; // for tron testnet
 
-  function run() public {
-    IERC20 usdt = IERC20(USDT);
+    Marketplace private marketplace;
+    Tom private tom;
+    Escrow private escrow;
+    address arbiter;
+    uint256 arbiterFee = 5 * 10 ** 18;
 
-    vm.startBroadcast(deployerPrivateKey);
+    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
+    bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
+    uint256 public constant maxValue = type(uint256).max;
 
-    marketplace = new Marketplace(address(usdt), 18);
-    tom = new TOM(address(marketplace));
-    escrow = new Escrow(address(marketplace));
+    function run() public {
+        IERC20 usdt = IERC20(USDT);
 
-    marketplace.activate(address(tom), address(escrow));
+        vm.startBroadcast(deployerPrivateKey);
 
-    // link.approve(address(marketplace), 100 * 10 ** 18);
-    // link.approve(address(escrow), 100 * 10 ** 18);
-    // tom.approve(address(marketplace), 100 * 10 ** 18);
+        arbiter = deployerAddress;
 
-    vm.stopBroadcast();
-  }
+        marketplace = new Marketplace(address(usdt), 18, arbiter, arbiterFee);
+        tom = new Tom();
+        tom.grantRole(PAUSER_ROLE, address(marketplace));
+        tom.grantRole(MINTER_ROLE, address(marketplace));
+        tom.grantRole(BURNER_ROLE, address(marketplace));
+        tom.grantRole(DEFAULT_ADMIN_ROLE, deployerAddress);
+
+        escrow = new Escrow(address(marketplace));
+
+        marketplace.activate(address(tom), address(escrow));
+
+        marketplace.transferOwnership(deployerAddress);
+
+        usdt.approve(address(marketplace), 100 * 10 ** 6);
+        usdt.approve(address(escrow), 100 * 10 ** 6);
+        tom.approve(address(marketplace), 100 * 10 ** 18);
+
+        vm.stopBroadcast();
+    }
 }

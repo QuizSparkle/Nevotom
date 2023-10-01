@@ -1,0 +1,20 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "src/oracle/TomUsdOracle.sol",
+    "id": 32247,
+    "exportedSymbols": {},
+    "nodeType": "SourceUnit",
+    "src": "0:0:45",
+    "nodes": []
+  },
+  "id": 45
+}

@@ -26,12 +26,13 @@ SECRET_KEY = "django-insecure-pb3sgtvjqqqi=#v9$&1^@@(6a(n(vim0o-^w2++!a(ucg6i4)+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "sslserver",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,13 +45,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
 
@@ -76,11 +77,15 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://12xhkolho3.execute-api.us-west-2.amazonaws.com",
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "https://12xhkolho3.execute-api.us-west-2.amazonaws.com",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Database
@@ -136,8 +141,18 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 
-# MEDIA_URL = "/item_images/"
-# MEDIA_ROOT = os.path.join(BASE_DIR, "item_images")
+# CORS_REPLACE_HTTPS_REFERER = False
+# HOST_SCHEME = "http://"
+SECURE_PROXY_SSL_HEADER = None
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_HSTS_SECONDS = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_FRAME_DENY = False
+
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR)

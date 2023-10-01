@@ -1,0 +1,9 @@
+{
+  "name": "Nevotom",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "tronbox": "^3.4.0"
+  }
+}
