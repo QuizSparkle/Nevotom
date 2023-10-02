@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeProduct from './HomeProduct'
+import HomeProduct from '../../allProducts/ProductBox'
 import tire from '../../assets/products/tire1.png'
 
 const products = [

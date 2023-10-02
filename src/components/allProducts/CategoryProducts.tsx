@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import HomeProduct from '../Old-folders/home/HomeProduct'
 import axios from 'axios'
+import ProductBox from './ProductBox'
 
 interface Product {
   id_item: number
@@ -45,7 +45,7 @@ const CategoryProducts = () => {
               to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
               key={index}
             >
-              <HomeProduct
+              <ProductBox
                 key={index}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
@@ -70,7 +70,7 @@ const CategoryProducts = () => {
               to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
               key={index}
             >
-              <HomeProduct
+              <ProductBox
                 key={index}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
@@ -97,7 +97,7 @@ const CategoryProducts = () => {
               to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
               key={index}
             >
-              <HomeProduct
+              <ProductBox
                 key={index}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
@@ -124,7 +124,7 @@ const CategoryProducts = () => {
               to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
               key={index}
             >
-              <HomeProduct
+              <ProductBox
                 key={index}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
@@ -149,7 +149,7 @@ const CategoryProducts = () => {
               to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
               key={index}
             >
-              <HomeProduct
+              <ProductBox
                 key={index}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}

@@ -1,6 +1,10 @@
 import React from 'react'
+import { cardProductsState } from '../../atoms/CartProducts'
+import { useRecoilValue } from 'recoil'
 
 const Cart = () => {
+  const cartProducts = useRecoilValue(cardProductsState)
+
   return (
     <>
       <div className="pagetitle">
@@ -62,37 +66,37 @@ const Cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">
-                        <a href="#">1</a>
-                      </th>
-                      <td>Brandon Jacob</td>
-                      <td>
-                        <a href="#" className="text-primary">
-                          At praesentium minu
-                        </a>
-                      </td>
-                      <td>$64</td>
-                      <td>
-                        <span className="badge bg-success">Approved</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <a href="#">2</a>
-                      </th>
-                      <td>Bridie Kessler</td>
-                      <td>
-                        <a href="#" className="text-primary">
-                          Blanditiis dolor omnis similique
-                        </a>
-                      </td>
-                      <td>$47</td>
-                      <td>
-                        <span className="badge bg-warning">Pending</span>
-                      </td>
-                    </tr>
-                    <tr>
+                    {cartProducts && cartProducts.length > 0 ? (
+                      cartProducts.map((c, i) => (
+                        <>
+                          <tr>
+                            <th scope="row">
+                              <a href="/">{i}</a>
+                            </th>
+                            <td>{c.name}</td>
+                            <td>
+                              <a href="/" className="text-primary">
+                                {c.description}
+                              </a>
+                            </td>
+                            <td>$ {c.price}</td>
+                            <td>
+                              <span className="badge bg-success">
+                                {c.reward}
+                              </span>
+                            </td>
+                          </tr>
+                        </>
+                      ))
+                    ) : (
+                      <div>
+                        <h1 className="text-center text-[1.4rem] text-red-500">
+                          Your Cart is Empty
+                        </h1>
+                      </div>
+                    )}
+
+                    {/* <tr>
                       <th scope="row">
                         <a href="#">3</a>
                       </th>
@@ -136,7 +140,7 @@ const Cart = () => {
                       <td>
                         <span className="badge bg-success">Approved</span>
                       </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>

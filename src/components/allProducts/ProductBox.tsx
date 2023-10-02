@@ -2,6 +2,8 @@ import React from 'react'
 import { RiShieldStarFill } from 'react-icons/ri'
 import { BiDollar } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
+import { cardProductsState } from '../../atoms/CartProducts'
+import { useRecoilState } from 'recoil'
 
 type props = {
   name: string
@@ -11,7 +13,20 @@ type props = {
   reward: boolean
 }
 
-const HomeProduct = (props: props) => {
+const ProductBox = (props: props) => {
+  const [cardProduct, setCardProduct] = useRecoilState(cardProductsState);
+  
+  const addToCart = () => {
+    const cProduct = {
+      name: props.name,
+      img: props.img,
+      description: props.description,
+      price: props.price,
+      reward: props.reward,
+    }
+    setCardProduct((prevProducts) => [...prevProducts, cProduct])
+  }
+
   const navigation = useNavigate()
   return (
     <div
@@ -55,19 +70,20 @@ const HomeProduct = (props: props) => {
       <div className="flex w-full items-start justify-between">
         <button
           className="py- 
-        rounded-md bg-green-600 hover:text-gray-700 px-2 text-[0.9rem] font-semibold text-gray-200 "
+        rounded-md bg-green-600 px-2 text-[0.9rem] font-semibold text-gray-200 hover:text-gray-700 "
         >
           Buy
         </button>
         <button
+          onClick={addToCart}
           className="py- 
-        rounded-md bg-red-600 px-2 hover:text-gray-700 text-[0.9rem] font-semibold text-gray-200 "
+        rounded-md bg-red-600 px-2 text-[0.9rem] font-semibold text-gray-200 hover:text-gray-700 "
         >
-          Post
+          Add To Card
         </button>
       </div>
     </div>
   )
 }
 
-export default HomeProduct
+export default ProductBox

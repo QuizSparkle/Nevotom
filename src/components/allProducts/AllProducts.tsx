@@ -4,7 +4,7 @@ import { HiViewGrid } from 'react-icons/hi'
 import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2'
 import { MdViewDay } from 'react-icons/md'
 import { formatUnits } from '@ethersproject/units'
-import HomeProduct from '../Old-folders/home/HomeProduct'
+import HomeProduct from './ProductBox'
 import { Link } from 'react-router-dom'
 import CategoryProducts from './CategoryProducts'
 
