@@ -4,9 +4,9 @@ import { HiViewGrid } from 'react-icons/hi'
 import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2'
 import { MdViewDay } from 'react-icons/md'
 import { formatUnits } from '@ethersproject/units'
-import HomeProduct from './ProductBox'
 import { Link } from 'react-router-dom'
 import CategoryProducts from './CategoryProducts'
+import { useNotify } from '../helpers/Notification'
 
 interface Product {
   id_item: number
@@ -20,10 +20,10 @@ interface Product {
 // axios.defaults.baseURL = 'https://18.236.73.110:8000'; // Set your API base URL
 // axios.defaults.withCredentials = true; // Enable sending cookies with requests
 
-
 const AllProducts = () => {
   const [products, setProducts] = useState<Product[]>([])
-
+  const { notify } = useNotify()
+  console.log('notify !', notify)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -86,7 +86,7 @@ const AllProducts = () => {
         </div>
         {/* products display */}
         {/* {products.map((product, index) => ( */}
-          <CategoryProducts />
+        <CategoryProducts />
         {/* ))} */}
         {/* <DeliveryRibbon /> */}
       </div>

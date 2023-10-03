@@ -1,9 +1,16 @@
-import React from 'react';
-import NavNotifications from '../components/notification/Navnotfication';
-import NavProfile from '../components/profile/Navprofile';
+import React, { useEffect } from 'react'
+import NavNotifications from '../components/notification/Navnotfication'
+import NavProfile from '../components/profile/Navprofile'
 import logo from '../assets/img/logo.png'
+import { useNotify } from '../components/helpers/Notification'
 
 const Headnav: React.FC = () => {
+  const { notify } = useNotify()
+
+  useEffect(() => {
+    // setTimeout(())
+  }, [notify])
+
   return (
     <header id="header" className="header fixed-top d-flex align-items-center">
       <div className="d-flex align-items-center justify-content-between">
@@ -49,9 +56,19 @@ const Headnav: React.FC = () => {
         </ul>
       </nav>
       {/* End Icons Navigation */}
+      {notify && (
+        <div
+          className={`absolute ${notify ? 'right-1' : 'right-28'} top-20 flex
+          items-center space-x-1 rounded-sm  bg-green-400 px-1 
+          text-[0.9rem] font-semibold text-black transition-all ease-linear`}
+        >
+          <span className="text-inherit">Product Added to the cart !</span>
+          {/* <CloseSharp className="cursor-pointer hover:text-red-600" /> */}
+        </div>
+      )}
     </header>
     /* End Header */
-  );
-};
+  )
+}
 
-export default Headnav;
+export default Headnav

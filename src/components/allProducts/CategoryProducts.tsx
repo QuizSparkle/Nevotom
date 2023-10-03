@@ -41,19 +41,22 @@ const CategoryProducts = () => {
         pb-2 scrollbar-thin scrollbar-thumb-white/40 scrollbar-corner-slate-50"
         >
           {products.map((product, index) => (
-            <Link
-              to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
-              key={index}
-            >
+            // <Link
+            //   to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
+            //   key={index}
+            // >
+            <div key={index}>
               <ProductBox
                 key={index}
+                id={product.id_item}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
                 price={parseFloat((product.price / 10 ** 18).toFixed(2))}
                 name={product.name}
                 reward={product.reward}
               />
-            </Link>
+            </div>
+            // </Link>
           ))}
         </div>
       </section>
@@ -66,19 +69,17 @@ const CategoryProducts = () => {
         pb-2 scrollbar-thin scrollbar-thumb-white/40 scrollbar-corner-slate-50"
         >
           {products.map((product, index) => (
-            <Link
-              to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
-              key={index}
-            >
+           <div key={index}>
               <ProductBox
                 key={index}
+                id={product.id_item}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
                 price={parseFloat((product.price / 10 ** 18).toFixed(2))}
                 name={product.name}
                 reward={product.reward}
               />
-            </Link>
+            </div>
           ))}
         </div>
       </section>
@@ -93,19 +94,17 @@ const CategoryProducts = () => {
         pb-2 scrollbar-thin scrollbar-thumb-white/40 scrollbar-corner-slate-50"
         >
           {products.map((product, index) => (
-            <Link
-              to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
-              key={index}
-            >
+           <div key={index}>
               <ProductBox
                 key={index}
+                id={product.id_item}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
                 price={parseFloat((product.price / 10 ** 18).toFixed(2))}
                 name={product.name}
                 reward={product.reward}
               />
-            </Link>
+            </div>
           ))}
         </div>
       </section>
@@ -120,19 +119,17 @@ const CategoryProducts = () => {
         pb-2 scrollbar-thin scrollbar-thumb-white/40 scrollbar-corner-slate-50"
         >
           {products.map((product, index) => (
-            <Link
-              to={`/product-detail/${product.id_item}`} // Pass item_id as a parameter
-              key={index}
-            >
+           <div key={index}>
               <ProductBox
                 key={index}
+                id={product.id_item}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
                 price={parseFloat((product.price / 10 ** 18).toFixed(2))}
                 name={product.name}
                 reward={product.reward}
               />
-            </Link>
+            </div>
           ))}
         </div>
       </section>
@@ -151,6 +148,7 @@ const CategoryProducts = () => {
             >
               <ProductBox
                 key={index}
+                id={product.id_item}
                 img={`http://127.0.0.1:8000/${product.imageLink}`}
                 description={product.description}
                 price={parseFloat((product.price / 10 ** 18).toFixed(2))}

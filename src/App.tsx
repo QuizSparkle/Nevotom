@@ -1,8 +1,6 @@
 import React, { useEffect, FC } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import tire from './assets/products/tire1.png'
-import { DAppProvider } from '@usedapp/core'
-import { config } from './SupportedChains'
 import ProductDetails from './components/productDetails/Old-ProductDetails'
 import CartPopup from './components/productDetails/CartPopup'
 import Footer from './layouts/Footer'
@@ -35,7 +33,8 @@ import './assets/vendor/boxicons/css/boxicons.min.css'
 import './assets/vendor/bootstrap-icons/bootstrap-icons.css'
 import './assets/vendor/bootstrap/css/bootstrap.min.css'
 import './assets/css/style.css'
-import 'react-notifications/lib/notifications.css'; //react-notifications
+import 'react-notifications/lib/notifications.css' //react-notifications
+import { UserProvider } from './components/helpers/Notification'
 
 const orderProducts = [
   {
@@ -95,6 +94,7 @@ const orderProducts = [
 ]
 
 const App: FC = () => {
+
   useEffect(() => {
     fetch('https://18.236.73.110:8000/api/endpoint') // Replace `endpoint` with the actual API endpoint in your Django app
       .then((response) => response.json())
@@ -108,61 +108,64 @@ const App: FC = () => {
       })
   }, [])
   return (
-    <div className=''>
-      <Router>
-        <Headnav />
-        <Sidenav />
-        <main id="main" className="main">
-          <section className="section dashboard">
-            <div className="row">
-              <Routes>
-                <Route path="/" element={<Products />} />
-                <Route path="/postlist" element={<Postlist />} />
-                <Route path="/checkhistory" element={<Checkhistory />} />
-                <Route path="/notification" element={<Notification />} />
-                <Route path="/postdetails" element={<Postdetails />} />
-                <Route path="/reward" element={<Reward />} />
-                <Route path="/wallet" element={<Wallet />} />
-                <Route
-                  path="/checkout"
-                  element={
-                    <Checkout
-                    // productName="product1"
-                    // productPrice={40}
-                    // subtotal={20}
-                    // total={60}
-                    />
-                  }
-                />
-                <Route
-                  path="/product-detail/:item_id"
-                  element={<ProductDetails />}
-                />
-                <Route path="/allproducts" element={<AllProducts />} />
-                <Route path="/sell" element={<Sell />} />
-                <Route path="/buytom" element={<BuyTomForm />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/marketers" element={<Marketers />} />
-                <Route path="/favourites" element={<Favourites />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route
-                  path="/cartmodal"
-                  element={
-                    <CartPopup
-                      handleClose={() => false}
-                      // handleClose="sdfsdf"
-                      isShow={true}
-                      // goodsCount={12}
-                    />
-                  }
-                />
-                <Route Component={Notfound_page} />
-              </Routes>
-            </div>
-          </section>
-        </main>
-        <Footer />
-      </Router>
+    <div className="">
+      <UserProvider>
+        <Router>
+          <Headnav />
+          <Sidenav />
+          <main id="main" className="main">
+            <section className="section dashboard">
+              <div className="row">
+                <Routes>
+                  <Route path="/" element={<Products />} />
+                  <Route path="/postlist" element={<Postlist />} />
+                  <Route path="/checkhistory" element={<Checkhistory />} />
+                  <Route path="/notification" element={<Notification />} />
+                  <Route path="/postdetails" element={<Postdetails />} />
+                  <Route path="/reward" element={<Reward />} />
+                  <Route path="/wallet" element={<Wallet />} />
+                  <Route
+                    path="/checkout"
+                    element={
+                      <Checkout
+                      // productName="product1"
+                      // productPrice={40}
+                      // subtotal={20}
+                      // total={60}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/product-detail/:item_id"
+                    element={<ProductDetails />}
+                  />
+                  <Route path="/allproducts" element={<AllProducts />} />
+                  <Route path="/sell" element={<Sell />} />
+                  <Route path="/buytom" element={<BuyTomForm />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/marketers" element={<Marketers />} />
+                  <Route path="/favourites" element={<Favourites />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route
+                    path="/cartmodal"
+                    element={
+                      <CartPopup
+                        handleClose={() => false}
+                        // handleClose="sdfsdf"
+                        isShow={true}
+                        // goodsCount={12}
+                      />
+                    }
+                  />
+                  <Route Component={Notfound_page} />
+                </Routes>
+              </div>
+            </section>
+          </main>
+          <Footer />
+        </Router>
+    
+      </UserProvider>
     </div>
   )
 }
