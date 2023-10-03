@@ -73,24 +73,26 @@ const Cart = () => {
                             <th scope="row">
                               <a href="/">{i}</a>
                             </th>
-                            <td>{c.name}</td>
+                            <td className="font-semibold text-white">
+                              {c.name}
+                            </td>
                             <td>
-                              <a href="/" className="text-primary">
+                              <a href="/" className="text-gray-300">
                                 {c.description}
                               </a>
                             </td>
                             <td>$ {c.price}</td>
                             <td>
-                              <span className="badge bg-success">
-                                {c.reward}
+                              <span className="badge bg-success ">
+                                {!c.reward && 'in progress'}
                               </span>
                             </td>
                           </tr>
                         </>
                       ))
                     ) : (
-                      <div>
-                        <h1 className="text-center text-[1.4rem] text-red-500">
+                      <div className='w-full mt-3'>
+                        <h1 className="text-center mx-auto text-[1.4rem] text-white">
                           Your Cart is Empty
                         </h1>
                       </div>

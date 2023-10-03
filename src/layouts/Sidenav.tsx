@@ -1,11 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTh, faFile, faShoppingCart, faCreditCard, faStore, faHeart, faGift, faWallet, faUser, faEnvelope, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faTh,
+  faFile,
+  faShoppingCart,
+  faCreditCard,
+  faStore,
+  faHeart,
+  faGift,
+  faWallet,
+  faUser,
+  faEnvelope,
+  faQuestionCircle,
+} from '@fortawesome/free-solid-svg-icons'
+import { useRecoilValue } from 'recoil'
+import { sidebarState } from '../atoms/SidebarState'
 
 const Sidenav: React.FC = () => {
+  const sidebarStateValue = useRecoilValue(sidebarState)
   return (
-    <aside id="sidebar" className="sidebar">
+    <aside
+      id="sidebar"
+      className={`sidebar ${sidebarStateValue && 'ml-[300px]'}`}
+    >
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-heading">Marketplace</li>
         <li className="nav-item">
@@ -90,7 +108,7 @@ const Sidenav: React.FC = () => {
       </ul>
     </aside>
     // End Sidebar
-  );
-};
+  )
+}
 
-export default Sidenav;
+export default Sidenav

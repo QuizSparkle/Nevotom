@@ -2,23 +2,40 @@ import React, { useEffect } from 'react'
 import NavNotifications from '../components/notification/Navnotfication'
 import NavProfile from '../components/profile/Navprofile'
 import logo from '../assets/img/logo.png'
-import { useNotify } from '../components/helpers/Notification'
+import { useNotify } from '../components/helpers/ContextState'
+import { Link } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { sidebarState } from '../atoms/SidebarState'
 
 const Headnav: React.FC = () => {
   const { notify } = useNotify()
+  const [, setSidebar] = useRecoilState(sidebarState);
 
   useEffect(() => {
     // setTimeout(())
   }, [notify])
 
+  const sidebarHandler = () => {
+    setSidebar((prev)=> !prev);
+  }
+
   return (
-    <header id="header" className="header fixed-top d-flex align-items-center">
+    <header
+      id="header"
+      className="header fixed-top d-flex
+     align-items-center"
+    >
       <div className="d-flex align-items-center justify-content-between">
-        <a href="index.html" className="logo d-flex align-items-center">
+        <Link to="/" className="logo d-flex align-items-center">
           <img src={logo} alt="" />
           <span className="d-none d-lg-block">Nevotom</span>
-        </a>
-        <i className="bi bi-list toggle-sidebar-btn"></i>
+        </Link>
+        <i
+          onClick={sidebarHandler}
+          className="bi bi-list lg:hidden
+        toggle-sidebar-btn
+        hover:text-black"
+        ></i>
       </div>
       {/* End Logo */}
 

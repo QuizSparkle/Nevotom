@@ -6,7 +6,7 @@ import { MdViewDay } from 'react-icons/md'
 import { formatUnits } from '@ethersproject/units'
 import { Link } from 'react-router-dom'
 import CategoryProducts from './CategoryProducts'
-import { useNotify } from '../helpers/Notification'
+import { useNotify } from '../helpers/ContextState'
 
 interface Product {
   id_item: number

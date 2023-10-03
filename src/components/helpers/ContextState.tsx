@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useState } from 'react'
 
 // Define the context type
-interface UserContextType {
+interface ContextType {
   notify: boolean
     setNotify: (notify: boolean) => void;
 }
 
 // Create the UserContext
-const NotifyContext = createContext<UserContextType | undefined>(undefined)
+const NotifyContext = createContext<ContextType | undefined>(undefined)
 
 // Create a provider component to wrap your app with
 export const UserProvider: React.FC<React.PropsWithChildren<{}>> = ({

@@ -34,7 +34,7 @@ import './assets/vendor/bootstrap-icons/bootstrap-icons.css'
 import './assets/vendor/bootstrap/css/bootstrap.min.css'
 import './assets/css/style.css'
 import 'react-notifications/lib/notifications.css' //react-notifications
-import { UserProvider } from './components/helpers/Notification'
+import { UserProvider } from './components/helpers/ContextState'
 
 const orderProducts = [
   {

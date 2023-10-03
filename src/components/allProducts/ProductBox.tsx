@@ -4,7 +4,7 @@ import { BiDollar } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { cardProductsState } from '../../atoms/CartProducts'
 import { useRecoilState } from 'recoil'
-import { useNotify } from '../helpers/Notification'
+import { useNotify } from '../helpers/ContextState'
 
 type props = {
   id: any
