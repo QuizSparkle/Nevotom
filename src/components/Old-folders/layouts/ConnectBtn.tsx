@@ -6,6 +6,7 @@ import { utils } from 'ethers'
 import { useRegisterUser } from '../../Hooks/useRegisterUser'
 import { getContractAddress } from '../../helpers/ContractAddress'
 import Marketplace from '../../../chain-info/out/Marketplace.sol/Marketplace.json'
+import profilepic from '../../../assets/img/profile-img.jpg';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,9 +86,13 @@ export const RegisterAndConnect = () => {
     <div>
       {isConnected ? (
         <>
-          <span className="mr-2 text-gray-300">
-            {`${account?.slice(0, 6)}...${account?.slice(-4)}`}
-          </span>
+        <img
+          src={profilepic}
+          alt="Profile"
+          className="rounded-circle"
+        />
+        <span className="d-none d-md-block dropdown-toggle ps-2">{`${account?.slice(0, 6)}...${account?.slice(-4)}`}</span>
+
           <Button
             variant="contained"
             onClick={deactivate}

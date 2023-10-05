@@ -1,18 +1,62 @@
-import React, { useEffect } from 'react'
-import NavNotifications from '../components/notification/Navnotfication'
-import NavProfile from '../components/profile/Navprofile'
-import logo from '../assets/img/logo.png'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Link as ScrollLink } from 'react-scroll'
+import { HiShoppingCart } from 'react-icons/hi'
+import { RiAccountCircleFill } from 'react-icons/ri'
+import { HiOutlineMenuAlt3 } from 'react-icons/hi'
+import { IoMdClose } from 'react-icons/io'
+import coin from '../../assets/Coin-No-BG.png'
+import { BuyTomForm } from '../components/functionalities/BuyTomAndDisplayBalance'
+import { RegisterUserForm } from '../components/functionalities/RegisterUserForm'
+import { ClaimRewards } from '../components/functionalities/ClaimRewards'
+// import { RegisterAndConnect } from '../components/Old-folders/layouts/ConnectBtn'
+import { useEthers, useTokenBalance } from '@usedapp/core'
+import { formatUnits } from '@ethersproject/units'
+import { getContractAddress } from '../components/helpers/ContractAddress'
+import NavNotifications from '../components/notification/Navnotfication';
+import NavProfile from '../components/profile/Navprofile';
+import logo from '../assets/img/logo.png'
 import { useRecoilState } from 'recoil'
 import { sidebarState } from '../atoms/SidebarState'
 import { RegisterAndConnect } from './RegisterAndConnect'
 
-const Headnav: React.FC = () => {
-  const [, setSidebar] = useRecoilState(sidebarState)
+type props = {
+  connected: boolean
+}
+
+
+const Headnav = (props: props) => {
+  const [showDropdown, setShowDropdown] = useState(false)
+
+  const { account, chainId } = useEthers()
+
+  const isConnected = account !== undefined
+
+  // const [regModal, setRegModal] = useState(false)
+  // const openRegModal = () => {
+  //   !userRegistered && setRegModal(true)
+  // }
+  // const closeRegModal = () => {
+  //   setUserRegistered(true)
+  //   setRegModal(false)
+  // }
+
+  // const [userRegistered, setUserRegistered] = useState(false)
+
+  const chain_Id = chainId ? chainId : 0
+
+  const tomAddress = getContractAddress(chain_Id.toString(), 'toam_address')
+  const tokenBalance = useTokenBalance(tomAddress, account)
+  const formattedTokenBalance: number = tokenBalance
+    ? parseFloat(formatUnits(tokenBalance, 18))
+    : 0
+
+    const [, setSidebar] = useRecoilState(sidebarState)
 
   const sidebarHandler = () => {
-    setSidebar((prev) => !prev)
+    setSidebar((prev: any) => !prev)
   }
+
 
   return (
     <header
@@ -63,7 +107,7 @@ const Headnav: React.FC = () => {
           {/* End Search Icon */}
 
           {/* Include NavNotifications and NavProfile components */}
-          <NavNotifications />
+          {/* <NavNotifications /> */}
           <NavProfile />
           <div className="flex">
             <RegisterAndConnect />

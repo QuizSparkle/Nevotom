@@ -48,7 +48,7 @@ const Recentsales = () => {
             <tbody>
               <tr>
                 <th scope="row">
-                  <a href="#">#2457</a>
+                  <a href="#">1</a>
                 </th>
                 <td>Brandon Jacob</td>
                 <td>
@@ -63,7 +63,7 @@ const Recentsales = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <a href="#">#2147</a>
+                  <a href="#">2</a>
                 </th>
                 <td>Bridie Kessler</td>
                 <td>
@@ -78,7 +78,7 @@ const Recentsales = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <a href="#">#2049</a>
+                  <a href="#">3</a>
                 </th>
                 <td>Ashleigh Langosh</td>
                 <td>
@@ -93,7 +93,7 @@ const Recentsales = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <a href="#">#2644</a>
+                  <a href="#">4</a>
                 </th>
                 <td>Angus Grady</td>
                 <td>
@@ -108,7 +108,7 @@ const Recentsales = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <a href="#">#2644</a>
+                  <a href="#">5</a>
                 </th>
                 <td>Raheem Lehner</td>
                 <td>

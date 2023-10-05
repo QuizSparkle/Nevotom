@@ -17,6 +17,7 @@ import {
 import { useRecoilValue } from 'recoil'
 import { sidebarState } from '../atoms/SidebarState'
 
+
 const Sidenav: React.FC = () => {
   const sidebarStateValue = useRecoilValue(sidebarState)
   return (
@@ -92,14 +93,14 @@ const Sidenav: React.FC = () => {
         {/* End Profile Page Nav */}
 
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/">
+          <Link className="nav-link collapsed" to="/contact">
             <FontAwesomeIcon icon={faEnvelope} />
             <span>Contact</span>
           </Link>
         </li>
         {/* End Contact Page Nav */}
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/">
+          <Link className="nav-link collapsed" to="/faq">
             <FontAwesomeIcon icon={faQuestionCircle} />
             <span>F.A.Q</span>
           </Link>

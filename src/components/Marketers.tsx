@@ -1,5 +1,5 @@
 import React from 'react'
-import useimage from '../assets/img/news-2.jpg'
+import useimage from '../assets/img/profile-img.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faPencilAlt, faDollarSign, faNewspaper, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import Topselling from './allProducts/Topselling'
@@ -33,7 +33,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Nihil blanditiis</a>
+                        <a href="#">Nihil bland</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -84,7 +84,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Nihil blanditiis</a>
+                        <a href="#">sone tvdx</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -92,7 +92,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Quidem autem</a>
+                        <a href="#">husus autem</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -100,7 +100,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Id quia</a>
+                        <a href="#">Idan usbw</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -108,7 +108,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Laborum cor</a>
+                        <a href="#">besos corn</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -116,7 +116,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Et dolores</a>
+                        <a href="#">nacy colen</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -135,7 +135,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Nihil blanditiis</a>
+                        <a href="#">nab wendy</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -143,7 +143,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Quidem autem</a>
+                        <a href="#">samm yoods</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -151,7 +151,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Id quia</a>
+                        <a href="#">winfor grouf</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -159,7 +159,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Laborum cor</a>
+                        <a href="#">Sparo jnsxs</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>
@@ -167,7 +167,7 @@ const Marketers: React.FC = () => {
                     <div className="post-item clearfix">
                       <img src={useimage} alt="" />
                       <h4>
-                        <a href="#">Et dolores</a>
+                        <a href="#">Bannel tabe</a>
                       </h4>
                       <button id="followbtn">Follow</button>
                     </div>

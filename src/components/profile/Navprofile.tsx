@@ -1,5 +1,5 @@
-import React from 'react';
-import profilepic from '../../assets/img/profile-img.jpg';
+import React from 'react'
+import { RegisterAndConnect } from '../Old-folders/layouts/ConnectBtn'
 const NavProfile: React.FC = () => {
   return (
     <li className="nav-item dropdown pe-3">
@@ -8,15 +8,10 @@ const NavProfile: React.FC = () => {
         href="#"
         data-bs-toggle="dropdown"
       >
-        <img
-          src={profilepic}
-          alt="Profile"
-          className="rounded-circle"
-        />
-        <span className="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+        <RegisterAndConnect />
       </a>
 
-      <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+      {/* <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li className="dropdown-header">
           <h6>Tolu John</h6>
           <span>Buyer</span>
@@ -70,9 +65,9 @@ const NavProfile: React.FC = () => {
             <span>Disconnect Wallet</span>
           </a>
         </li>
-      </ul>
+      </ul> */}
     </li>
-  );
-};
+  )
+}
 
-export default NavProfile;
+export default NavProfile
