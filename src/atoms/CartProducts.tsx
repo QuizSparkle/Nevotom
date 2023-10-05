@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 
 type props = {
+  id: any
   name: string
   img: string
   description: string

@@ -6,7 +6,6 @@ import { MdViewDay } from 'react-icons/md'
 import { formatUnits } from '@ethersproject/units'
 import { Link } from 'react-router-dom'
 import CategoryProducts from './CategoryProducts'
-import { useNotify } from '../helpers/ContextState'
 
 interface Product {
   id_item: number
@@ -22,8 +21,6 @@ interface Product {
 
 const AllProducts = () => {
   const [products, setProducts] = useState<Product[]>([])
-  const { notify } = useNotify()
-  console.log('notify !', notify)
   useEffect(() => {
     const fetchProducts = async () => {
       try {

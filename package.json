@@ -36,6 +36,7 @@
     "react-scripts": "^5.0.1",
     "react-scroll": "^1.8.9",
     "recoil": "^0.7.7",
+    "sonner": "^1.0.3",
     "viem": "^1.1.4",
     "wagmi": "^1.2.1",
     "web-vitals": "^2.1.4"

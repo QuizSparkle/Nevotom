@@ -38,7 +38,7 @@ interface CartProps {
   listed: OrderProduct[];
 }
 
-const Cart = ({  }) => {
+const OldCart = ({  }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -268,4 +268,4 @@ const Cart = ({  }) => {
   );
 };
 
-export default Cart;
+export default OldCart;

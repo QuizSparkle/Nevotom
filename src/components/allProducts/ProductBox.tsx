@@ -1,10 +1,9 @@
-import { createContext, useState } from 'react'
 import { RiShieldStarFill } from 'react-icons/ri'
 import { BiDollar } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { cardProductsState } from '../../atoms/CartProducts'
 import { useRecoilState } from 'recoil'
-import { useNotify } from '../helpers/ContextState'
+import { Toaster, toast } from 'sonner';
 
 type props = {
   id: any
@@ -17,10 +16,10 @@ type props = {
 
 const ProductBox = (props: props) => {
   const [cardProduct, setCardProduct] = useRecoilState(cardProductsState)
-  const { setNotify } = useNotify()
 
   const addToCart = () => {
     const cProduct = {
+      id: props.id,
       name: props.name,
       img: props.img,
       description: props.description,
@@ -28,13 +27,7 @@ const ProductBox = (props: props) => {
       reward: props.reward,
     }
     setCardProduct((prevProducts) => [...prevProducts, cProduct])
-
-    // ! for notification
-    setNotify(true)
-
-    setTimeout(() => {
-      setNotify(false)
-    }, 3000)
+    toast('Product Added to Cart !')
   }
 
   const navigation = useNavigate()
@@ -103,6 +96,7 @@ const ProductBox = (props: props) => {
           Add To Card
         </button>
       </div>
+      <Toaster />
     </div>
   )
 }

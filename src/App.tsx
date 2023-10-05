@@ -34,7 +34,7 @@ import './assets/vendor/bootstrap-icons/bootstrap-icons.css'
 import './assets/vendor/bootstrap/css/bootstrap.min.css'
 import './assets/css/style.css'
 import 'react-notifications/lib/notifications.css' //react-notifications
-import { UserProvider } from './components/helpers/ContextState'
+import OldCart from './components/cart/Old-Cart'
 
 const orderProducts = [
   {
@@ -109,7 +109,6 @@ const App: FC = () => {
   }, [])
   return (
     <div className="">
-      <UserProvider>
         <Router>
           <Headnav />
           <Sidenav />
@@ -165,7 +164,6 @@ const App: FC = () => {
           <Footer />
         </Router>
     
-      </UserProvider>
     </div>
   )
 }
