@@ -23,6 +23,8 @@ import Wallet from './components/wallet/Wallet'
 import Reward from './components/rewards/Reward'
 import Favourites from './components/allProducts/Favourites'
 import Products from './components/allProducts/Products'
+import Faq from './components/Faq'
+import Contact from './components/Contact'
 import Notfound_page from './components/Notfound_page'
 // sampleOrderedProducts
 
@@ -109,7 +111,7 @@ const App: FC = () => {
   return (
     <div className=''>
       <Router>
-        <Headnav />
+        <Headnav connected={false} />
         <Sidenav />
         <main id="main" className="main">
           <section className="section dashboard">
@@ -122,6 +124,8 @@ const App: FC = () => {
                 <Route path="/postdetails" element={<Postdetails />} />
                 <Route path="/reward" element={<Reward />} />
                 <Route path="/wallet" element={<Wallet />} />
+                <Route path="/faq" element={<Faq />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route
                   path="/checkout"
                   element={

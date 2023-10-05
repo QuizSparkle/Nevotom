@@ -57,7 +57,7 @@ const Topselling: React.FC = () => {
                 </th>
                 <td>
                   <a href="#" className="fw-bold">
-                    Ut inventore ipsa voluptas nulla
+                    Ut inventore
                   </a>
                 </td>
                 <td>$64</td>
@@ -72,7 +72,7 @@ const Topselling: React.FC = () => {
                 </th>
                 <td>
                   <a href="#" className="fw-bold">
-                    Exercitationem similique doloremque
+                    Exercitationem
                   </a>
                 </td>
                 <td>$46</td>
@@ -87,7 +87,7 @@ const Topselling: React.FC = () => {
                 </th>
                 <td>
                   <a href="#" className="fw-bold">
-                    Doloribus nisi exercitationem
+                    Doloribus nisi
                   </a>
                 </td>
                 <td>$59</td>
@@ -102,7 +102,7 @@ const Topselling: React.FC = () => {
                 </th>
                 <td>
                   <a href="#" className="fw-bold">
-                    Officiis quaerat sint rerum error
+                    Officiis quaerat
                   </a>
                 </td>
                 <td>$32</td>
@@ -117,7 +117,7 @@ const Topselling: React.FC = () => {
                 </th>
                 <td>
                   <a href="#" className="fw-bold">
-                    Sit unde debitis delectus repellendus
+                    Sit unde debitis
                   </a>
                 </td>
                 <td>$79</td>

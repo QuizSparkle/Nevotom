@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTh, faFile, faShoppingCart, faCreditCard, faStore, faHeart, faGift, faWallet, faUser, faEnvelope, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
+
 const Sidenav: React.FC = () => {
   return (
     <aside id="sidebar" className="sidebar">
@@ -74,14 +75,14 @@ const Sidenav: React.FC = () => {
         {/* End Profile Page Nav */}
 
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/">
+          <Link className="nav-link collapsed" to="/contact">
             <FontAwesomeIcon icon={faEnvelope} />
             <span>Contact</span>
           </Link>
         </li>
         {/* End Contact Page Nav */}
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/">
+          <Link className="nav-link collapsed" to="/faq">
             <FontAwesomeIcon icon={faQuestionCircle} />
             <span>F.A.Q</span>
           </Link>

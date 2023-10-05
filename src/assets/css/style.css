@@ -3,6 +3,12 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+#balance {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
 :root {
   scroll-behavior: smooth;
 }
@@ -1111,24 +1117,32 @@ h6 {
   color: #6980aa;
 }
 
+
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
+.contact {
+  background-color: transparent;
+}
 .contact .info-box {
-  padding: 28px 30px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 20px 0 30px 0;
 }
 
 .contact .info-box i {
-  font-size: 38px;
-  line-height: 0;
-  color: #4154f1;
+  font-size: 32px;
+  color: whitesmoke;
+  border-radius: 50%;
+  padding: 8px;
 }
 
 .contact .info-box h3 {
   font-size: 20px;
-  color: white;
+  color: #c0cad1;
   font-weight: 700;
-  margin: 20px 0 10px 0;
+  margin: 10px 0;
 }
 
 .contact .info-box p {
@@ -1138,14 +1152,22 @@ h6 {
   margin-bottom: 0;
 }
 
+.contact .php-email-form {
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 30px;
+}
+
 .contact .php-email-form .error-message {
   display: none;
   color: #fff;
-  background: #ed3c0d;
+  background: whitesmoke;
   text-align: left;
   padding: 15px;
-  margin-bottom: 24px;
   font-weight: 600;
+}
+
+.contact .php-email-form .error-message br+br {
+  margin-top: 25px;
 }
 
 .contact .php-email-form .sent-message {
@@ -1154,7 +1176,6 @@ h6 {
   background: #18d26e;
   text-align: center;
   padding: 15px;
-  margin-bottom: 24px;
   font-weight: 600;
 }
 
@@ -1163,7 +1184,6 @@ h6 {
   background: #fff;
   text-align: center;
   padding: 15px;
-  margin-bottom: 24px;
 }
 
 .contact .php-email-form .loading:before {
@@ -1183,12 +1203,14 @@ h6 {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
-  border-radius: 0;
+  border-radius: 4px;
+  background-color: #586a77;
 }
 
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
-  border-color: #4154f1;
+  border-color: whitesmoke;
+  color: #fff;
 }
 
 .contact .php-email-form input {
@@ -1200,18 +1222,22 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #4154f1;
+  background: whitesmoke;
   border: 0;
-  padding: 10px 30px;
-  color: #fff;
+  padding: 10px 24px;
+  color: #242222;
   transition: 0.4s;
   border-radius: 4px;
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #5969f3;
+  background: whitesmoke;
 }
+#usebutcases {
+  background-color: gold;
+  color: #242222;
 
+}
 @keyframes animate-loading {
   0% {
     transform: rotate(0deg);
@@ -1221,6 +1247,7 @@ h6 {
     transform: rotate(360deg);
   }
 }
+
 
 /*--------------------------------------------------------------
 # Error 404
@@ -1259,6 +1286,99 @@ h6 {
     max-width: 50%;
   }
 }
+/*--------------------------------------------------------------
+# faq
+--------------------------------------------------------------*/
+.faq {
+  background-image: linear-gradient(to right, #272626, black);
+}
+.faq .content h3 {
+  font-weight: 400;
+  font-size: 34px;
+  color: gold;
+}
+
+.faq .content p {
+  font-size: 15px;
+  color: whitesmoke;
+}
+
+.faq .faq-container .faq-item {
+  position: relative;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 25px 0px rgba(var(--default-color-rgb), 0.1);
+  overflow: hidden;
+}
+
+.faq .faq-container .faq-item:last-child {
+  margin-bottom: 0;
+}
+
+.faq .faq-container .faq-item h3 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0 30px 0 0;
+  transition: 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+}
+
+.faq .faq-container .faq-item h3 .num {
+  color: gold;
+  padding-right: 5px;
+}
+
+.faq .faq-container .faq-item h3:hover {
+  color: goldenrod;
+}
+
+.faq .faq-container .faq-item .faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.faq .faq-container .faq-item .faq-content p {
+  margin-bottom: 0;
+  overflow: hidden;
+  color: whitesmoke;
+}
+
+.faq .faq-container .faq-item .faq-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 16px;
+  line-height: 0;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.faq .faq-container .faq-item .faq-toggle:hover {
+  color: gold;
+}
+
+.faq .faq-container .faq-active h3 {
+  color: gold;
+}
+
+.faq .faq-container .faq-active .faq-content {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+  padding-top: 10px;
+}
+
+.faq .faq-container .faq-active .faq-toggle {
+  transform: rotate(90deg);
+  color: gold;
+}
+
 
 /*--------------------------------------------------------------
 # Footer

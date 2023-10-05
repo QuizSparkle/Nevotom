@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import OldCart  from './Old-Cart';
 
 const Cart = () => {
   return (
@@ -16,8 +17,9 @@ const Cart = () => {
       </div>
       {/* End Page Title */}
       <div className="col-lg-12">
-        <div className="row">
-          {/* Recent Sales */}
+        <OldCart />
+        {/* <div className="row">
+        
           <div className="col-12">
             <div className="card recent-sales overflow-auto">
               <div className="filter">
@@ -142,8 +144,8 @@ const Cart = () => {
               </div>
             </div>
           </div>
-          {/* End Recent Sales */}
-        </div>
+          
+        </div> */}
       </div>
     </>
   )
