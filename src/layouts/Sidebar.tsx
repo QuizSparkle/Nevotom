@@ -16,7 +16,7 @@ import { getContractAddress } from '../components/helpers/ContractAddress'
 import NavNotifications from '../components/notification/Navnotfication';
 import NavProfile from '../components/profile/Navprofile';
 import logo from '../assets/img/logo.png'
-import useimage from '../assets/img/news-2.jpg'
+import useimage from '../assets/img/profile-img.jpg'
 import Tom from "../assets/Coin-No-BG.png"
 import Tron from "../assets/tron.png"
 
