@@ -23,19 +23,7 @@ import Tron from "../assets/tron.png"
 
 
 const Sidebar = () => {
-  const [showDropdown, setShowDropdown] = useState(false)
-
-  const { account, chainId } = useEthers()
-
-  const isConnected = account !== undefined
-
-  const chain_Id = chainId ? chainId : 0
-
-  const tomAddress = getContractAddress(chain_Id.toString(), 'toam_address')
-  const tokenBalance = useTokenBalance(tomAddress, account)
-  const formattedTokenBalance: number = tokenBalance
-    ? parseFloat(formatUnits(tokenBalance, 18))
-    : 0
+  
   return (
     <div className="col-lg-4">
       {/* Recent Activity */}
@@ -49,10 +37,7 @@ const Sidebar = () => {
 
             </div>
             <div className="ps-3">
-              <h6>{' '}
-                    {formattedTokenBalance
-                      ? formattedTokenBalance.toString()
-                      : '0'}</h6>
+              <h6>0</h6>
             </div>
           </div>
           <hr />
@@ -62,10 +47,7 @@ const Sidebar = () => {
               <img id='balance' src={Tron} alt='' />
             </div>
             <div className="ps-3">
-              <h6>{' '}
-                    {formattedTokenBalance
-                      ? formattedTokenBalance.toString()
-                      : '0'}</h6>
+              <h6>0</h6>
             </div>
           </div>
         </div>

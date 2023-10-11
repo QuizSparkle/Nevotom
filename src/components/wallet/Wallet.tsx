@@ -10,19 +10,7 @@ import Tron from "../../assets/tron.png"
 
 
 const Wallet = () => {
-  const [showDropdown, setShowDropdown] = useState(false)
-
-  const { account, chainId } = useEthers()
-
-  const isConnected = account !== undefined
-
-  const chain_Id = chainId ? chainId : 0
-
-  const tomAddress = getContractAddress(chain_Id.toString(), 'toam_address')
-  const tokenBalance = useTokenBalance(tomAddress, account)
-  const formattedTokenBalance: number = tokenBalance
-    ? parseFloat(formatUnits(tokenBalance, 18))
-    : 0
+  
 
   return (
     <>
@@ -52,10 +40,7 @@ const Wallet = () => {
                     <img id='balance' src={Tom} alt='' />
                   </div>
                   <div className="ps-3">
-                  <h6>{' '}
-                    {formattedTokenBalance
-                      ? formattedTokenBalance.toString()
-                      : '0'}</h6>
+                  <h6>0</h6>
                   </div>
                 </div>
               </div>
@@ -72,10 +57,7 @@ const Wallet = () => {
                     <img id='balance' src={Tron} alt='' />
                   </div>
                   <div className="ps-3">
-                  <h6>{' '}
-                    {formattedTokenBalance
-                      ? formattedTokenBalance.toString()
-                      : '0'}</h6>
+                  <h6>0</h6>
                   </div>
                 </div>
               </div>

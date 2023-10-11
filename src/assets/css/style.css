@@ -1290,7 +1290,7 @@ h6 {
 # faq
 --------------------------------------------------------------*/
 .faq {
-  background-image: linear-gradient(to right, #272626, black);
+  background-image: transparent;
 }
 .faq .content h3 {
   font-weight: 400;
@@ -1324,6 +1324,7 @@ h6 {
   cursor: pointer;
   display: flex;
   align-items: flex-start;
+  color: gold;
 }
 
 .faq .faq-container .faq-item h3 .num {
