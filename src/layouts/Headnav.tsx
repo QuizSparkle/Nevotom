@@ -9,7 +9,6 @@ import coin from '../../assets/Coin-No-BG.png'
 import { BuyTomForm } from '../components/functionalities/BuyTomAndDisplayBalance'
 import { RegisterUserForm } from '../components/functionalities/RegisterUserForm'
 import { ClaimRewards } from '../components/functionalities/ClaimRewards'
-// import { RegisterAndConnect } from '../components/Old-folders/layouts/ConnectBtn'
 import { useEthers, useTokenBalance } from '@usedapp/core'
 import { formatUnits } from '@ethersproject/units'
 import { getContractAddress } from '../components/helpers/ContractAddress'
@@ -19,6 +18,7 @@ import logo from '../assets/img/logo.png'
 import { useRecoilState } from 'recoil'
 import { sidebarState } from '../atoms/SidebarState'
 import { RegisterAndConnect } from './RegisterAndConnect'
+
 
 type props = {
   connected: boolean
@@ -44,12 +44,6 @@ const Headnav = (props: props) => {
   // const [userRegistered, setUserRegistered] = useState(false)
 
   const chain_Id = chainId ? chainId : 0
-
-  const tomAddress = getContractAddress(chain_Id.toString(), 'toam_address')
-  const tokenBalance = useTokenBalance(tomAddress, account)
-  const formattedTokenBalance: number = tokenBalance
-    ? parseFloat(formatUnits(tokenBalance, 18))
-    : 0
 
     const [, setSidebar] = useRecoilState(sidebarState)
 
