@@ -14,27 +14,27 @@ const Products = () => {
   const faqData = [
     {
       number: '1.',
-      question: 'What is UASU OTC?',
+      question: 'What is our Inspiration?',
       answer:
-        'UASU is the premier open OTC platform for P2P native bitcoin options. This platform enables buyers and sellers to directly negotiate and finalize deals, streamlining the trading process for native bitcoin options. By connecting a global community of users, UASU not only amplifies the liquidity of Native Bitcoin options, but also enhances the price discovery process.',
+        'Our inspiration for this project stems from the recognition of the tremendous potential of affiliate marketing and the desire to create a platform that incentivizes both buyers and sellers. We noticed that affiliate marketers who excel in selling products often earn higher commissions and gain elevated positions within the companies they work for. With this in mind, we envisioned a marketplace that people would love to patronize, where buyers receive governance tokens as compensation for their purchases, and sellers are rewarded for their contributions. By incorporating token rewards and incentives, we aim to create a unique user experience that fosters an engaged community of buyers and sellers.',
     },
     {
       number: '2.',
-      question: 'How do I start using the UASU platform?',
+      question: 'What Nevotom does?',
       answer:
-        "UASU is an open-source protocol, accessible to anyone interested in P2P native bitcoin options. Access is gated only by the options principal; meaning you need to be able to either purchase the premium or lock in the necessary bitcoin collateral for a fully covered option. After understanding the access requirements, you can initiate or respond to open OTC listings tailored for P2P native bitcoin options. Begin by filling out our 'Create/Respond to Listing' form on the platform with your specific requirements. This allows you to compare offers from different participants. Once you've reviewed the offers, you can evaluate them to determine the best fit for your needs. If you'd like a guided overview of the UASU platform, please contact our team at demo@uasu.fi for a walkthrough.",
+        "Our marketplace revolutionizes the traditional buying and selling experience by integrating NFT/token rewards and incentives. Buyers can browse a wide range of products and make purchases like they would on any e-commerce platform. However, in addition to acquiring the desired product, buyers receive NFTs as rewards for their transactions. These NFTs/tokens hold value and can be collected, traded, or used for various purposes within the platform. On the other hand, sellers are incentivized to list and sell their products in the marketplace through various rewards, fostering a vibrant ecosystem.",
     },
     {
       number: '3.',
-      question: 'What are the UASU platform fees?',
+      question: 'Accomplishment we are proud of?',
       answer:
-        'UASU has a transparent pricing model for native bitcoin options. No hidden fees, and no abusive margins. Fees are paid by takers (those who respond to a listing). Makers (who post a listing) don’t pay fees. You can find our detailed fee schedule here. All listed option prices are exclusive of any external fees or costs associated with the individual trading strategies or execution.',
+        'We are proud to have successfully built a New fully functional marketplace on the blockchain, providing a novel and engaging experience for users. Our platform leverages the power of NFTs and blockchain technology to create an ecosystem where buyers and sellers can benefit from their transactions in unique ways. We have implemented key features such as user registration, product listing, order placement, checkout processes, and transaction processing. Moreover, our focus on security and user experience has resulted in a robust and intuitive platform that we are proud to present.',
     },
     {
       number: '4.',
-      question: 'What are the benefits of using UASU platform?',
+      question: 'Whats next on nevotom?',
       answer:
-        'Ease of use: the UASU platform simplifies the process for users to initiate or respond to open OTC listings tailored for P2P native bitcoin options. Time savings: Using the UASU platform can significantly reduce the time needed to finalize deals by consolidating the process into a single, efficient platform. Price transparency: the UASU platform offers clear visibility into different offers, enabling users to easily identify the most favorable terms. Streamlined trading process: the UASU platform centralizes the trading process, ensuring that users can engage, evaluate, and execute trades seamlessly. UASU leverages the power and transparency of bitcoin technology for your trading needs.',
+        'The future of our project is filled with exciting possibilities. We plan to expand our marketplace by attracting more buyers and sellers, fostering a thriving community. We will continuously enhance the user experience by incorporating user feedback and introducing new features. We aim to integrate additional functionalities, such as auction mechanisms, user ratings and reviews, and social features that encourage interaction among participants. Furthermore, we will explore partnerships and collaborations to expand the range of products available in our marketplace. Additionally, we envision integrating with other blockchain networks to provide more options and reach a wider user base.',
     },
   ]
 
