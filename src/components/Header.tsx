@@ -35,9 +35,7 @@ export const Header = () => {
             <div>
                 {isConnected ? (
                     <>
-{/*                         <Button color="primary" variant="contained" className={classes.address}> */}
-                        <Button color="primary" vairant="contained" className="scrollbar-true scrollbar-visible scroll-smooth 
-                            scroll-h-30 scroll-w">
+                        <Button color="primary" variant="contained" className={classes.address}>
                             {`${account?.slice(0, 6)}...${account?.slice(-4)}`}
                         </Button>
                         <Button variant="contained"
@@ -49,11 +47,9 @@ export const Header = () => {
                     <>
                         <div className={classes.div}>
                             <ConnectionRequiredMsg />
-{/*                             <Button color="primary" variant="contained"
+                            <Button color="primary" variant="contained"
                                 onClick={() => activateBrowserWallet()}
-                                className={classes.connexion}> */}                   
-                        <Button color="primary" vairant="contained" className="scrollbar-true scrollbar-visible scroll-smooth 
-                            scroll-h-30 scroll-w">
+                                className={classes.connexion}>
                                 Connect
                             </Button>
                         </div>
