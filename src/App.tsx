@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import tire from './assets/products/tire1.png'
 import { DAppProvider } from '@usedapp/core'
 import { config } from './SupportedChains'
-import ProductDetails from './components/productDetails/Old-ProductDetails'
+import ProductDetails from './components/productDetails/ProductDetails'
 import CartPopup from './components/productDetails/CartPopup'
 import Footer from './layouts/Footer'
 import AllProducts from './components/allProducts/AllProducts'
@@ -24,7 +24,7 @@ import Reward from './components/rewards/Reward'
 import Favourites from './components/allProducts/Favourites'
 import Products from './components/allProducts/Products'
 import Faq from './components/Faq'
-import Contact from './components/Contact'
+import Contact from './components/contact'
 import Notfound_page from './components/Notfound_page'
 // sampleOrderedProducts
 
@@ -97,7 +97,7 @@ const orderProducts = [
 
 const App: FC = () => {
   useEffect(() => {
-    fetch('https://18.236.73.110:8000/api/endpoint') // Replace `endpoint` with the actual API endpoint in your Django app
+    fetch('https://localhost:8000/api/endpoint') // Replace `endpoint` with the actual API endpoint in your Django app
       .then((response) => response.json())
       .then((data) => {
         // Handle the received data

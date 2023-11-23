@@ -63,7 +63,7 @@ export const RegisterAndConnect = () => {
       }
     }
 
-    registerUser()
+    registerUser();
   }, [account])
 
   useEffect(() => {
@@ -74,7 +74,6 @@ export const RegisterAndConnect = () => {
   }, [chainId])
 
   const handleConnect = () => {
-
     if (!isConnected) {
       activateBrowserWallet()
     }
@@ -90,8 +89,8 @@ export const RegisterAndConnect = () => {
           <button
             onClick={deactivate}
             className="rounded-sm border border-black
-             bg-[#622386] px-3 py-2 text-white transition-all ease-in-out 
-             hover:scale-x-95"
+             bg-[#ce3ae2] px-3 py-2 text-white transition-all ease-in-out 
+             hover:"
           >
             Disconnect
           </button>
@@ -102,8 +101,8 @@ export const RegisterAndConnect = () => {
             color="primary"
             onClick={handleConnect}
             className="rounded-sm border border-black
-             bg-[#862381] px-3 py-2 text-white transition-all ease-in-out 
-             hover:scale-x-95"
+             bg-[#ce3ae2] px-3 py-2 text-white transition-all ease-in-out 
+             hover:bg-[#9e34db] hover:border-white sm:text-auto text-[0.9rem] h-[40px] w-[160px] sm:h-auto sm:w-auto "
             disabled={isMining}
           >
             {isMining ? 'Registering...' : 'Register & Connect'}

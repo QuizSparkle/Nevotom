@@ -102,7 +102,7 @@ const Headnav = (props: props) => {
 
           {/* Include NavNotifications and NavProfile components */}
           {/* <NavNotifications /> */}
-          <NavProfile />
+          {/* <NavProfile /> */}
           <div className="flex">
             <RegisterAndConnect />
           </div>

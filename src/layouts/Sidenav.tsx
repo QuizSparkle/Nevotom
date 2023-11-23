@@ -28,37 +28,37 @@ const Sidenav: React.FC = () => {
       <ul className="sidebar-nav" id="sidebar-nav">
         <li className="nav-heading">Marketplace</li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/">
+          <Link className="nav-link gap-1 collapsed" to="/">
             <FontAwesomeIcon icon={faTh} />
-            <span>Products</span>
+            <span> Products</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/postlist">
+          <Link className="nav-link gap-1 collapsed" to="/postlist">
             <FontAwesomeIcon icon={faFile} />
             <span>Posts</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/cart">
+          <Link className="nav-link gap-1 collapsed" to="/cart">
             <FontAwesomeIcon icon={faShoppingCart} />
             <span>Cart</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/checkhistory">
+          <Link className="nav-link gap-1 collapsed" to="/checkhistory">
             <FontAwesomeIcon icon={faCreditCard} />
             <span>Checkout</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/sell">
+          <Link className="nav-link gap-1 collapsed" to="/sell">
             <FontAwesomeIcon icon={faStore} />
             <span>Sell</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/marketers">
+          <Link className="nav-link gap-1 collapsed" to="/marketers">
             <FontAwesomeIcon icon={faUser} />
             <span>Marketers</span>
           </Link>
@@ -67,25 +67,25 @@ const Sidenav: React.FC = () => {
         <li className="nav-heading">Pages</li>
 
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/favourites">
+          <Link className="nav-link gap-1 collapsed" to="/favourites">
             <FontAwesomeIcon icon={faHeart} />
             <span>Favourite</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/reward">
+          <Link className="nav-link gap-1 collapsed" to="/reward">
             <FontAwesomeIcon icon={faGift} />
             <span>Rewards</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/wallet">
+          <Link className="nav-link gap-1 collapsed" to="/wallet">
             <FontAwesomeIcon icon={faWallet} />
             <span>Wallet</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/profile">
+          <Link className="nav-link gap-1 collapsed" to="/profile">
             <FontAwesomeIcon icon={faUser} />
             <span>Profile</span>
           </Link>
@@ -93,14 +93,14 @@ const Sidenav: React.FC = () => {
         {/* End Profile Page Nav */}
 
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/contact">
+          <Link className="nav-link gap-1 collapsed" to="/contact">
             <FontAwesomeIcon icon={faEnvelope} />
             <span>Contact</span>
           </Link>
         </li>
         {/* End Contact Page Nav */}
         <li className="nav-item">
-          <Link className="nav-link collapsed" to="/faq">
+          <Link className="nav-link gap-1 collapsed" to="/faq">
             <FontAwesomeIcon icon={faQuestionCircle} />
             <span>F.A.Q</span>
           </Link>

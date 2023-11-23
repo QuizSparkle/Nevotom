@@ -4,10 +4,12 @@ import miniThumbImg from '../../assets/logos/mini-thumb.png';
 import linkedInIcon from '../../assets/logos/linked-in.svg';
 import twitterIcon from '../../assets/logos/twitter.svg';
 import faceBookIcon from '../../assets/logos/face-book.svg';
-import ShoppingCartModal from './Old-ProductDetails';
+import ShoppingCartModal from './ProductDetails';
 import './DetailInfo.css';
 import { Link, useParams } from 'react-router-dom';
 
+const BACKEND_APP_API_URL = "http://127.0.0.1:8000";
+console.log('url : ', BACKEND_APP_API_URL);
 interface Product {
   imageLink: string;
   name: string;
@@ -26,7 +28,7 @@ const DetailInfo: FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://18.236.73.110:8000/api/items/${item_id}/`);
+        const response = await fetch(`${BACKEND_APP_API_URL}/${item_id}/`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -58,18 +60,18 @@ const DetailInfo: FC = () => {
           {/* Mini Thumbs */}
           <div className="flex flex-col gap-8">
             <div className="detail-img-thumb">
-              <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="mini-thumb" />
+              <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="mini-thumb" />
             </div>
             <div className="detail-img-thumb">
-              <img src={`https://18.236.73.110:8000/${product.imageLink}`}alt="mini-thumb" />
+              <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`}alt="mini-thumb" />
             </div>
             <div className="detail-img-thumb">
-              <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="mini-thumb" />
+              <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="mini-thumb" />
             </div>
           </div>
           {/* Big Thumb */}
           <div className="detail-big-thumb">
-            <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="big-thumb" />
+            <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="big-thumb" />
           </div>
         </div>
 
@@ -120,10 +122,10 @@ const DetailInfo: FC = () => {
         </div>
         <div className="thumb-box">
           <div className="thumb">
-            <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="big-thumb" />
+            <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="big-thumb" />
           </div>
           <div className="thumb">
-            <img src={`https://18.236.73.110:8000/${product.imageLink}`} alt="big-thumb" />
+            <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="big-thumb" />
           </div>
         </div>
       </div>
