@@ -13,17 +13,17 @@ function Breadcrumbs() {
         />
       </div>
       <div className="flex items-center">
-        Shop
+        Product
         <img
           src={closeAngleBracketImg}
           alt="close-angle-bracket"
           className="pl-5"
         />
       </div>
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <img src={verticalBarImg} alt="vertical-bar" className="mr-3" />
         Tire
-      </div>
+      </div> */}
     </div>
   );
 }

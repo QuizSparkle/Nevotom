@@ -8,7 +8,7 @@ import ShoppingCartModal from './ProductDetails';
 import './DetailInfo.css';
 import { Link, useParams } from 'react-router-dom';
 
-const BACKEND_APP_API_URL = "http://ec2-3-108-237-103.ap-south-1.compute.amazonaws.com:8000/api/items/";
+const BACKEND_APP_API_URL = "http://ec2-3-108-237-103.ap-south-1.compute.amazonaws.com:8000/api/items";
 interface Product {
   imageLink: string;
   name: string;
@@ -24,11 +24,13 @@ const DetailInfo: FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
 
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(`${BACKEND_APP_API_URL}/${item_id}/`);
         const data = await response.json();
+        console.log('data : ', data);
         setProduct(data);
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -37,6 +39,8 @@ const DetailInfo: FC = () => {
 
     fetchProduct();
   }, [item_id]);
+
+  console.log('product : ', product);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
@@ -52,6 +56,8 @@ const DetailInfo: FC = () => {
     return <div>Loading...</div>;
   }
 
+  console.log(product.imageLink);
+
   return (
     <div className="detail-info">
       <div className="detail-content-box">
@@ -59,18 +65,18 @@ const DetailInfo: FC = () => {
           {/* Mini Thumbs */}
           <div className="flex flex-col gap-8">
             <div className="detail-img-thumb">
-              <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="mini-thumb" />
+              <img src={product.imageLink} alt="mini-thumb" />
             </div>
             <div className="detail-img-thumb">
-              <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`}alt="mini-thumb" />
+              <img src={product.imageLink} alt="mini-thumb" />
             </div>
             <div className="detail-img-thumb">
-              <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="mini-thumb" />
+              <img src={product.imageLink} alt="mini-thumb" />
             </div>
           </div>
           {/* Big Thumb */}
           <div className="detail-big-thumb">
-            <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="big-thumb" />
+            <img src={product.imageLink} alt="big-thumb" />
           </div>
         </div>
 
@@ -121,10 +127,10 @@ const DetailInfo: FC = () => {
         </div>
         <div className="thumb-box">
           <div className="thumb">
-            <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="big-thumb" />
+            <img src={product.imageLink} alt="big-thumb" />
           </div>
           <div className="thumb">
-            <img src={`${BACKEND_APP_API_URL}/${product.imageLink}`} alt="big-thumb" />
+            <img src={product.imageLink} alt="big-thumb" />
           </div>
         </div>
       </div>
