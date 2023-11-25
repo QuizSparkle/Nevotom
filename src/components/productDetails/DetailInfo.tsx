@@ -8,8 +8,7 @@ import ShoppingCartModal from './ProductDetails';
 import './DetailInfo.css';
 import { Link, useParams } from 'react-router-dom';
 
-const BACKEND_APP_API_URL = "http://127.0.0.1:8000";
-console.log('url : ', BACKEND_APP_API_URL);
+const BACKEND_APP_API_URL = "http://ec2-3-108-237-103.ap-south-1.compute.amazonaws.com:8000/api/items/";
 interface Product {
   imageLink: string;
   name: string;
