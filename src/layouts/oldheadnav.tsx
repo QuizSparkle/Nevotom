@@ -12,29 +12,20 @@ import { ClaimRewards } from '../components/functionalities/ClaimRewards'
 import { useEthers, useTokenBalance } from '@usedapp/core'
 import { formatUnits } from '@ethersproject/units'
 import { getContractAddress } from '../components/helpers/ContractAddress'
-import NavNotifications from '../components/notification/Navnotfication'
-import NavProfile from '../components/profile/Navprofile'
+import NavNotifications from '../components/notification/Navnotfication';
+import NavProfile from '../components/profile/Navprofile';
 import logo from '../assets/img/logo.png'
 import { useRecoilState } from 'recoil'
 import { sidebarState } from '../atoms/SidebarState'
 import { RegisterAndConnect } from './RegisterAndConnect'
 
-interface HeadnavProps {
-  isWalletConnected: boolean
-  walletAddress: string
-  connectWallet: () => void
-  disconnectWallet: () => void
-}
-const Headnav: React.FC<HeadnavProps> = ({
-  isWalletConnected,
-  walletAddress,
-  connectWallet,
-  disconnectWallet,
-}) => {
-  const truncatedAddress = isWalletConnected
-    ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-    : ''
 
+type props = {
+  connected: boolean
+}
+
+
+const Headnav = (props: props) => {
   const [showDropdown, setShowDropdown] = useState(false)
 
   const { account, chainId } = useEthers()
@@ -54,11 +45,12 @@ const Headnav: React.FC<HeadnavProps> = ({
 
   const chain_Id = chainId ? chainId : 0
 
-  const [, setSidebar] = useRecoilState(sidebarState)
+    const [, setSidebar] = useRecoilState(sidebarState)
 
   const sidebarHandler = () => {
     setSidebar((prev: any) => !prev)
   }
+
 
   return (
     <header
@@ -70,7 +62,7 @@ const Headnav: React.FC<HeadnavProps> = ({
         <i
           onClick={sidebarHandler}
           className="bi bi-list toggle-sidebar-btn
-        mr-3 hover:text-black
+        hover:text-black mr-3
         lg:hidden"
         ></i>
         <Link to="/" className="logo d-flex align-items-center">
@@ -112,39 +104,7 @@ const Headnav: React.FC<HeadnavProps> = ({
           {/* <NavNotifications /> */}
           {/* <NavProfile /> */}
           <div className="flex">
-            {isWalletConnected ? (
-              <>
-                <li
-                  className="sm:text-auto mr-4 h-[40px] w-[160px]
-             rounded-xl border border-black bg-[transparent] px-3 py-2 
-             text-[0.9rem] text-white transition-all ease-in-out sm:h-auto sm:w-auto"
-                >
-                  {/* <FontAwesomeIcon icon={faUser} className="profile-icon" /> */}
-                  <span>{truncatedAddress}</span>
-                </li>
-                <li
-                  className="sm:text-auto mr-4 h-[40px] w-[160px]
-             rounded-sm border border-black bg-[#ce3ae2] px-3 py-2 
-             text-[0.9rem] text-white transition-all ease-in-out hover:border-white hover:bg-[#9e34db] sm:h-auto sm:w-auto"
-                >
-                  <button className="connect-btn" onClick={disconnectWallet}>
-                    Disconnect
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li
-                  className="sm:text-auto mr-4 h-[40px] w-[160px]
-             rounded-sm border border-black bg-[#ce3ae2] px-3 py-2 
-             text-[0.9rem] text-white transition-all ease-in-out hover:border-white hover:bg-[#9e34db] sm:h-auto sm:w-auto"
-                >
-                  <button className="connect-btn" onClick={connectWallet}>
-                    <i className="fa fa-plug"></i> Connect Wallet
-                  </button>
-                </li>
-              </>
-            )}
+            <RegisterAndConnect />
           </div>
         </ul>
       </nav>

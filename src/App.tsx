@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react'
+import React, { useEffect, useState, FC } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import tire from './assets/products/tire1.png'
 import { DAppProvider } from '@usedapp/core'
@@ -37,6 +37,9 @@ import './assets/vendor/boxicons/css/boxicons.min.css'
 import './assets/vendor/bootstrap-icons/bootstrap-icons.css'
 import './assets/vendor/bootstrap/css/bootstrap.min.css'
 import './assets/css/style.css'
+
+// importing web3 instance
+import web3 from './web3'
 
 const orderProducts = [
   {
@@ -95,7 +98,7 @@ const orderProducts = [
   },
 ]
 
-const App: FC = () => {
+const App: React.FC = () => {
   useEffect(() => {
     fetch('https://localhost:8000/api/endpoint') // Replace `endpoint` with the actual API endpoint in your Django app
       .then((response) => response.json())
@@ -108,10 +111,86 @@ const App: FC = () => {
         console.error(error)
       })
   }, [])
+
+  const [isWalletConnected, setIsWalletConnected] = useState<boolean>(false)
+  const [walletAddress, setWalletAddress] = useState<string>('')
+
+  useEffect(() => {
+    const checkWalletConnection = async () => {
+      if (web3.currentProvider) {
+        try {
+          // Request user permission to connect the wallet
+          await (web3.currentProvider as any).request({
+            method: 'eth_requestAccounts',
+          })
+
+          // Check the connection status or Ethereum address availability in the web3 instance
+          const accounts: string[] = await web3.eth.getAccounts()
+          const isConnected: boolean = accounts.length > 0
+
+          setIsWalletConnected(isConnected)
+          setWalletAddress(accounts[0]) // Set the wallet address
+        } catch (error) {
+          console.error('Failed to connect the wallet:', error)
+        }
+      }
+    }
+
+    checkWalletConnection()
+  }, [])
+
+  // const connectWallet = () => {
+  //   if (web3.currentProvider) {
+  //     ;(web3.currentProvider as any)
+  //       .request({ method: 'eth_requestAccounts' })
+  //       .then((accounts: string[]) => {
+  //         setIsWalletConnected(true)
+  //         setWalletAddress(accounts[0])
+  //       })
+  //       .catch((error: Error) => {
+  //         console.log(error)
+  //       })
+  //   } else {
+  //     window.open('https://metamask.io/download.html', '_blank')
+  //   }
+  // }
+
+  const connectWallet = async () => {
+    if (web3.currentProvider) {
+      try {
+        // Request user permission to connect the wallet
+        await (web3.currentProvider as any).request({
+          method: 'eth_requestAccounts',
+        })
+
+        // Checking the connection status or Ethereum address availability in the web3 instance
+        const accounts: string[] = await web3.eth.getAccounts()
+        const isConnected: boolean = accounts.length > 0
+
+        setIsWalletConnected(isConnected)
+        setWalletAddress(accounts[0]) // Setting up the wallet address
+      } catch (error) {
+        console.error('Failed to connect the wallet:', error)
+      }
+    } else {
+      window.open('https://metamask.io/download.html', '_blank')
+    }
+  }
+
+  const disconnectWallet = () => {
+    setIsWalletConnected(false)
+    setWalletAddress('')
+  }
+
   return (
-    <div className=''>
+    <div className="">
       <Router>
-        <Headnav connected={false} />
+        <Headnav
+          isWalletConnected={isWalletConnected}
+          walletAddress={walletAddress}
+          connectWallet={connectWallet}
+          disconnectWallet={disconnectWallet}
+        />
         <Sidenav />
         <main id="main" className="main">
           <section className="section dashboard">
